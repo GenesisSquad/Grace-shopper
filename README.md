@@ -4,7 +4,10 @@ I am full of information about this repo!
 
 ## Running this code in development
 
-`npm run start-dev` will make great things happen!
+run
+`npm run start-dev-mac` for mac users
+and 
+`npm run start-dev-win` for windows users
 
 If you want to run the server and/or webpack separately, you can also `npm run start-server` and `npm run build-client`.
 
