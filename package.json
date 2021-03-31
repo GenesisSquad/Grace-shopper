@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev-mac": "react-scripts start",
+    "start-dev-win": "CHOKIDAR_USEPOLLING=true react-scripts start",
+    "build":"react-scripts build"
   },
   "repository": {
     "type": "git",
