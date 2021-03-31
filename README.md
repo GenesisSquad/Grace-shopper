@@ -23,7 +23,7 @@ The contribution process is...
 ### Code style guide
 
 - Pay attention to the linter!
-- Don't use semicolons
+- use semicolons
 - Two spaces -- for indentation
 - Trailing commas where possible
 - Use `const` or `let` over `var`
