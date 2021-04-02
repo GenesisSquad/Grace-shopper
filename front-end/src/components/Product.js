@@ -20,5 +20,4 @@ const Product = ({ drinkItems, token }) => {
     return <h1>LOADING :0)</h1>;
   }
 };
-
-module.exports = { Product };
+export default as = { Product };

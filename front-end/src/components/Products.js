@@ -1,6 +1,8 @@
 import React from "react";
 
-const handleSubmit = () => {};
+const handleSubmit = () => {
+  console.log("checkout page!");
+};
 
 const Products = (drinkItems) => {
   return drinkItems.map((product) => {
@@ -16,4 +18,4 @@ const Products = (drinkItems) => {
   });
 };
 
-module.exports = { Products };
+export default as = { Products };
