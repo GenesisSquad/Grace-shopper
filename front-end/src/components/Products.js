@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@material-ui/core";
 
 const handleSubmit = () => {
   console.log("checkout page!");
@@ -12,7 +13,9 @@ const Products = (drinkItems) => {
         <h2>{product.description}</h2>
         <h3> Price : {product.price}</h3>
         <div>{product.category}</div>
-        <button onClick={handleSubmit}> confirm order</button>
+        <Button variant="outlined" color="secondary" onClick={handleSubmit}>
+          confirm order
+        </Button>
       </div>
     </>;
   });

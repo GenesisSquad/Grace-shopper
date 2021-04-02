@@ -29,14 +29,15 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
-const Header = ({ name, token, setToken }) => {
+const Header = ({ name, token, setToken, drinkItems }) => {
   const history = useHistory();
-  const routes = ["/home", "/myroutines", "/activities", "/routines"];
+  const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [
     <HomeIcon />,
     <FitnessCenterIcon />,
     <DirectionsRunIcon />,
     <ListAltIcon />,
+    <Products/>
   ];
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {

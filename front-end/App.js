@@ -2,11 +2,30 @@
 import react from "react";
 import { Route } from "react-router-dom";
 import { AccountForm } from "./pages";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { callApi } from "../api";
+
+const fetchDrinks = async (token) => {
+  const data = await callApi({
+    url: "products",
+    token,
+  });
+
+  return data;
+};
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [drinkItems, setDrinkItems] = useState([]);
+
+  useEffect(async () => {
+    const drinks = await fetchDrinks();
+
+    if (drinks) {
+      setDrinkItems(drinks);
+      console.log(drinks)
+    }
+  }, [token]);
 
   return (
     <>
@@ -25,8 +44,8 @@ function App() {
           token={token}
         />
       </Route>
-      <Route path="/product/:productId">
-        <Products
+      <Route path="/products/:productId">
+        <Product
           drinkItems={drinkItems}
           setDrinkItems={setDrinkItems}
           token={token}
