@@ -1,5 +1,5 @@
-import {client} from './client'
-export const getProductById = (id) => {
+const {client} = require('./client');
+const getProductById = async (id) => {
     try {const {rows:[product]} = await client.query(`
     SELECT * FROM products WHERE id=$1
     `,[id])
@@ -9,3 +9,26 @@ export const getProductById = (id) => {
     }
 }
 
+const createProduct = async (fields) => {
+    const {name, description, price, imageURL, inStock, category} = fields;
+    try {
+        const {rows:[product]} = await client.query(`
+        INSERT INTO products(name,description,price,"imageURL","inStock",category) VALUES($1,$2,$3,$4,$5,$6) RETURNING*;
+        `,[name, description, price, imageURL, inStock, category]);
+        return product;
+    } catch (error) {
+        console.error(error);   
+    }
+
+}
+
+
+const getAllProducts = async () => {
+    
+}
+
+module.exports = {
+    getAllProducts,
+    createProduct,
+    getProductById,
+}
