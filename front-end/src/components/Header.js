@@ -20,7 +20,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
-
+import { Route, Link } from "react-router-dom";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
@@ -37,7 +37,6 @@ const Header = ({ name, token, setToken, drinkItems }) => {
     <FitnessCenterIcon />,
     <DirectionsRunIcon />,
     <ListAltIcon />,
-    <Products/>
   ];
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
@@ -55,6 +54,11 @@ const Header = ({ name, token, setToken, drinkItems }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <div>
+        <Link className="siteName" to="/products">
+          Products
+        </Link>
+      </div>
       <List style={{ width: "250px" }}>
         {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? (
