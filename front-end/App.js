@@ -5,8 +5,8 @@ import { AccountForm } from "./pages";
 import { useState } from "react";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("fitness-token"));
-  const [routines, setRoutines] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [drinkItems, setDrinkItems] = useState([]);
 
   return (
     <>
@@ -17,9 +17,20 @@ function App() {
       <Route path="/register">
         <AccountForm action="register" setToken={setToken} />
       </Route>
-      
-      <Route path="/product">
-        <Products />
+
+      <Route path="/products">
+        <Products
+          drinkItems={drinkItems}
+          setDrinkItems={setDrinkItems}
+          token={token}
+        />
+      </Route>
+      <Route path="/product/:productId">
+        <Products
+          drinkItems={drinkItems}
+          setDrinkItems={setDrinkItems}
+          token={token}
+        />
       </Route>
     </>
   );

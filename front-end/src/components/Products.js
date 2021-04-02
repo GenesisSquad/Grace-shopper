@@ -2,18 +2,18 @@ import React from "react";
 
 const handleSubmit = () => {};
 
-const Product = (drinkItems) => {
-  return drinkItems.map((drink) => {
+const Products = (drinkItems) => {
+  return drinkItems.map((product) => {
     <>
       <div className="cart">
-        <h1>{drink.name}</h1>
-        <h2>{drink.description}</h2>
-        <h3> Price : {drink.price}</h3>
-        <div>{drink.category}</div>
+        <h1>{product.name}</h1>
+        <h2>{product.description}</h2>
+        <h3> Price : {product.price}</h3>
+        <div>{product.category}</div>
         <button onClick={handleSubmit}> confirm order</button>
       </div>
     </>;
   });
 };
 
-module.exports = { Product };
+module.exports = { Products };
