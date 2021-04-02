@@ -13,9 +13,11 @@ function App() {
       <Route path="/login">
         <AccountForm action="login" setToken={setToken} />
       </Route>
+
       <Route path="/register">
         <AccountForm action="register" setToken={setToken} />
       </Route>
+      
       <Route path="/product">
         <Products />
       </Route>
