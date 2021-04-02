@@ -6,7 +6,7 @@
   "scripts": {
     "start-dev-mac": "react-scripts start",
     "start-dev-win": "CHOKIDAR_USEPOLLING=true react-scripts start",
-    "build":"react-scripts build"
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "express": "^4.17.1",
+    "jest": "^26.6.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "react": "^17.0.2",
