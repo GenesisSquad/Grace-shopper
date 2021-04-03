@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 const Product = ({ drinkItems, token }) => {
   const { productId } = useParams();
   const product = drinkItems.find((product) => productId === product.id);
+  <h1>HELLO can you see me</h1>
   if (product) {
     return (
       <>

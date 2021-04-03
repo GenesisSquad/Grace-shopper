@@ -2,8 +2,10 @@
 import react from "react";
 import { Route } from "react-router-dom";
 import { AccountForm } from "./pages";
+import {Product, Products} from "."
 import { useState, useEffect } from "react";
 import { callApi } from "../api";
+import { Product } from "./src/components";
 
 const fetchDrinks = async (token) => {
   const data = await callApi({
