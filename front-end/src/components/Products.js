@@ -21,4 +21,4 @@ const Products = (drinkItems) => {
   });
 };
 
-export default as = { Products };
+export default Products ;

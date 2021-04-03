@@ -20,4 +20,4 @@ const Product = ({ drinkItems, token }) => {
     return <h1>LOADING :0)</h1>;
   }
 };
-export default as = { Product };
+export default Product ;
