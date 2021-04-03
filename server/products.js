@@ -15,7 +15,7 @@ productsRouter.get("/products", async (req, res, next) => {
 
 productsRouter.get("/products/:productId", async (req, res, next) => {
   try {
-    return res.send(await getProductById());
+    return res.send(await getProductById(req.params));
   } catch (error) {
     console.error(error);
   }

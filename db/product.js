@@ -10,10 +10,12 @@ const getProductById = async (id) => {
 }
 
 const createProduct = async (fields) => {
-    const {name, description, price, imageURL, inStock, category} = fields;
-    if(!name ||!description ||!price ||!category){
-        return {};
-    }
+    const {name, 
+        description, 
+        price, 
+        imageURL, 
+        inStock, 
+        category} = fields;
     try {
         const {rows:[product]} = await client.query(`
         INSERT INTO products(name,description,price,"imageURL","inStock",category) VALUES($1,$2,$3,$4,$5,$6) RETURNING*;

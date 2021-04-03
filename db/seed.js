@@ -18,7 +18,8 @@ async function dropTables() {
       throw error;
     }
   }
-
+//https://www.marketsatshrewsbury.com/wp-content/uploads/2019/02/andrea-tummons-448852-unsplash-1024x683.jpg
+//
 const buildTables = async () => {
     try {
       console.log('creating tables...');
@@ -28,7 +29,7 @@ const buildTables = async () => {
             name VARCHAR(255) NOT NULL,
             description TEXT NOT NULL,
             price FLOAT NOT NULL,
-            "imageURL" TEXT DEFAULT 'https://www.marketsatshrewsbury.com/wp-content/uploads/2019/02/andrea-tummons-448852-unsplash-1024x683.jpg',
+            "imageURL" TEXT NOT NULL,
             "inStock" BOOLEAN DEFAULT false,
             category TEXT NOT NULL
         );
@@ -37,7 +38,7 @@ const buildTables = async () => {
             "firstName" VARCHAR(255) NOT NULL,
             "lastName" VARCHAR(255) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
-            "imageURL" TEXT DEFAULT 'https://www.marketsatshrewsbury.com/wp-content/uploads/2019/02/andrea-tummons-448852-unsplash-1024x683.jpg',
+            "imageURL" TEXT NOT NULL,
             username VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL,
             "isAdmin" BOOLEAN DEFAULT false
