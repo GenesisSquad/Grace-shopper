@@ -1,5 +1,4 @@
-const {client,rebuildDB} = require('../db');
-
+const {client,rebuildDB,createProduct} = require('../db');
 describe('Database',()=>{
 
     beforeAll(async()=>{
