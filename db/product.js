@@ -11,10 +11,14 @@ const getProductById = async (id) => {
 
 const createProduct = async (fields) => {
     const {name, description, price, imageURL, inStock, category} = fields;
+    if(!name ||!description ||!price ||!category){
+        return {};
+    }
     try {
         const {rows:[product]} = await client.query(`
         INSERT INTO products(name,description,price,"imageURL","inStock",category) VALUES($1,$2,$3,$4,$5,$6) RETURNING*;
         `,[name, description, price, imageURL, inStock, category]);
+        console.log(product);
         return product;
     } catch (error) {
         console.error(error);   
@@ -22,9 +26,15 @@ const createProduct = async (fields) => {
 
 }
 
-
 const getAllProducts = async () => {
-    
+    try {
+        const {rows} = await client.query(`
+        SELECT * FROM products;
+        `)
+        return rows;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 module.exports = {
