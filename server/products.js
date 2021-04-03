@@ -1,6 +1,5 @@
 const express = require("express");
 const productsRouter = express.router();
-<<<<<<< Updated upstream
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { getAllProducts, getProductById } = require("");
@@ -48,8 +47,3 @@ productsRouter.get("/products/:productId", async (req, res, next) => {
 //     })
 
 module.exports = { productsRouter };
-=======
-const { getAllProducts, getProductById } = require("");
-
-productsRouter.get;
->>>>>>> Stashed changes
