@@ -20,7 +20,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
-
+import { Route, Link } from "react-router-dom";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
@@ -29,9 +29,9 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
-const Header = ({ name, token, setToken }) => {
+const Header = ({ name, token, setToken, drinkItems }) => {
   const history = useHistory();
-  const routes = ["/home", "/myroutines", "/activities", "/routines"];
+  const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [
     <HomeIcon />,
     <FitnessCenterIcon />,
@@ -54,6 +54,11 @@ const Header = ({ name, token, setToken }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <div>
+        <Link className="siteName" to="/products">
+          Products
+        </Link>
+      </div>
       <List style={{ width: "250px" }}>
         {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? (
