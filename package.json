@@ -7,7 +7,8 @@
     "start-dev-mac": "react-scripts start",
     "start-dev-win": "CHOKIDAR_USEPOLLING=true react-scripts start",
     "build": "react-scripts build",
-    "test:watch": "jest --watchAll --runInBand --verbose"
+    "test:watch": "jest --watchAll --runInBand --verbose",
+    "start-server": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,21 +19,33 @@
   "bugs": {
     "url": "https://github.com/GenesisSquad/Grace-shopper/issues"
   },
-  "homepage": "https://github.com/GenesisSquad/Grace-shopper#readme",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/data-grid": "^4.0.0-alpha.23",
     "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "pg": "^8.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-material-ui-carousel": "^2.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "4.0.3",
     "react-three-fiber": "^5.3.22",
     "three": "^0.126.1"
   },
@@ -49,7 +62,6 @@
     ]
   },
   "devDependencies": {
-    "jest": "^26.6.0",
     "nodemon": "^2.0.7"
   }
 }

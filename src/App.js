@@ -1,9 +1,10 @@
 // Front end APP.js file
-import react from "react";
+// import react from "react";
 import { Route } from "react-router-dom";
 import { AccountForm } from "./pages";
 import { useState, useEffect } from "react";
-import { callApi } from "../api";
+import { callApi } from "./api";
+import { Product, Products } from "./components";
 
 const fetchDrinks = async (token) => {
   const data = await callApi({
@@ -18,17 +19,28 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [drinkItems, setDrinkItems] = useState([]);
 
-  useEffect(async () => {
-    const drinks = await fetchDrinks();
-
-    if (drinks) {
-      setDrinkItems(drinks);
-      console.log(drinks)
+  useEffect(() => {
+    
+    const getDrinks = async() => {
+      try {
+        const drinks = await fetchDrinks();
+    
+        if (drinks) {
+          setDrinkItems(drinks);
+          console.log(drinks)
+        }
+      } catch (error) {
+        console.error(error);
+      }  
     }
+    getDrinks();
   }, [token]);
 
   return (
     <>
+    <Route exact path='/'>
+    <TestPage />
+    </Route>
       <Route path="/login">
         <AccountForm action="login" setToken={setToken} />
       </Route>
@@ -53,5 +65,11 @@ function App() {
       </Route>
     </>
   );
+}
+
+const TestPage = () => {
+  return <div>
+    WELCOME!
+  </div>
 }
 export default App;
