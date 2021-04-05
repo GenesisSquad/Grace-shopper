@@ -1,45 +1,59 @@
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import {
   AppBar,
+  Avatar,
+  Badge,
   Button,
   Drawer,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
-  withStyles,
+  withStyles
 } from "@material-ui/core";
-import "./Header.css";
+// import "./Header.css";
 import { deepOrange } from "@material-ui/core/colors";
-import MenuIcon from "@material-ui/icons/Menu";
-import { useState } from "react";
-import { useHistory } from "react-router";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
-import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
-import { Route, Link } from "react-router-dom";
+import Products from "./Products.js";
+// import { Route } from "react-router-dom";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
     color: theme.palette.getContrastText(deepOrange[800]),
-    backgroundColor: deepOrange[800],
-  },
+    backgroundColor: deepOrange[800]
+  }
 }))(Toolbar);
 
 const Header = ({ name, token, setToken, drinkItems }) => {
   const history = useHistory();
   const routes = ["/home", "/myroutines", "/activities", "/products"];
-  const icons = [
-    <HomeIcon />,
-    <FitnessCenterIcon />,
-    <DirectionsRunIcon />,
-    <ListAltIcon />,
-  ];
+  const icons = [<HomeIcon />, <ListAltIcon />];
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+    console.log(
+      "clicking on this brings up a menu for the user for his products and profile"
+    );
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
+    console.log("this opens and closes the cart side window");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -56,21 +70,23 @@ const Header = ({ name, token, setToken, drinkItems }) => {
     >
       <div>
         <Link className="siteName" to="/products">
-          Products
+          Shopping Cart:
         </Link>
       </div>
-      <List style={{ width: "250px" }}>
+      <List style={{ width: "500px" }}>
         {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? (
             <ListItem
               button
               key={text}
               onClick={() => {
-                history.push(routes[i]);
+                // history.push(routes[i]);
+                console.log("this will card you to the specific product page");
               }}
             >
-              <ListItemIcon>{icons[i]}</ListItemIcon>
-              <ListItemText primary={text} />
+              {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
+              {/* <ListItemText primary={text} /> */}
+              <Products />
             </ListItem>
           ) : (
             token && (
@@ -93,37 +109,95 @@ const Header = ({ name, token, setToken, drinkItems }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
-        <IconButton
-          edge="start"
-          color="primary"
-          aria-label="menu"
-          onClick={toggleDrawer("left", true)}
-        >
-          <MenuIcon style={{ color: "#ffffff" }} />
-        </IconButton>
         <Typography variant="h6">{name}</Typography>
+        <Avatar
+          alt="RC"
+          src="https://i.postimg.cc/Bv18bq7N/rhino-coffee.png"
+          className={"Header Logo"}
+        />
+        <Button
+          color="inherit"
+          onClick={(event) => {
+            // history.push("/");
+            console.log("this link will guide you to the Home page");
+          }}
+        >
+          {"Home"}
+        </Button>
+        <Button
+          color="inherit"
+          onClick={(event) => {
+            // history.push("/about");
+            console.log("this link will route you to the About page");
+          }}
+        >
+          {"About"}
+        </Button>
+        <Button
+          color="inherit"
+          onClick={(event) => {
+            // history.push("/products");
+            console.log("this link will route you to all the Products page");
+          }}
+        >
+          {"Products"}
+        </Button>
         <Button
           color="inherit"
           onClick={(event) => {
             const val = event.target.value;
             if (val === "Login") {
-              history.push("/login");
+              // history.push("/login");
+              console.log("you have clicked me");
             } else {
-              setToken("");
-              localStorage.clear();
-              history.push("/");
+              // setToken("");
+              // localStorage.clear();
+              // history.push("/");
+              console.log("I've been clicked !");
             }
           }}
         >
           {!token ? "Login" : "Logout"}
         </Button>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleMenu}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right"
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right"
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My Orders</MenuItem>
+        </Menu>
+        <IconButton aria-label="show shopping cart" color="inherit">
+          <Badge badgeContent={29} color="secondary">
+            <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
+          </Badge>
+        </IconButton>
       </OrangeToolbar>
       <Drawer
-        anchor="left"
-        open={state["left"]}
-        onClose={toggleDrawer("left", false)}
+        anchor="right"
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
       >
-        {list("left")}
+        {list("right")}
       </Drawer>
     </AppBar>
   );
