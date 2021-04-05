@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import { callApi } from "../api";
 import { Header } from "../components";
-import "./home.css";
+import "./Home.css";
 const useStyles = makeStyles({
   root: {
     textAlign: "center",
