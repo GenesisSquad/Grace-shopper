@@ -3,7 +3,7 @@ import react from "react";
 import { Route } from "react-router-dom";
 import { AccountForm } from "./pages";
 import { useState, useEffect } from "react";
-import { callApi } from "../api";
+import { callApi } from "./api";
 
 const fetchDrinks = async (token) => {
   const data = await callApi({
@@ -29,6 +29,9 @@ function App() {
 
   return (
     <>
+    <Route exact path='/'>
+    <div> WELCOME! </div>
+    </Route>
       <Route path="/login">
         <AccountForm action="login" setToken={setToken} />
       </Route>
