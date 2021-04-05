@@ -11,6 +11,17 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use("/products", productsRouter);
 
+server.use('*', (req, res, next) => {
+  res.status(404);
+  res.send({ error: "Client sent an invalid request." });
+});
+
+server.use((error, req, res, next) => {
+    res.status(500);
+    res.send({ error: "Server failed to fulfill valid request." });
+});
+
 server.listen(PORT, () => {
   console.log("Port listening...");
 });
+
