@@ -22,7 +22,7 @@ client.connect();
 
 server.use(morgan("dev"));
 server.use(cors());
-server.use(express.static("/build"));
+server.use("/",express.static("/build"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
@@ -71,5 +71,5 @@ server.use("/api/users", usersRouter);
 
 
 server.listen(PORT, () => {
-  console.log("Port listening...");
+  console.log(`listening on port ${PORT}...`);
 });
