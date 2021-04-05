@@ -15,8 +15,7 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  Typography,
-  withStyles
+  withStyles,
 } from "@material-ui/core";
 // import "./Header.css";
 import { deepOrange } from "@material-ui/core/colors";
@@ -30,8 +29,9 @@ const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
     color: theme.palette.getContrastText(deepOrange[800]),
-    backgroundColor: deepOrange[800]
-  }
+    backgroundColor: deepOrange[800],
+    justifyContent: "space-between",
+  },
 }))(Toolbar);
 
 const Header = ({ name, token, setToken, drinkItems }) => {
@@ -109,88 +109,92 @@ const Header = ({ name, token, setToken, drinkItems }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
-        <Typography variant="h6">{name}</Typography>
         <Avatar
           alt="RC"
           src="https://i.postimg.cc/Bv18bq7N/rhino-coffee.png"
-          className={"Header Logo"}
+          className="HeaderLogo"
         />
-        <Button
-          color="inherit"
-          onClick={(event) => {
-            // history.push("/");
-            console.log("this link will guide you to the Home page");
-          }}
-        >
-          {"Home"}
-        </Button>
-        <Button
-          color="inherit"
-          onClick={(event) => {
-            // history.push("/about");
-            console.log("this link will route you to the About page");
-          }}
-        >
-          {"About"}
-        </Button>
-        <Button
-          color="inherit"
-          onClick={(event) => {
-            // history.push("/products");
-            console.log("this link will route you to all the Products page");
-          }}
-        >
-          {"Products"}
-        </Button>
-        <Button
-          color="inherit"
-          onClick={(event) => {
-            const val = event.target.value;
-            if (val === "Login") {
-              // history.push("/login");
-              console.log("you have clicked me");
-            } else {
-              // setToken("");
-              // localStorage.clear();
+        <div>
+          <Button
+            color="inherit"
+            onClick={(event) => {
               // history.push("/");
-              console.log("I've been clicked !");
-            }
-          }}
-        >
-          {!token ? "Login" : "Logout"}
-        </Button>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleMenu}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right"
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right"
-          }}
-          open={open}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My Orders</MenuItem>
-        </Menu>
-        <IconButton aria-label="show shopping cart" color="inherit">
-          <Badge badgeContent={29} color="secondary">
-            <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
-          </Badge>
-        </IconButton>
+              console.log("this link will guide you to the Home page");
+            }}
+          >
+            {"Home"}
+          </Button>
+          <Button
+            color="inherit"
+            onClick={(event) => {
+              // history.push("/about");
+              console.log("this link will route you to the About page");
+            }}
+          >
+            {"About"}
+          </Button>
+
+          <Button
+            color="inherit"
+            onClick={(event) => {
+              // history.push("/products");
+              console.log("this link will route you to all the Products page");
+            }}
+          >
+            {"Products"}
+          </Button>
+        </div>
+        <div>
+          <Button
+            color="inherit"
+            onClick={(event) => {
+              const val = event.target.value;
+              if (val === "Login") {
+                // history.push("/login");
+                console.log("you have clicked me");
+              } else {
+                // setToken("");
+                // localStorage.clear();
+                // history.push("/");
+                console.log("I've been clicked !");
+              }
+            }}
+          >
+            {!token ? "Login" : "Logout"}
+          </Button>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My Orders</MenuItem>
+          </Menu>
+          <IconButton aria-label="show shopping cart" color="inherit">
+            <Badge badgeContent={29} color="secondary">
+              <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
+            </Badge>
+          </IconButton>
+        </div>
       </OrangeToolbar>
       <Drawer
         anchor="right"
