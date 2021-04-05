@@ -2,7 +2,7 @@ const express = require("express");
 const productsRouter = express.router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { getAllProducts, getProductById } = require("");
+const { getAllProducts, getProductById } = require("../db");
 const { JWT_SECRET } = process.env;
 
 productsRouter.get("/products", async (req, res, next) => {
@@ -15,7 +15,7 @@ productsRouter.get("/products", async (req, res, next) => {
 
 productsRouter.get("/products/:productId", async (req, res, next) => {
   try {
-    return res.send(await getProductById(req.params));
+    return res.send(await getProductById(req.params.productId));
   } catch (error) {
     console.error(error);
   }
