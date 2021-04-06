@@ -23,7 +23,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import Products from "./Products.js";
+import Product from "./Product.js";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
@@ -86,7 +86,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
               {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
               {/* <ListItemText primary={text} /> */}
               {/* <Products /> */}
-I am an Item in your cart!!
+              <Product/>
 
             </ListItem>
           {/* ) : (
