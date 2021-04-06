@@ -10,21 +10,20 @@ import {
   Link,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
+  // ListItemIcon,
+  // ListItemText,
   Menu,
   MenuItem,
   Toolbar,
   withStyles,
 } from "@material-ui/core";
-// import "./Header.css";
+import "./Header.css";
 import { deepOrange } from "@material-ui/core/colors";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import Products from "./Products.js";
-// import { Route } from "react-router-dom";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
@@ -74,11 +73,11 @@ const Header = ({ name, token, setToken, drinkItems }) => {
         </Link>
       </div>
       <List style={{ width: "500px" }}>
-        {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
-          i !== 1 ? (
+        {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
+          i !== 1 ? ( */}
             <ListItem
-              button
-              key={text}
+              // button
+              // key={text}
               onClick={() => {
                 // history.push(routes[i]);
                 console.log("this will card you to the specific product page");
@@ -88,7 +87,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
               {/* <ListItemText primary={text} /> */}
               <Products />
             </ListItem>
-          ) : (
+          {/* ) : (
             token && (
               <ListItem
                 button
@@ -100,9 +99,9 @@ const Header = ({ name, token, setToken, drinkItems }) => {
                 <ListItemIcon>{icons[i]}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
-            )
-          )
-        )}
+            ) */}
+          {/* )
+        )} */}
       </List>
     </div>
   );
@@ -118,7 +117,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
           <Button
             color="inherit"
             onClick={(event) => {
-              // history.push("/");
+              history.push("/");
               console.log("this link will guide you to the Home page");
             }}
           >
@@ -127,7 +126,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
           <Button
             color="inherit"
             onClick={(event) => {
-              // history.push("/about");
+              history.push("/about");
               console.log("this link will route you to the About page");
             }}
           >
@@ -137,7 +136,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
           <Button
             color="inherit"
             onClick={(event) => {
-              // history.push("/products");
+              history.push("/products");
               console.log("this link will route you to all the Products page");
             }}
           >
@@ -150,7 +149,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
             onClick={(event) => {
               const val = event.target.value;
               if (val === "Login") {
-                // history.push("/login");
+                history.push("/login");
                 console.log("you have clicked me");
               } else {
                 // setToken("");

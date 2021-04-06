@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { AccountForm } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
-import { Product, Products } from "./components";
+import { Product, Products, Header } from "./components";
 
 const fetchDrinks = async (token) => {
   const data = await callApi({
@@ -38,6 +38,8 @@ function App() {
 
   return (
     <>
+    <Header
+      drinkItems={drinkItems}/>
     <Route exact path='/'>
     <TestPage />
     </Route>
