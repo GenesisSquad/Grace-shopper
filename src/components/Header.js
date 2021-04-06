@@ -85,7 +85,9 @@ const Header = ({ name, token, setToken, drinkItems }) => {
             >
               {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
               {/* <ListItemText primary={text} /> */}
-              <Products />
+              {/* <Products /> */}
+I am an Item in your cart!!
+
             </ListItem>
           {/* ) : (
             token && (
