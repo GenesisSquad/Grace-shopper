@@ -1,21 +1,27 @@
 import {
   Avatar,
-  Container,
-  CssBaseline,
-  //  makeStyles,
-  // Paper,
-  // Grid,
-  // Avatar,
+  // Container,
+  // CssBaseline,
+  // makeStyles,
+  Paper,
+  Grid,
   TextField,
   Typography,
 } from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Component } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 // import { useParams } from "react-router";
 import { ColorButton } from "../components";
 import "./AccountForm.css";
-
+const paperStyle = {
+  padding: 20,
+  height: "50vh",
+  width: 280,
+  margin: "20px auto",
+};
+const avatarStyle = { backgroundColor: "#00008B" };
 class AccountForm extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +39,7 @@ class AccountForm extends Component {
     this.isLogin = this.state.action === "login";
     this.title = this.isLogin ? "Login" : "Register";
     this.oppositeTitle = !this.isLogin ? "Login" : "Register";
-    this.oppositeAction = !this.isLogin ? "login" : "register";
+    this.oppositeAction = !this.isLogin ? "Login" : "Register";
     this.oppositeMessage = !this.isLogin ? "Have an account?" : "New to us?";
   }
   componentDidMount() {
@@ -107,18 +113,18 @@ class AccountForm extends Component {
             }
           } else {
             alert(
-              "make sure that both the password and confirm password fields match"
+              "Make sure that both the password and confirm password fields match"
             );
             return;
           }
         } else {
           alert(
-            "make sure that both the username and password length is greater than "
+            "Make sure that both the username and password length is greater than 7 characters"
           );
           return;
         }
       } else {
-        alert("not all required fields have been filled in");
+        alert("Not all required fields have been filled in");
         return;
       }
     } else {
@@ -176,16 +182,25 @@ class AccountForm extends Component {
   render() {
     const { action, password, username, confirmPass } = this.state;
     return (
-      <Container maxWidth="xs" className="formmm" style={{ minWidth: "20%" }}>
-        <CssBaseline>
+      // <Container maxWidth="xs" className="formmm" style={{ minWidth: "20%" }}>
+      //   <CssBaseline>
+      //     <div className="textt">
+      //       <Avatar
+      //         variant="square"
+      //         className="textt"
+      //         src="/images/FT-logo.png"
+      //         alt="logo"
+      //         style={{ marginBottom: "10px" }}
+      //       />
+      <Grid>
+        <Paper elevation={10} style={paperStyle}>
+          <Grid align="center">
+            <Avatar style={avatarStyle}>
+              <LockOutlinedIcon />
+            </Avatar>
+            {/* <h2>Sign In</h2> */}
+          </Grid>
           <div className="textt">
-            <Avatar
-              variant="square"
-              className="textt"
-              src="/images/FT-logo.png"
-              alt="logo"
-              style={{ marginBottom: "10px" }}
-            />
             <Typography component="h1" variant="h5" className="textt">
               {this.title}
             </Typography>
@@ -203,6 +218,7 @@ class AccountForm extends Component {
               onChange={this.handleChange}
             />
             <TextField
+              type="password"
               varient="outlined"
               margin="normal"
               required
@@ -216,6 +232,7 @@ class AccountForm extends Component {
 
             {action === "register" && (
               <TextField
+                type="password"
                 varient="outlined"
                 margin="normal"
                 required
@@ -230,36 +247,41 @@ class AccountForm extends Component {
             <ColorButton
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               style={{ marginTop: "10px" }}
               onClick={this.handleSubmit}
             >
               Submit
             </ColorButton>
+            <br></br>
             <span>
               <Link
                 to="#"
-                style={{ marginTop: "10px" }}
+                style={{ marginTop: "20px" }}
                 onClick={() => {
                   this.props.history.push(`/${this.oppositeAction}`);
                 }}
               >
                 {this.oppositeMessage} {this.oppositeAction} here!
               </Link>{" "}
+              <br></br>
+              <br></br>
               <Link
-                style={{ marginLeft: "10px" }}
+                style={{ marginLeft: "20px" }}
                 to="#"
                 onClick={() => {
                   this.props.history.push(`/home`);
                 }}
               >
                 {" "}
-                or continue as guest
+                Continue as guest
               </Link>
             </span>
           </div>
-        </CssBaseline>
-      </Container>
+          {/* </CssBaseline>
+      </Container> */}
+        </Paper>
+      </Grid>
     );
   }
 }
