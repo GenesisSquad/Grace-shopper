@@ -27,8 +27,8 @@ import Product from "./Product.js";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
-    color: theme.palette.getContrastText(deepOrange[800]),
-    backgroundColor: deepOrange[800],
+    color: theme.palette.getContrastText("#9B7D46"),
+    backgroundColor: "#9B7D46",
     justifyContent: "space-between",
   },
 }))(Toolbar);
@@ -75,21 +75,20 @@ const Header = ({ name, token, setToken, drinkItems }) => {
       <List style={{ width: "500px" }}>
         {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? ( */}
-            <ListItem
-              // button
-              // key={text}
-              onClick={() => {
-                // history.push(routes[i]);
-                console.log("this will card you to the specific product page");
-              }}
-            >
-              {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
-              {/* <ListItemText primary={text} /> */}
-              {/* <Products /> */}
-              <Product/>
-
-            </ListItem>
-          {/* ) : (
+        <ListItem
+          // button
+          // key={text}
+          onClick={() => {
+            // history.push(routes[i]);
+            console.log("this will card you to the specific product page");
+          }}
+        >
+          {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
+          {/* <ListItemText primary={text} /> */}
+          {/* <Products /> */}
+          <Product />
+        </ListItem>
+        {/* ) : (
             token && (
               <ListItem
                 button
@@ -102,7 +101,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
                 <ListItemText primary={text} />
               </ListItem>
             ) */}
-          {/* )
+        {/* )
         )} */}
       </List>
     </div>
