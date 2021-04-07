@@ -119,7 +119,7 @@ class AccountForm extends Component {
           }
         } else {
           alert(
-            "Make sure that both the username and password length is greater than 7 characters"
+            "Make sure that the username and password length is greater than 7 characters"
           );
           return;
         }
