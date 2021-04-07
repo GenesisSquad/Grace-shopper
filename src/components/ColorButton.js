@@ -4,10 +4,10 @@ import { deepOrange } from "@material-ui/core/colors";
 const ColorButton = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
-    color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
+    color: theme.palette.getContrastText("#9B7D46"),
+    backgroundColor: "#C0A572",
     "&:hover": {
-      backgroundColor: deepOrange[700],
+      backgroundColor: "#9B7D46",
     },
   },
 }))(Button);

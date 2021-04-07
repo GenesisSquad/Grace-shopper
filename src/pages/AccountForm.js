@@ -39,7 +39,7 @@ class AccountForm extends Component {
     this.isLogin = this.state.action === "login";
     this.title = this.isLogin ? "Login" : "Register";
     this.oppositeTitle = !this.isLogin ? "Login" : "Register";
-    this.oppositeAction = !this.isLogin ? "Login" : "Register";
+    this.oppositeAction = !this.isLogin ? "login" : "register";
     this.oppositeMessage = !this.isLogin ? "Have an account?" : "New to us?";
   }
   componentDidMount() {
@@ -253,8 +253,14 @@ class AccountForm extends Component {
             >
               Submit
             </ColorButton>
-            <br></br>
-            <span>
+            {/* <br></br> */}
+            <span
+              style={{
+                display: "flex",
+                flexFlow: "column",
+                justifyContent: "center",
+              }}
+            >
               <Link
                 to="#"
                 style={{ marginTop: "20px" }}
@@ -263,9 +269,10 @@ class AccountForm extends Component {
                 }}
               >
                 {this.oppositeMessage} {this.oppositeAction} here!
-              </Link>{" "}
-              <br></br>
-              <br></br>
+              </Link>
+              {""}
+              {/* <br></br>
+              <br></br> */}
               <Link
                 style={{ marginLeft: "20px" }}
                 to="#"
@@ -273,7 +280,7 @@ class AccountForm extends Component {
                   this.props.history.push(`/home`);
                 }}
               >
-                {" "}
+                {""}
                 Continue as guest
               </Link>
             </span>
