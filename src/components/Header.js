@@ -33,7 +33,7 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
-const Header = ({ name, token, setToken, drinkItems }) => {
+const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
   const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [<HomeIcon />, <ListAltIcon />];
@@ -45,7 +45,12 @@ const Header = ({ name, token, setToken, drinkItems }) => {
       "clicking on this brings up a menu for the user for his products and profile"
     );
   };
-
+  const logOut = () => {
+    localStorage.clear();
+    setUserData({});
+    setToken("");
+    history.push("/home");
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -75,21 +80,20 @@ const Header = ({ name, token, setToken, drinkItems }) => {
       <List style={{ width: "500px" }}>
         {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? ( */}
-            <ListItem
-              // button
-              // key={text}
-              onClick={() => {
-                // history.push(routes[i]);
-                console.log("this will card you to the specific product page");
-              }}
-            >
-              {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
-              {/* <ListItemText primary={text} /> */}
-              {/* <Products /> */}
-              <Product/>
-
-            </ListItem>
-          {/* ) : (
+        <ListItem
+          // button
+          // key={text}
+          onClick={() => {
+            // history.push(routes[i]);
+            console.log("this will card you to the specific product page");
+          }}
+        >
+          {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
+          {/* <ListItemText primary={text} /> */}
+          {/* <Products /> */}
+          <Product />
+        </ListItem>
+        {/* ) : (
             token && (
               <ListItem
                 button
@@ -102,7 +106,7 @@ const Header = ({ name, token, setToken, drinkItems }) => {
                 <ListItemText primary={text} />
               </ListItem>
             ) */}
-          {/* )
+        {/* )
         )} */}
       </List>
     </div>
@@ -146,23 +150,38 @@ const Header = ({ name, token, setToken, drinkItems }) => {
           </Button>
         </div>
         <div>
-          <Button
+          {/* <Button
             color="inherit"
             onClick={(event) => {
               const val = event.target.value;
+              console.log("THE EVEBT:", val);
               if (val === "Login") {
                 history.push("/login");
                 console.log("you have clicked me");
               } else {
                 // setToken("");
-                // localStorage.clear();
-                // history.push("/");
+                localStorage.clear();
+                history.push("/");
                 console.log("I've been clicked !");
               }
             }}
           >
             {!token ? "Login" : "Logout"}
-          </Button>
+          </Button> */}
+          {token ? (
+            <Button color="inherit" onClick={logOut}>
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="inherit"
+              onClick={(event) => {
+                history.push("/login");
+              }}
+            >
+              Login
+            </Button>
+          )}
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"

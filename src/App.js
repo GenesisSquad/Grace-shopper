@@ -17,7 +17,8 @@ const fetchDrinks = async (token) => {
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [drinkItems, setDrinkItems] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [userData, setUserData] = useState([])
 
   useEffect(() => {
     
@@ -26,7 +27,7 @@ function App() {
         const drinks = await fetchDrinks();
     
         if (drinks) {
-          setDrinkItems(drinks);
+          setProducts(drinks);
           console.log(drinks)
         }
       } catch (error) {
@@ -39,7 +40,9 @@ function App() {
   return (
     <>
     <Header
-      drinkItems={drinkItems}/>
+      products={products}
+      userData= {userData}
+      setUserData = {setUserData}/>
     <Route exact path='/'>
     <TestPage />
     </Route>
@@ -53,15 +56,15 @@ function App() {
 
       <Route path="/products">
         <Products
-          drinkItems={drinkItems}
-          setDrinkItems={setDrinkItems}
+          productss={products}
+          setProducts={setProducts}
           token={token}
         />
       </Route>
       <Route path="/products/:productId">
         <Product
-          drinkItems={drinkItems}
-          setDrinkItems={setDrinkItems}
+          products={products}
+          setProducts={setProducts}
           token={token}
         />
       </Route>
