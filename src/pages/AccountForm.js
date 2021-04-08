@@ -43,13 +43,13 @@ class AccountForm extends Component {
     this.oppositeMessage = !this.isLogin ? "Have an account?" : "New to us?";
   }
   componentDidMount() {
-    if (localStorage.getItem("accountForm-FitnessTrackr")) {
+    if (localStorage.getItem("accountForm")) {
       this.setState(
-        JSON.parse(localStorage.getItem("accountForm-FitnessTrackr"))
+        JSON.parse(localStorage.getItem("accountForm"))
       );
     } else {
       localStorage.setItem(
-        "accountForm-FitnessTrackr",
+        "accountForm",
         JSON.stringify(this.emptyState)
       );
     }
@@ -61,10 +61,10 @@ class AccountForm extends Component {
   // }
   handleChange = (event) => {
     const a = event.target.value;
-    const copy = JSON.parse(localStorage.getItem("accountForm-FitnessTrackr"));
+    const copy = JSON.parse(localStorage.getItem("accountForm"));
     copy[event.target.name] = a;
     this.setState({ [event.target.name]: a });
-    localStorage.setItem("accountForm-FitnessTrackr", JSON.stringify(copy));
+    localStorage.setItem("accountForm", JSON.stringify(copy));
   };
 
   handleSubmit = async (event) => {
@@ -96,8 +96,8 @@ class AccountForm extends Component {
               if (token) {
                 user.token = token;
                 this.props.setToken(token);
-                localStorage.setItem("fitness-user", JSON.stringify(user));
-                localStorage.setItem("fitness-token", user.token);
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("token", user.token);
                 this.props.history.push("/home");
               }
             } catch (error) {
@@ -107,7 +107,7 @@ class AccountForm extends Component {
             } finally {
               this.setState({ ...this.emptyState });
               localStorage.setItem(
-                "accountForm-FitnessTrackr",
+                "accountForm",
                 JSON.stringify(this.emptyState)
               );
             }
@@ -119,7 +119,7 @@ class AccountForm extends Component {
           }
         } else {
           alert(
-            "Make sure that both the username and password length is greater than 7 characters"
+            "Make sure that the username and password length is greater than 7 characters"
           );
           return;
         }

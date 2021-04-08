@@ -1,4 +1,5 @@
-export const BASE_URL = "https://fakestoreapi.com/ (PLACEHOLDER)";
+export const BASE_URL = process.env.DEV ? "http://localhost:3001/api/" : "/api/";
+
 export const callApi = async ({ url, method, token, body }) => {
   // console.log("callApi: ", { url, method, token, body });
   try {
