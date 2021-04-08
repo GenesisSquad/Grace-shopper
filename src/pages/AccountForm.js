@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Component } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import { callApi } from "../api";
 // import { useParams } from "react-router";
 import { ColorButton } from "../components";
 import "./AccountForm.css";
@@ -36,6 +37,7 @@ class AccountForm extends Component {
       password: "",
       confirmPass: "",
     };
+    this.isLoading = false;
     this.isLogin = this.state.action === "login";
     this.title = this.isLogin ? "Login" : "Register";
     this.oppositeTitle = !this.isLogin ? "Login" : "Register";
@@ -68,6 +70,7 @@ class AccountForm extends Component {
   };
 
   handleSubmit = async (event) => {
+    
     event.preventDefault();
     const { action, password, username, confirmPass } = this.state;
     if (action === "register") {
@@ -79,17 +82,16 @@ class AccountForm extends Component {
           if (password === confirmPass) {
             //password is the same as confirm password
             try {
-              const result = await fetch(
-                `https://fitness-tracker-back-end.herokuapp.com/api/users/${action}`,
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ username, password }),
+              this.isLoading = true;
+              const res = await callApi({
+                url:'users/register',
+                method:'POST',
+                body:{
+                  username,
+                  password
                 }
-              );
-              const data = await result.json();
+              })
+              const data = await res.json();
               const token = data?.token;
               const user = data?.user;
               delete user.password;
@@ -110,6 +112,7 @@ class AccountForm extends Component {
                 "accountForm",
                 JSON.stringify(this.emptyState)
               );
+              this.isLoading = false
             }
           } else {
             alert(
@@ -119,7 +122,7 @@ class AccountForm extends Component {
           }
         } else {
           alert(
-            "Make sure that the username and password length is greater than 7 characters"
+            "username & password length must be greater than 7 characters"
           );
           return;
         }
@@ -133,17 +136,16 @@ class AccountForm extends Component {
         if (username.length > 7 && password.length > 7) {
           //password and username are long enough
           try {
-            const result = await fetch(
-              `https://fitness-tracker-back-end.herokuapp.com/api/users/${action}`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, password }),
+            this.isLoading = true;
+            const res = await callApi({
+              url:'users/login',
+              method:'POST',
+              body:{
+                username,
+                password
               }
-            );
-            const data = await result.json();
+            })
+            const data = await res.json();
             // console.log(data);
             const token = data?.token;
             // const user = data?.user;
@@ -165,10 +167,11 @@ class AccountForm extends Component {
               "accountForm-FitnessTrackr",
               JSON.stringify(this.emptyState)
             );
+            this.isLoading = false;
           }
         } else {
           alert(
-            "make sure that both the username and password length is greater than "
+            "username & password length must be greater than 7 characters"
           );
           return;
         }
@@ -205,6 +208,7 @@ class AccountForm extends Component {
               {this.title}
             </Typography>
             <TextField
+              disabled={this.isLoading}
               varient="outlined"
               margin="normal"
               required
@@ -218,6 +222,7 @@ class AccountForm extends Component {
               onChange={this.handleChange}
             />
             <TextField
+            disabled={this.isLoading}
               type="password"
               varient="outlined"
               margin="normal"
@@ -232,6 +237,7 @@ class AccountForm extends Component {
 
             {action === "register" && (
               <TextField
+              disabled={this.isLoading}
                 type="password"
                 varient="outlined"
                 margin="normal"
@@ -245,6 +251,7 @@ class AccountForm extends Component {
               />
             )}
             <ColorButton
+            disabled={this.isLoading}
               fullWidth
               variant="contained"
               color="secondary"
@@ -262,6 +269,7 @@ class AccountForm extends Component {
               }}
             >
               <Link
+              disabled={this.isLoading}
                 to="#"
                 style={{ marginTop: "20px" }}
                 onClick={() => {
@@ -274,6 +282,7 @@ class AccountForm extends Component {
               {/* <br></br>
               <br></br> */}
               <Link
+              disabled={this.isLoading}
                 style={{ marginLeft: "20px" }}
                 to="#"
                 onClick={() => {

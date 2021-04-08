@@ -1,14 +1,15 @@
 const {client} = require('./client');
 const bcrypt = require('bcrypt');
-const userString = 'username,"firstName","lastName", email, "imageURL", "isAdmin"';
-const createUser = async({username,password}) => {
+const userString = 'username,"firstName","lastName", email, "isAdmin"';
+const createUser = async({username,password,firstName,lastName,email,isAdmin = false}) => {
     try {
         const SALT_COUNT = 10;
         const hash = await bcrypt.hash(password,SALT_COUNT)
         const {rows:[user]} = await client.query(`
-            INSERT INTO users(username,password) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING id, username;
-            `,[username.toLowerCase(),hash])
-        return user;
+            INSERT INTO users(password,${userString}) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING RETURNING id, ${userString};
+            `,[hash,username.toLowerCase(),firstName,lastName,email,isAdmin])
+        console.log(user);
+            return user;
     } catch (error) {
         console.error(error);
     }
@@ -32,7 +33,7 @@ const getUser = async({ username, password }) => {
 const getAllUsers = async() => {
     try {
         const {rows} = await client.query(`
-        SELECT ${userString} FROM users;
+        SELECT id, ${userString} FROM users;
         `)
         return rows;
     } catch (error) {
@@ -43,7 +44,7 @@ const getAllUsers = async() => {
 const getUserById = async(id) => {
     try {
         const {rows:[user]} = await client.query(`
-        SELECT ${userString} FROM users WHERE id = $1;
+        SELECT id, ${userString} FROM users WHERE id = $1;
         `,[id])
         return user;
     } catch (error) {
@@ -54,7 +55,7 @@ const getUserByUsername = async(username) => {
     try {
         username = username.toLowerCase();
         const {rows:[user]} = await client.query(`
-        SELECT ${userString} FROM users WHERE username = $1;
+        SELECT id, ${userString} FROM users WHERE username = $1;
         `,[username])
         return user
     } catch (error) {

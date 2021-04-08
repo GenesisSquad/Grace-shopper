@@ -3,7 +3,7 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
-const { createUser, getUserByUsername, getUser } = require("../db");
+const { createUser, getUserByUsername, getUser, getAllUsers } = require("../db");
 const { JWT_SECRET } = process.env;
 
 usersRouter.post("/register", async (req, res, next) => {
@@ -14,7 +14,6 @@ usersRouter.post("/register", async (req, res, next) => {
 			firstName,
 			lastName,
 			email,
-			imageURL,
 		} = req.body;
 		if (!username || !password) {
 			return res
@@ -36,8 +35,7 @@ usersRouter.post("/register", async (req, res, next) => {
 			password,
 			firstName,
 			lastName,
-			email,
-			imageURL,
+			email
 		});
 		if (user && user.username) {
 			const token = jwt.sign(
@@ -110,6 +108,16 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
 	}
 });
 
+usersRouter.get('/',
+// requireAdmin,
+async (req, res, next) => {
+try {
+	return res.send(await getAllUsers())
+} catch (error) {
+	next(error);
+}
+
+})
 module.exports = {
 	usersRouter
 }
