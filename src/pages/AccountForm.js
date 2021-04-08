@@ -16,6 +16,7 @@ import { callApi } from "../api";
 // import { useParams } from "react-router";
 import { ColorButton } from "../components";
 import "./AccountForm.css";
+
 const paperStyle = {
   padding: 20,
   height: 'auto',
@@ -41,21 +42,16 @@ class AccountForm extends Component {
     };
     this.isLoading = false;
     this.isLogin = this.state.action === "login";
-    this.title = this.isLogin ? "Login" : "Register";
-    this.oppositeTitle = !this.isLogin ? "Login" : "Register";
-    this.oppositeAction = !this.isLogin ? "login" : "register";
+    this.title = this.isLogin ? "login" : "register";
+    this.oppositeTitle = !this.isLogin ? "login" : "register";
+    this.oppositeAction = !this.isLogin ? "Login" : "Register";
     this.oppositeMessage = !this.isLogin ? "Have an account?" : "New to us?";
   }
   componentDidMount() {
     if (localStorage.getItem("accountForm")) {
-      this.setState(
-        JSON.parse(localStorage.getItem("accountForm"))
-      );
+      this.setState(JSON.parse(localStorage.getItem("accountForm")));
     } else {
-      localStorage.setItem(
-        "accountForm",
-        JSON.stringify(this.emptyState)
-      );
+      localStorage.setItem("accountForm", JSON.stringify(this.emptyState));
     }
   }
   // componentWillUnmount() {
@@ -120,9 +116,7 @@ class AccountForm extends Component {
               this.isLoading = false
             }
           } else {
-            alert(
-              "Make sure that both the password and confirm password fields match"
-            );
+            alert("Make sure both password and confirm password fields match");
             return;
           }
         } else {
@@ -181,7 +175,7 @@ class AccountForm extends Component {
           return;
         }
       } else {
-        alert("not all required fields have been filled in");
+        alert("Not all required fields have been filled in");
         return;
       }
     }
@@ -206,7 +200,6 @@ class AccountForm extends Component {
             <Avatar style={avatarStyle}>
               <LockOutlinedIcon />
             </Avatar>
-            {/* <h2>Sign In</h2> */}
           </Grid>
           <div className="textt">
             <Typography component="h1" variant="h5" className="textt">
@@ -312,7 +305,6 @@ class AccountForm extends Component {
             >
               Submit
             </ColorButton>
-            {/* <br></br> */}
             <span
               style={{
                 display: "flex",
@@ -323,25 +315,30 @@ class AccountForm extends Component {
               <Link
               disabled={this.isLoading}
                 to="#"
-                style={{ marginTop: "20px" }}
+                style={{ marginTop: "15px" }}
                 onClick={() => {
                   this.props.history.push(`/${this.oppositeAction}`);
                 }}
               >
-                {this.oppositeMessage} {this.oppositeAction} here!
-              </Link>
-              {""}
-              {/* <br></br>
-              <br></br> */}
+                {this.oppositeMessage}
+                <Link style={{ textDecoration: "none" }}>
+                  {" "} {this.oppositeAction} here!
+                </Link>
+              </div>              
               <Link
-              disabled={this.isLoading}
-                style={{ marginLeft: "20px" }}
+              disabled={this.isLoading}                
+                style={{
+                  display: "flex",
+                  marginTop: "10px",
+                  marginLeft: "20px",
+                  textDecoration: "none",
+                  justifyContent: "center"
+                }}
                 to="#"
                 onClick={() => {
                   this.props.history.push(`/home`);
                 }}
               >
-                {""}
                 Continue as guest
               </Link>
             </span>

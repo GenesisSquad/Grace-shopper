@@ -49,54 +49,57 @@ const Product = (drinkItems, token) => {
     setExpanded(!expanded);
   };
   if (true) {
-    return ( <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="Rhino Avatar" className={classes.avatar}>
-            RC
-          </Avatar>
-        }
-        title="Coffe Name"
-        subheader="Price"
-      />
-      <CardMedia
-        className={classes.media}
-        image="https://www.incimages.com/uploaded_files/image/1920x1080/getty_500740897_200013331653767347294_333325.jpg"
-        title="Beverage"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Product Category (whether its coffee or tea):
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="addShopping cart icon">
-          <AddShoppingCartIcon />
-        </IconButton>
-        <IconButton aria-label="addShopping cart icon">
-          <RemoveShoppingCartIcon />
-        </IconButton>
-
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {" "}
-          More info:
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+    return (
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Rhino Avatar" className={classes.avatar}>
+              RC
+            </Avatar>
+          }
+          title="Coffe Name"
+          subheader="Price"
+        />
+        <CardMedia
+          className={classes.media}
+          image="https://www.incimages.com/uploaded_files/image/1920x1080/getty_500740897_200013331653767347294_333325.jpg"
+          title="Beverage"
+        />
         <CardContent>
-          <Typography paragraph>Very delicious coffee from Ethiopia</Typography>
-          <Typography></Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Product Category (whether its coffee or tea):
+          </Typography>
         </CardContent>
-      </Collapse>
-    </Card>
+        <CardActions disableSpacing>
+          <IconButton aria-label="addShopping cart icon">
+            <AddShoppingCartIcon />
+          </IconButton>
+          <IconButton aria-label="addShopping cart icon">
+            <RemoveShoppingCartIcon />
+          </IconButton>
+
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            {" "}
+            More info:
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>
+              Very delicious coffee from Ethiopia
+            </Typography>
+            <Typography></Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
     );
   } else {
     return <h1>LOADING :0)</h1>;
