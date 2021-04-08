@@ -33,7 +33,7 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
-const Header = ({ name, token, setToken, drinkItems }) => {
+const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
   const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [<HomeIcon />, <ListAltIcon />];
@@ -44,6 +44,13 @@ const Header = ({ name, token, setToken, drinkItems }) => {
     console.log(
       "clicking on this brings up a menu for the user for his products and profile"
     );
+  };
+
+  const logOut = () => {
+    localStorage.clear();
+    setUserData({});
+    setToken("");
+    history.push("/home");
   };
 
   const handleClose = () => {
@@ -145,23 +152,20 @@ const Header = ({ name, token, setToken, drinkItems }) => {
           </Button>
         </div>
         <div>
-          <Button
-            color="inherit"
-            onClick={(event) => {
-              const val = event.target.value;
-              if (val === "Login") {
+          {token ? (
+            <Button color="inherit" onClick={logOut}>
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="inherit"
+              onClick={(event) => {
                 history.push("/login");
-                console.log("you have clicked me");
-              } else {
-                // setToken("");
-                // localStorage.clear();
-                // history.push("/");
-                console.log("I've been clicked !");
-              }
-            }}
-          >
-            {!token ? "Login" : "Logout"}
-          </Button>
+              }}
+            >
+              Login
+            </Button>
+          )}
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
