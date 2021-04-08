@@ -26,7 +26,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import Product from "./Product.js";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
-    fontFamily: "tahoma",
+    fontFamily: "tahoma", 
     color: theme.palette.getContrastText("#9B7D46"),
     backgroundColor: "#9B7D46",
     justifyContent: "space-between",
@@ -75,7 +75,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div>
-        <Link className="siteName" to="/products">
+        <Link className="shoppingCart" to="/products">
           Shopping Cart:
         </Link>
       </div>
@@ -116,13 +116,22 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
+        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center' }}>
         <Avatar
           alt="RC"
           src="https://i.postimg.cc/Bv18bq7N/rhino-coffee.png"
           className="HeaderLogo"
-        />
+        />        
+         <Link style={{ textDecoration: 'none' }}
+              onClick={(event) => {
+              history.push("/");
+              console.log("this link will guide you to the Home page");
+            }}>
+         <div className="siteName">Rhino Coffee</div>       
+         </Link>
+         </div>
         <div>
-          <Button
+          {/* <Button
             color="inherit"
             onClick={(event) => {
               history.push("/");
@@ -130,7 +139,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             }}
           >
             {"Home"}
-          </Button>
+          </Button> */}
           <Button
             color="inherit"
             onClick={(event) => {
