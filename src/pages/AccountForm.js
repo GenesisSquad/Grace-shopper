@@ -324,7 +324,7 @@ class AccountForm extends Component {
                 <Link style={{ textDecoration: "none" }}>
                   {" "} {this.oppositeAction} here!
                 </Link>
-              </div>              
+              </Link>              
               <Link
               disabled={this.isLoading}                
                 style={{
