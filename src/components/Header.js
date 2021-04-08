@@ -23,7 +23,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import Product from "./Product.js";
+// import Product from "./pages";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
@@ -93,7 +93,10 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
           {/* <ListItemText primary={text} /> */}
           {/* <Products /> */}
-          <Product />
+          {/* <Product /> */}
+
+          I am a shopping cart item!!!
+          when this works we should render and array of items in the users shopping cart
         </ListItem>
         {/* ) : (
             token && (
