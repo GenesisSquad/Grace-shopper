@@ -15,9 +15,10 @@ import { Link } from "react-router-dom";
 // import { useParams } from "react-router";
 import { ColorButton } from "../components";
 import "./AccountForm.css";
+
 const paperStyle = {
   padding: 20,
-  height: "50vh",
+  height: "auto",
   width: 280,
   margin: "20px auto",
 };
@@ -37,21 +38,16 @@ class AccountForm extends Component {
       confirmPass: "",
     };
     this.isLogin = this.state.action === "login";
-    this.title = this.isLogin ? "Login" : "Register";
-    this.oppositeTitle = !this.isLogin ? "Login" : "Register";
-    this.oppositeAction = !this.isLogin ? "login" : "register";
+    this.title = this.isLogin ? "login" : "register";
+    this.oppositeTitle = !this.isLogin ? "login" : "register";
+    this.oppositeAction = !this.isLogin ? "Login" : "Register";
     this.oppositeMessage = !this.isLogin ? "Have an account?" : "New to us?";
   }
   componentDidMount() {
     if (localStorage.getItem("accountForm")) {
-      this.setState(
-        JSON.parse(localStorage.getItem("accountForm"))
-      );
+      this.setState(JSON.parse(localStorage.getItem("accountForm")));
     } else {
-      localStorage.setItem(
-        "accountForm",
-        JSON.stringify(this.emptyState)
-      );
+      localStorage.setItem("accountForm", JSON.stringify(this.emptyState));
     }
   }
   // componentWillUnmount() {
@@ -112,14 +108,12 @@ class AccountForm extends Component {
               );
             }
           } else {
-            alert(
-              "Make sure that both the password and confirm password fields match"
-            );
+            alert("Make sure both password and confirm password fields match");
             return;
           }
         } else {
           alert(
-            "Make sure that the username and password length is greater than 7 characters"
+            "Make sure username and password length is greater than 7 characters"
           );
           return;
         }
@@ -168,12 +162,12 @@ class AccountForm extends Component {
           }
         } else {
           alert(
-            "make sure that both the username and password length is greater than "
+            "Make sure both username and password length is greater than 7 characters"
           );
           return;
         }
       } else {
-        alert("not all required fields have been filled in");
+        alert("Not all required fields have been filled in");
         return;
       }
     }
@@ -198,7 +192,6 @@ class AccountForm extends Component {
             <Avatar style={avatarStyle}>
               <LockOutlinedIcon />
             </Avatar>
-            {/* <h2>Sign In</h2> */}
           </Grid>
           <div className="textt">
             <Typography component="h1" variant="h5" className="textt">
@@ -253,7 +246,6 @@ class AccountForm extends Component {
             >
               Submit
             </ColorButton>
-            {/* <br></br> */}
             <span
               style={{
                 display: "flex",
@@ -261,26 +253,30 @@ class AccountForm extends Component {
                 justifyContent: "center",
               }}
             >
-              <Link
+              <div
                 to="#"
-                style={{ marginTop: "20px" }}
+                style={{ marginTop: "15px" }}
                 onClick={() => {
                   this.props.history.push(`/${this.oppositeAction}`);
                 }}
               >
-                {this.oppositeMessage} {this.oppositeAction} here!
-              </Link>
-              {""}
-              {/* <br></br>
-              <br></br> */}
+                {this.oppositeMessage}
+                <Link style={{ textDecoration: "none" }}>
+                  {" "} {this.oppositeAction} here!
+                </Link>
+              </div>              
               <Link
-                style={{ marginLeft: "20px" }}
+                style={{
+                  display: "flex",
+                  marginTop: "10px",
+                  textDecoration: "none",
+                  justifyContent: "center"
+                }}
                 to="#"
                 onClick={() => {
                   this.props.history.push(`/home`);
                 }}
               >
-                {""}
                 Continue as guest
               </Link>
             </span>
