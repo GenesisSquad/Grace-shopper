@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 
 const { usersRouter } = require("./users");
 const { productsRouter } = require("./products");
-const {client, getUserById} = require('../db');
+const {client, getUserById, rebuildDB} = require('../db');
 
 // all required locally made files go ^
 
@@ -19,7 +19,7 @@ const { JWT_SECRET } = process.env;
 const server = express();
 
 client.connect();
-
+rebuildDB();
 server.use(morgan("dev"));
 server.use(cors());
 server.use("/",express.static("/build"));
