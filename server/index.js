@@ -1,16 +1,16 @@
-require("dotenv").config;
-const { PORT = 3000 } = process.env;
+require("dotenv").config();
+const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
 const axios = require("axios");
 const bodyParser = require("body-parser");
 var cors = require('cors')
-
+const jwt = require('jsonwebtoken');
 // all required node_modules go ^
 
 const { usersRouter } = require("./users");
 const { productsRouter } = require("./products");
-const {client,getUserById} = require('../db');
+const {client, getUserById} = require('../db');
 
 // all required locally made files go ^
 

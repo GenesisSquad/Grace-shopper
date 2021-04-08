@@ -27,13 +27,13 @@ import Product from "./Product.js";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
-    color: theme.palette.getContrastText(deepOrange[800]),
-    backgroundColor: deepOrange[800],
+    color: theme.palette.getContrastText("#9B7D46"),
+    backgroundColor: "#9B7D46",
     justifyContent: "space-between",
   },
 }))(Toolbar);
 
-const Header = ({ name, token, setToken, products, setUserData }) => {
+const Header = ({ name, token, setToken, drinkItems }) => {
   const history = useHistory();
   const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [<HomeIcon />, <ListAltIcon />];
@@ -45,12 +45,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
       "clicking on this brings up a menu for the user for his products and profile"
     );
   };
-  const logOut = () => {
-    localStorage.clear();
-    setUserData({});
-    setToken("");
-    history.push("/home");
-  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -150,38 +145,23 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Button>
         </div>
         <div>
-          {/* <Button
+          <Button
             color="inherit"
             onClick={(event) => {
               const val = event.target.value;
-              console.log("THE EVEBT:", val);
               if (val === "Login") {
                 history.push("/login");
                 console.log("you have clicked me");
               } else {
                 // setToken("");
-                localStorage.clear();
-                history.push("/");
+                // localStorage.clear();
+                // history.push("/");
                 console.log("I've been clicked !");
               }
             }}
           >
             {!token ? "Login" : "Logout"}
-          </Button> */}
-          {token ? (
-            <Button color="inherit" onClick={logOut}>
-              Logout
-            </Button>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={(event) => {
-                history.push("/login");
-              }}
-            >
-              Login
-            </Button>
-          )}
+          </Button>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"

@@ -104,7 +104,6 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
 		const { user } = req;
 		if (!user) return res.status(400).send("no token");
 		// console.log(user);
-		user.data = await getAllRoutinesByUser(user);
 		return res.send(user);
 	} catch (error) {
 		next(error);
