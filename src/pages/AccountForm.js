@@ -18,7 +18,7 @@ import { ColorButton } from "../components";
 import "./AccountForm.css";
 const paperStyle = {
   padding: 20,
-  height: "50vh",
+  height: 'auto',
   width: 280,
   margin: "20px auto",
 };
@@ -30,12 +30,14 @@ class AccountForm extends Component {
       username: "",
       password: "",
       confirmPass: "",
+      firstName:'', lastName:'', email:'',
       action: this.props.action,
     };
     this.emptyState = {
       username: "",
       password: "",
       confirmPass: "",
+      firstName:'', lastName:'', email:'',
     };
     this.isLoading = false;
     this.isLogin = this.state.action === "login";
@@ -72,10 +74,10 @@ class AccountForm extends Component {
   handleSubmit = async (event) => {
     
     event.preventDefault();
-    const { action, password, username, confirmPass } = this.state;
+    const { action, password, username, confirmPass, firstName, lastName, email} = this.state;
     if (action === "register") {
       //register a user
-      if (password && username && confirmPass) {
+      if (password && username && confirmPass && firstName && lastName && email) {
         // all fields are filled in
         if (username.length > 7 && password.length > 7) {
           //password and username are long enough
@@ -88,10 +90,13 @@ class AccountForm extends Component {
                 method:'POST',
                 body:{
                   username,
-                  password
+                  password,
+                  firstName,
+                  lastName,
+                  email
                 }
               })
-              const data = await res.json();
+              const data = res;
               const token = data?.token;
               const user = data?.user;
               delete user.password;
@@ -183,7 +188,7 @@ class AccountForm extends Component {
   };
 
   render() {
-    const { action, password, username, confirmPass } = this.state;
+    const { action, password, username, confirmPass, firstName, lastName, email} = this.state;
     return (
       // <Container maxWidth="xs" className="formmm" style={{ minWidth: "20%" }}>
       //   <CssBaseline>
@@ -221,6 +226,53 @@ class AccountForm extends Component {
               autoFocus
               onChange={this.handleChange}
             />
+              {
+                action === 'register' && <><div style={{display:'flex',flexFlow:'row'}}><TextField
+                disabled={this.isLoading}
+                varient="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="FirstName"
+                label="first name"
+                name="firstName"
+                value={firstName}
+                autoComplete="name"
+                autoFocus
+                onChange={this.handleChange}
+              />
+              <TextField
+                style={{marginLeft:'10px'}}
+                disabled={this.isLoading}
+                varient="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="lastName"
+                label="last name"
+                name="lastName"
+                value={lastName}
+                autoComplete="name"
+                autoFocus
+                onChange={this.handleChange}
+              /></div>
+              <TextField
+                disabled={this.isLoading}
+                varient="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="email"
+                name="email"
+                value={email}
+                autoComplete="name"
+                autoFocus
+                onChange={this.handleChange}
+              /></>
+              }
+              
+            
             <TextField
             disabled={this.isLoading}
               type="password"

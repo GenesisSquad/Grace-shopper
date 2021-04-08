@@ -5,7 +5,7 @@ require("dotenv").config();
 const { getAllProducts, getProductById } = require("../db");
 const { JWT_SECRET } = process.env;
 
-productsRouter.get("/products", async (req, res, next) => {
+productsRouter.get("/", async (req, res, next) => {
   try {
     return res.send(await getAllProducts());
   } catch (error) {
@@ -13,7 +13,7 @@ productsRouter.get("/products", async (req, res, next) => {
   }
 });
 
-productsRouter.get("/products/:productId", async (req, res, next) => {
+productsRouter.get("/:productId", async (req, res, next) => {
   try {
     return res.send(await getProductById(req.params.productId));
   } catch (error) {
