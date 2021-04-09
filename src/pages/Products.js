@@ -246,7 +246,6 @@ const useStyles = makeStyles((theme) => ({
   },
   expand: {
     transform: "rotate(0deg)",
-    marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
@@ -258,6 +257,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: blue[500],
   },
   paper: {},
+  bottomCard: { justifyContent: "space-between" },
 }));
 
 const Products = ({ userData }) => {
@@ -302,26 +302,30 @@ const Products = ({ userData }) => {
                       {product.category}
                     </Typography>
                   </CardContent>
-                  <CardActions disableSpacing>
-                    <IconButton aria-label="addShopping cart icon">
-                      <AddShoppingCartIcon onClick={handleAddItem} />
-                    </IconButton>
-                    <IconButton aria-label="addShopping cart icon">
-                      <RemoveShoppingCartIcon onClick={handleRemoveItem} />
-                    </IconButton>
-                    <IconButton>More Info:</IconButton>
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                      })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
-                      aria-label="show more"
-                    >
-                      {" "}
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </CardActions>
+                  <div>
+                    <CardActions className={classes.bottomCard} disableSpacing>
+                      <div>
+                      <IconButton aria-label="addShopping cart icon">
+                        <AddShoppingCartIcon onClick={handleAddItem} />
+                      </IconButton>
+                      <IconButton aria-label="remove shopping cart icon">
+                       
+                        <RemoveShoppingCartIcon onClick={handleRemoveItem} />
+                      </IconButton>
+                      </div>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                      >
+                        {" "}
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    </CardActions>
+                  </div>
                   <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                       <Typography paragraph>{product.description}</Typography>
