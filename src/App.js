@@ -1,7 +1,7 @@
 // Front end APP.js file
 // import react from "react";
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products } from "./pages";
+import { AccountForm, Product, Products, Home } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -42,7 +42,7 @@ function App() {
         setUserData={setUserData}
       />
       <Route exact path="/">
-        <TestPage />
+        <Home products={products} token={token} />
       </Route>
       <Route path="/login">
         <AccountForm action="login" setToken={setToken} />
@@ -58,11 +58,15 @@ function App() {
       <Route path="/products/:productId">
         <Product products={products} setProducts={setProducts} token={token} />
       </Route>
+
+      <Route path="/home"></Route>
     </>
   );
 }
 
-const TestPage = () => {
-  return <div>WELCOME! </div>;
-};
+
+// const TestPage = () => {
+//   return <div>WELCOME!</div>;
+// };
+
 export default App;
