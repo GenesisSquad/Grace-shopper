@@ -144,7 +144,7 @@ class AccountForm extends Component {
                 password
               }
             })
-            const data = await res.json();
+            const data = res;
             // console.log(data);
             const token = data?.token;
             // const user = data?.user;
@@ -153,7 +153,7 @@ class AccountForm extends Component {
               // user.token = token;
               this.props.setToken(token);
               // localStorage.setItem("fitness-user", JSON.stringify(user));
-              localStorage.setItem("fitness-token", token);
+              localStorage.setItem("token", token);
               this.props.history.push("/home");
             }
           } catch (error) {
@@ -163,7 +163,7 @@ class AccountForm extends Component {
           } finally {
             // this.setState({ ...this.emptyState });
             localStorage.setItem(
-              "accountForm-FitnessTrackr",
+              "accountForm",
               JSON.stringify(this.emptyState)
             );
             this.isLoading = false;

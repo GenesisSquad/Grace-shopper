@@ -2,8 +2,7 @@ require("dotenv").config();
 const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
-const axios = require("axios");
-const bodyParser = require("body-parser");
+// const axios = require("axios");
 var cors = require('cors')
 const jwt = require('jsonwebtoken');
 // all required node_modules go ^
@@ -77,7 +76,7 @@ server.use('*', (req, res, next) => {
   
 server.use((error, req, res, next) => {
 	res.status(500);
-	res.send({ error: "Server failed to fulfill valid request." });
+	res.send({ error });
 });
   
 
