@@ -72,7 +72,7 @@ const products = [
     inStock:true,
     name: "joe",
     description: "GREAT COFFEE!",
-    category: "TEA",
+    category: "COFFEE",
     price: "$22",
     imageURL:
       "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
@@ -99,7 +99,7 @@ const products = [
     inStock:true,
     name: "Nick's DD Brew",
     description: "Nick's interpretation of DUnkin Donuts Coffee",
-    category: "Coffee",
+    category: "COFFEE",
     price: "$4",
     imageURL:
       "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
@@ -135,7 +135,7 @@ const products = [
     inStock:true,
     name: "joe",
     description: "GREAT COFFEE!",
-    category: "TEA",
+    category: "COFFEE",
     price: "$22",
     imageURL:
       "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
@@ -163,7 +163,7 @@ const products = [
     inStock:true,
     name: "Capuccino 2.0",
     description: "Delicious foamy cofi",
-    category: "Coffee",
+    category: "COFFEE",
     price: "$23",
     imageURL:
     "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
