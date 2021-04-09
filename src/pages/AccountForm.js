@@ -113,7 +113,7 @@ class AccountForm extends Component {
                 "accountForm",
                 JSON.stringify(this.emptyState)
               );
-              this.isLoading = false
+              this.isLoading = false;
             }
           } else {
             alert("Make sure both password and confirm password fields match");
@@ -132,7 +132,7 @@ class AccountForm extends Component {
     } else {
       if (password && username) {
         // all fields are filled in
-        if (username.length > 7 && password.length > 7) {
+        if (password.length > 7) {
           //password and username are long enough
           try {
             this.isLoading = true;
@@ -170,7 +170,7 @@ class AccountForm extends Component {
           }
         } else {
           alert(
-            "username & password length must be greater than 7 characters"
+            "password length must be greater than 7 characters"
           );
           return;
         }
@@ -320,10 +320,7 @@ class AccountForm extends Component {
                   this.props.history.push(`/${this.oppositeAction}`);
                 }}
               >
-                {this.oppositeMessage}
-                <Link style={{ textDecoration: "none" }}>
-                  {" "} {this.oppositeAction} here!
-                </Link>
+                {this.oppositeMessage}{" "} {this.oppositeAction} here!
               </Link>              
               <Link
               disabled={this.isLoading}                
