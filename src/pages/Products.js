@@ -7,7 +7,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
@@ -34,7 +33,7 @@ const products = [
     category: "COFFEE",
     price: "$332",
     imageUrl:
-      "https://lh3.googleusercontent.com/proxy/-uZn48p7J5spc9gPvseJNWKbZ5O9-Xgg2hOXzbUeTKtso9pssqSsRzLrXGl82PLRzFfjiqB1s1qQK-5Vtj-SSKU1oJaHF5nABVRGHg4C4L1k74WSAvf8R7W0SOx09pnoX0eW",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6yBA9_5Lbi1HikFLiXfb1oqY0osvx9MzFA&usqp=CAU",
   },
   {
     id: 33,
@@ -47,7 +46,7 @@ const products = [
   },
   {
     id: 44,
-    name: "Nick's Dunkin Donuts Brew",
+    name: "Nick's DD Brew",
     description: "Nick's interpretation of DUnkin Donuts Coffee",
     category: "Coffee",
     price: "4ETH",
@@ -74,21 +73,21 @@ const products = [
   },
   {
     id: 77,
-    name: "Nick's Dunkin Donuts Brew",
-    description: "Nick's interpretation of DUnkin Donuts Coffee",
-    category: "Coffee",
-    price: "4ETH",
+    name: "capuccino",
+    description: "veri foami",
+    category: "COFFEE",
+    price: "$332",
     imageUrl:
-      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+      "https://vaya.in/recipes/wp-content/uploads/2019/02/Cappuccino.jpg",
   },
   {
     id: 88,
-    name: "Nick's Dunkin Donuts Brew",
-    description: "Nick's interpretation of DUnkin Donuts Coffee",
-    category: "Coffee",
-    price: "4ETH",
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
     imageUrl:
-      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
   },
   {
     id: 99,
@@ -101,21 +100,21 @@ const products = [
   },
   {
     id: 111,
-    name: "Nick's Dunkin Donuts Brew",
-    description: "Nick's interpretation of DUnkin Donuts Coffee",
-    category: "Coffee",
-    price: "4ETH",
+    name: "capuccino",
+    description: "veri foami",
+    category: "COFFEE",
+    price: "$332",
     imageUrl:
-      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+      "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
   },
   {
     id: 222,
-    name: "Nick's Dunkin Donuts Brew",
-    description: "Nick's interpretation of DUnkin Donuts Coffee",
-    category: "Coffee",
-    price: "4ETH",
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
     imageUrl:
-      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
   },
   {
     id: 333,
@@ -183,14 +182,6 @@ const Products = ({ userData }) => {
               <Paper className={classes.paper}>
                 <Card className={classes.root}>
                   <CardHeader
-                    avatar={
-                      <Avatar
-                        aria-label="Rhino Avatar"
-                        className={classes.avatar}
-                      >
-                        RC
-                      </Avatar>
-                    }
                     title={product.name}
                     subheader={product.price}
                   />
