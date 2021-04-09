@@ -18,13 +18,21 @@ const fetchDrinks = async (token) => {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(localStorage.getItem('user') || {});
 
   useEffect(() => {
-    const getDrinks = async () => {
+    const getInfo = async () => {
       try {
         const drinks = await fetchDrinks();
-
+        if(token){
+          const user = await callApi({
+            url:'users/me',
+            method:'GET',
+            token
+          })
+          setUserData(user);
+          localStorage.setItem('user',JSON.stringify(user))
+        }
         if (drinks) {
           setProducts(drinks);
           console.log(drinks);
@@ -33,7 +41,7 @@ function App() {
         console.error(error);
       }
     };
-    getDrinks();
+    getInfo();
   }, [token]);
 
   return (
