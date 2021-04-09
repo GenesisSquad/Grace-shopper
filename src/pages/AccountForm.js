@@ -327,8 +327,7 @@ class AccountForm extends Component {
                 style={{
                   display: "flex",
                   marginTop: "10px",
-                  marginLeft: "20px",
-                  // textDecoration: "none",
+                  justifyContent: "center",
                 }}
                 to="#"
                 onClick={() => {
