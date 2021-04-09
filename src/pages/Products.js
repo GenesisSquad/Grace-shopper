@@ -108,6 +108,15 @@ const products = [
       "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
   },
   {
+    id: 333,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageUrl:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+  },
+  {
     id: 222,
     name: "joe",
     description: "GREAT COFFEE!",
@@ -115,6 +124,96 @@ const products = [
     price: "$22",
     imageUrl:
       "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
+  {
+    id: 11,
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
+    imageUrl:
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
+  {
+    id: 22,
+    name: "capuccino",
+    description: "veri foami",
+    category: "COFFEE",
+    price: "$332",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6yBA9_5Lbi1HikFLiXfb1oqY0osvx9MzFA&usqp=CAU",
+  },
+  {
+    id: 33,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageUrl:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+  },
+  {
+    id: 44,
+    name: "Nick's DD Brew",
+    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    category: "Coffee",
+    price: "4ETH",
+    imageUrl:
+      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    id: 55,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge ",
+    category: "TEA",
+    price: "$900",
+    imageUrl:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    id: 66,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageUrl:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+  },
+  {
+    id: 77,
+    name: "capuccino",
+    description: "veri foami",
+    category: "COFFEE",
+    price: "$332",
+    imageUrl:
+      "https://vaya.in/recipes/wp-content/uploads/2019/02/Cappuccino.jpg",
+  },
+  {
+    id: 88,
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
+    imageUrl:
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
+  {
+    id: 99,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge ",
+    category: "TEA",
+    price: "$900",
+    imageUrl:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    id: 111,
+    name: "capuccino",
+    description: "veri foami",
+    category: "COFFEE",
+    price: "$332",
+    imageUrl:
+      "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
   },
   {
     id: 333,
@@ -125,12 +224,21 @@ const products = [
     imageUrl:
       "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
   },
+  {
+    id: 222,
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
+    imageUrl:
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: "20px"
+    marginTop: "20px",
   },
   media: {
     height: 0,
@@ -173,18 +281,13 @@ const Products = ({ userData }) => {
         direction="row"
         justify="center"
         alignItems="center"
-        
       >
-        
         {products.map((product) => {
           return (
             <Grid item xs={2}>
               <Paper className={classes.paper}>
                 <Card className={classes.root}>
-                  <CardHeader
-                    title={product.name}
-                    subheader={product.price}
-                  />
+                  <CardHeader title={product.name} subheader={product.price} />
                   <CardMedia
                     className={classes.media}
                     image={product.imageUrl}
@@ -206,6 +309,7 @@ const Products = ({ userData }) => {
                     <IconButton aria-label="addShopping cart icon">
                       <RemoveShoppingCartIcon onClick={handleRemoveItem} />
                     </IconButton>
+                    <IconButton>More Info:</IconButton>
                     <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,
@@ -215,7 +319,6 @@ const Products = ({ userData }) => {
                       aria-label="show more"
                     >
                       {" "}
-                      More info:
                       <ExpandMoreIcon />
                     </IconButton>
                   </CardActions>
