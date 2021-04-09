@@ -1,9 +1,9 @@
 const express = require("express");
 const productsRouter = express.Router();
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { getAllProducts, getProductById } = require("../db");
-const { JWT_SECRET } = process.env;
+// const { JWT_SECRET } = process.env;
 
 productsRouter.get("/", async (req, res, next) => {
   try {
