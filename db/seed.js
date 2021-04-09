@@ -84,7 +84,7 @@ const products = [
     category: "COFFEE",
     price: "$332",
     imageURL:
-      "https://lh3.googleusercontent.com/proxy/-uZn48p7J5spc9gPvseJNWKbZ5O9-Xgg2hOXzbUeTKtso9pssqSsRzLrXGl82PLRzFfjiqB1s1qQK-5Vtj-SSKU1oJaHF5nABVRGHg4C4L1k74WSAvf8R7W0SOx09pnoX0eW",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6yBA9_5Lbi1HikFLiXfb1oqY0osvx9MzFA&usqp=CAU",
   },
   {
     inStock:false,
@@ -97,12 +97,85 @@ const products = [
   },
   {
     inStock:true,
-    name: "Nick's Dunkin Donuts Brew",
+    name: "Nick's DD Brew",
     description: "Nick's interpretation of DUnkin Donuts Coffee",
     category: "Coffee",
     price: "$4",
     imageURL:
       "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    inStock:true,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge",
+    category: "TEA",
+    price: "$900",
+    imageURL:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    inStock:true,
+    name: "Capuccino 2.0",
+    description: "Delicious foamy cofi",
+    category: "Coffee",
+    price: "$23",
+    imageURL:
+    "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
+  },
+  {
+    inStock:true,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge",
+    category: "TEA",
+    price: "$900",
+    imageURL:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    inStock:true,
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
+    imageURL:
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
+
+  {
+    inStock:true,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge",
+    category: "TEA",
+    price: "$900",
+    imageURL:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    inStock:true,
+    name: "joe",
+    description: "GREAT COFFEE!",
+    category: "TEA",
+    price: "$22",
+    imageURL:
+      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+  },
+  {
+    inStock:true,
+    name: "Capuccino 2.0",
+    description: "Delicious foamy cofi",
+    category: "Coffee",
+    price: "$23",
+    imageURL:
+    "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
+  },
+  {
+    inStock:false,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageURL:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
   },
 ];
 const users = [

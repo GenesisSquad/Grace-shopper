@@ -6,10 +6,9 @@ import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
 
-const fetchDrinks = async (token) => {
+const fetchProducts = async () => {
   const data = await callApi({
     url: "products",
-    token,
   });
 
   return data;
@@ -21,19 +20,18 @@ function App() {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    const getDrinks = async () => {
+    const getProducts = async () => {
       try {
-        const drinks = await fetchDrinks();
-
-        if (drinks) {
-          setProducts(drinks);
-          console.log(drinks);
+        const products = await fetchProducts();
+        if (products) {
+          setProducts(products);
+          console.log("products being set:", products);
         }
       } catch (error) {
         console.error(error);
       }
     };
-    getDrinks();
+    getProducts();
   }, [token]);
 
   return (
@@ -55,11 +53,7 @@ function App() {
       </Route>
 
       <Route path="/products">
-        <Products
-          productss={products}
-          setProducts={setProducts}
-          token={token}
-        />
+        <Products products={products} />
       </Route>
       <Route path="/products/:productId">
         <Product products={products} setProducts={setProducts} token={token} />
@@ -69,6 +63,6 @@ function App() {
 }
 
 const TestPage = () => {
-  return <div>WELCOME!</div>;
+  return <div>WELCOME! </div>;
 };
 export default App;
