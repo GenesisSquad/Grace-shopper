@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 const products = [
   {
@@ -53,11 +54,84 @@ const products = [
     imageUrl:
       "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
   },
+  {
+    id: 55,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge ",
+    category: "TEA",
+    price: "$900",
+    imageUrl:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    id: 66,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageUrl:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+  },
+  {
+    id: 77,
+    name: "Nick's Dunkin Donuts Brew",
+    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    category: "Coffee",
+    price: "4ETH",
+    imageUrl:
+      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    id: 88,
+    name: "Nick's Dunkin Donuts Brew",
+    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    category: "Coffee",
+    price: "4ETH",
+    imageUrl:
+      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    id: 99,
+    name: "Juno's Morning Tea",
+    description: "A delicious green tea made from the leaves of Juno's hedge ",
+    category: "TEA",
+    price: "$900",
+    imageUrl:
+      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+  },
+  {
+    id: 111,
+    name: "Nick's Dunkin Donuts Brew",
+    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    category: "Coffee",
+    price: "4ETH",
+    imageUrl:
+      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    id: 222,
+    name: "Nick's Dunkin Donuts Brew",
+    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    category: "Coffee",
+    price: "4ETH",
+    imageUrl:
+      "https://www.mercurynews.com/wp-content/uploads/2020/08/SJM-L-DUNKINDONUTS-0812.jpg?",
+  },
+  {
+    id: 333,
+    name: "mega tea",
+    description: "Tea imported from Japan",
+    category: "TEA",
+    price: "$42",
+    imageUrl:
+      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: "20px"
   },
   media: {
     height: 0,
@@ -76,6 +150,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: blue[500],
   },
+  paper: {},
 }));
 
 const Products = ({ userData }) => {
@@ -93,65 +168,73 @@ const Products = ({ userData }) => {
   };
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid
+        container
+        spacing={5}
+        direction="row"
+        justify="center"
+        alignItems="center"
+        
+      >
+        
         {products.map((product) => {
           return (
-            <Grid item>
-              {/* <Paper className={classes.paper}> */}
-              <Card className={classes.root}>
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      aria-label="Rhino Avatar"
-                      className={classes.avatar}
-                    >
-                      RC
-                    </Avatar>
-                  }
-                  title={product.name}
-                  subheader={product.price}
-                />
-                <CardMedia
-                  className={classes.media}
-                  image={product.imageUrl}
-                  title="Beverage"
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {product.category}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="addShopping cart icon">
-                    <AddShoppingCartIcon onClick={handleAddItem} />
-                  </IconButton>
-                  <IconButton aria-label="addShopping cart icon">
-                    <RemoveShoppingCartIcon onClick={handleRemoveItem} />
-                  </IconButton>
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    {" "}
-                    More info:
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Grid item xs={2}>
+              <Paper className={classes.paper}>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        aria-label="Rhino Avatar"
+                        className={classes.avatar}
+                      >
+                        RC
+                      </Avatar>
+                    }
+                    title={product.name}
+                    subheader={product.price}
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={product.imageUrl}
+                    title="Beverage"
+                  />
                   <CardContent>
-                    <Typography paragraph>{product.description}</Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {product.category}
+                    </Typography>
                   </CardContent>
-                </Collapse>
-              </Card>
-              {/* </Paper> */}
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="addShopping cart icon">
+                      <AddShoppingCartIcon onClick={handleAddItem} />
+                    </IconButton>
+                    <IconButton aria-label="addShopping cart icon">
+                      <RemoveShoppingCartIcon onClick={handleRemoveItem} />
+                    </IconButton>
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expanded,
+                      })}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label="show more"
+                    >
+                      {" "}
+                      More info:
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </CardActions>
+                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>{product.description}</Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Paper>
             </Grid>
           );
         })}
