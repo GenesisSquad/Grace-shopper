@@ -2,10 +2,10 @@ import React from "react";
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
+  CircularProgress,
   Grid,
   IconButton,
   makeStyles,
@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,8 @@ const ProductCard = ({ product }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const history = useHistory();
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
@@ -41,6 +44,7 @@ const ProductCard = ({ product }) => {
   };
   const handleRemoveItem = () => {
     console.log("item removed!!!");
+    history.push(`/products/${product.id}`);
   };
 
   const handleClick = (event) => {
@@ -64,7 +68,7 @@ const ProductCard = ({ product }) => {
             {product.category}
           </Typography>
         </CardContent>
-        <CardActions className={classes.bottomCard} disableSpacing>
+        <div className={classes.bottomCard} disableSpacing>
           <div>
             <IconButton aria-label="addShopping cart icon">
               <AddShoppingCartIcon onClick={handleAddItem} />
@@ -98,7 +102,7 @@ const ProductCard = ({ product }) => {
               <Typography paragraph>{product.description}</Typography>
             </CardContent>
           </Popover>
-        </CardActions>
+        </div>
       </Card>
     </Grid>
   );
@@ -106,7 +110,6 @@ const ProductCard = ({ product }) => {
 
 const Products = ({ products, userData }) => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Grid
@@ -116,9 +119,16 @@ const Products = ({ products, userData }) => {
         justify="center"
         alignItems="center"
       >
-        {products.map((product, index) => {
-          return <ProductCard product={product} key={product.id} />;
-        })}
+        {!products ? (
+          <Grid item>
+            {" "}
+            <CircularProgress />{" "}
+          </Grid>
+        ) : (
+          products.map((product, index) => {
+            return <ProductCard product={product} key={product.id} />;
+          })
+        )}
       </Grid>
     </div>
   );

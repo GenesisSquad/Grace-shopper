@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import CardHeader from "@material-ui/core/CardHeader";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles({
   root: {
@@ -17,44 +19,58 @@ const useStyles = makeStyles({
   },
 });
 
-const Product = (drinkItems, token) => {
-  // const { productId } = useParams();
-  // const product = drinkItems.find((product) => productId === product.id);
+const ProductCard = ({product}) => {
   const classes = useStyles();
-  if (true) {
-    return (
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardContent>
-            <CardHeader title={"NAME"} subheader={"PRICE"} />
-            <CardMedia
-              component="img"
-              alt="DRANK"
-              height="140"
-              image="product.imageURL"
-              title="drink"
-            />
-            <Typography gutterBottom variant="h6" component="h2">
-              Category of coffee
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              This is the description of the coffee
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <IconButton aria-label="addShopping cart icon">
-            <AddShoppingCartIcon onClick={console.log("added!")} />
-          </IconButton>
-          <IconButton aria-label="addShopping cart icon">
-            <RemoveShoppingCartIcon onClick={console.log("removed!")} />
-          </IconButton>
-        </CardActions>
-      </Card>
-    );
-  } else {
-    return <h1>LOADING :0)</h1>;
-  }
+  return (
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardContent>
+          <CardHeader title={product.name} subheader={product.price} />
+          <CardMedia
+            component="img"
+            alt="DRANK"
+            height="140"
+            image={product.imageURL}
+            title="drink"
+          />
+          <Typography gutterBottom variant="h6" component="h2">
+            {}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {product.description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <IconButton aria-label="addShopping cart icon">
+          <AddShoppingCartIcon onClick={console.log("added!")} />
+        </IconButton>
+        <IconButton aria-label="addShopping cart icon">
+          <RemoveShoppingCartIcon onClick={console.log("removed!")} />
+        </IconButton>
+      </CardActions>
+    </Card>
+  );
+};
+
+const Product = ({ products }) => {
+  let { productId } = useParams();
+  productId = parseInt(productId, 10);
+  const product = products.find((product) => productId === product.id);
+  console.log("products being passed into product", products);
+  console.log("useparams id", productId);
+  console.log("this is the product", product);
+  return (
+    <>
+      {product ? (
+        <ProductCard product={product} />
+      ) : (
+        <div>
+          <h1>Loading</h1> <CircularProgress />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Product;
