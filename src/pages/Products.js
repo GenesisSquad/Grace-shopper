@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -9,12 +11,10 @@ import {
   Grid,
   IconButton,
   makeStyles,
-  Popover,
   Typography,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
-import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,28 +32,20 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductCard = ({ product }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const history = useHistory();
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   const handleAddItem = () => {
     console.log("added item!!!");
   };
   const handleRemoveItem = () => {
     console.log("item removed!!!");
-    history.push(`/products/${product.id}`);
   };
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    history.push(`/products/${product.id}`);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <Grid item xs={5} sm={3}>
       <Card className={classes.card}>
@@ -68,7 +60,7 @@ const ProductCard = ({ product }) => {
             {product.category}
           </Typography>
         </CardContent>
-        <div className={classes.bottomCard} disableSpacing>
+        <CardActions className={classes.bottomCard} disableSpacing>
           <div>
             <IconButton aria-label="addShopping cart icon">
               <AddShoppingCartIcon onClick={handleAddItem} />
@@ -77,32 +69,10 @@ const ProductCard = ({ product }) => {
               <RemoveShoppingCartIcon onClick={handleRemoveItem} />
             </IconButton>
           </div>
-          <Button
-            aria-describedby={id}
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-          >
+          <Button variant="contained" color="primary" onClick={handleClick}>
             More info
           </Button>
-          <Popover
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <CardContent>
-              <Typography paragraph>{product.description}</Typography>
-            </CardContent>
-          </Popover>
-        </div>
+        </CardActions>
       </Card>
     </Grid>
   );
@@ -121,7 +91,7 @@ const Products = ({ products, userData }) => {
       >
         {!products ? (
           <Grid item>
-            {" "}
+            LOADING
             <CircularProgress />{" "}
           </Grid>
         ) : (

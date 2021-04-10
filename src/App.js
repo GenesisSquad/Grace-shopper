@@ -25,7 +25,7 @@ function App() {
         const products = await fetchProducts();
         if (products) {
           setProducts(products);
-          console.log("products being set:", products);
+          console.log("List of all products:", products);
         }
       } catch (error) {
         console.error(error);
