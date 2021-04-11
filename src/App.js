@@ -18,6 +18,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [cart, setCart] = useState(localStorage.getItem("cart") || {});
 
   useEffect(() => {
     const getProducts = async () => {
@@ -40,6 +41,8 @@ function App() {
         products={products}
         userData={userData}
         setUserData={setUserData}
+        cart={cart}
+        setCart={setCart}
       />
       <Route exact path="/">
         <Home products={products} token={token} />
@@ -58,8 +61,6 @@ function App() {
       <Route exact path="/products">
         <Products products={products} />
       </Route>
-
-      <Route path="/home"></Route>
     </>
   );
 }

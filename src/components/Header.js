@@ -18,15 +18,15 @@ import {
   withStyles,
 } from "@material-ui/core";
 import "./Header.css";
-import { deepOrange } from "@material-ui/core/colors";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import { Cart } from "./Cart";
 // import Product from "./pages";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
-    fontFamily: "tahoma", 
+    fontFamily: "tahoma",
     color: theme.palette.getContrastText("#9B7D46"),
     backgroundColor: "#9B7D46",
     justifyContent: "space-between",
@@ -93,10 +93,8 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
           {/* <ListItemText primary={text} /> */}
           {/* <Products /> */}
-          {/* <Product /> */}
-
-          I am a shopping cart item!!!
-          when this works we should render and array of items in the users shopping cart
+          {/* <Product /> */}I am a shopping cart item!!! when this works we
+          should render and array of items in the users shopping cart
         </ListItem>
         {/* ) : (
             token && (
@@ -119,20 +117,22 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
-        <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center' }}>
-        <Avatar
-          alt="RC"
-          src="https://i.postimg.cc/Bv18bq7N/rhino-coffee.png"
-          className="HeaderLogo"
-        />        
-         <Link style={{ textDecoration: 'none' }}
-              onClick={(event) => {
+        <div style={{ display: "flex", flexFlow: "row", alignItems: "center" }}>
+          <Avatar
+            alt="RC"
+            src="https://i.postimg.cc/Bv18bq7N/rhino-coffee.png"
+            className="HeaderLogo"
+          />
+          <Link
+            style={{ textDecoration: "none" }}
+            onClick={(event) => {
               history.push("/");
               console.log("this link will guide you to the Home page");
-            }}>
-         <div className="siteName">Rhino Coffee</div>       
-         </Link>
-         </div>
+            }}
+          >
+            <div className="siteName">Rhino Coffee</div>
+          </Link>
+        </div>
         <div>
           {/* <Button
             color="inherit"
