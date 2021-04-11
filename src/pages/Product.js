@@ -4,21 +4,13 @@ import { useHistory } from "react-router";
 import {
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
   CircularProgress,
   Divider,
   Grid,
-  IconButton,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 
 const useStyles = makeStyles({
   root: {
@@ -81,11 +73,11 @@ const Product = ({ products }) => {
   return (
     <>
       {product ? (
-        // <ProductCard product={product} />
         <ProductGrid product={product} />
       ) : (
         <div>
-          <h1>Loading</h1> <CircularProgress />
+          <CircularProgress />
+          <h1>Loading</h1> 
         </div>
       )}
     </>
