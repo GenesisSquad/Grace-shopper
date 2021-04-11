@@ -36,7 +36,7 @@ const ProductGrid = ({ product }) => {
     >
       <Grid item sm={6}>
         <Paper>
-        <Button
+          <Button
             onClick={() => {
               history.push("/products");
             }}
@@ -44,7 +44,6 @@ const ProductGrid = ({ product }) => {
             ← Back to products
           </Button>
           <img src={product.imageURL} width="100%" />
-     
         </Paper>
       </Grid>
       <Grid item sm={6}>
@@ -52,53 +51,24 @@ const ProductGrid = ({ product }) => {
           <Typography variant="h2">{product.name}</Typography>
           <Typography variant="subtitle2">{product.category}</Typography>
           <Divider />
-          <Box mt={2}>
-            <Typography variant="subtitle1"> {product.description}</Typography>
-            <Typography variant="h5">{product.price}</Typography>
+          <Box mt={2} style={{ justifyContent: "space-between" }}>
+            <div>
+              <Typography variant="subtitle1">
+                {" "}
+                {product.description}
+              </Typography>
+            </div>
           </Box>
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ marginTop: "auto" }}
-          >
-            {" "}
-            Add to cart
-          </Button>
+          <Box mt="auto">
+            <Typography variant="h5">{product.price}</Typography>
+            <Button variant="contained" color="secondary">
+              {" "}
+              Add to cart
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </Grid>
-  );
-};
-
-const ProductCard = ({ product }) => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.root}>
-      <CardContent>
-        <CardHeader title={product.name} subheader={product.price} />
-        <CardMedia
-          component="img"
-          alt="DRANK"
-          height="140"
-          image={product.imageURL}
-          title="drink"
-        />
-        <Typography gutterBottom variant="h6" component="h2">
-          {}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {product.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <IconButton aria-label="addShopping cart icon">
-          <AddShoppingCartIcon onClick={console.log("added!")} />
-        </IconButton>
-        <IconButton aria-label="addShopping cart icon">
-          <RemoveShoppingCartIcon onClick={console.log("removed!")} />
-        </IconButton>
-      </CardActions>
-    </Card>
   );
 };
 
