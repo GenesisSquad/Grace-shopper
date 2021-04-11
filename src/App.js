@@ -26,7 +26,7 @@ function App() {
         const products = await fetchProducts();
         if (products) {
           setProducts(products);
-          console.log("products being set:", products);
+          console.log("List of all products:", products);
         }
       } catch (error) {
         console.error(error);
@@ -54,13 +54,12 @@ function App() {
       <Route path="/register">
         <AccountForm action="register" setToken={setToken} />
       </Route>
-
-      <Route path="/products">
-        <Products products={products} />
+      <Route exact path="/products/:productId">
+        <Product products={products} />
       </Route>
 
-      <Route path="/products/:productId">
-        <Product products={products} setProducts={setProducts} token={token} />
+      <Route exact path="/products">
+        <Products products={products} />
       </Route>
     </>
   );
