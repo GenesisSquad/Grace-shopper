@@ -43,6 +43,8 @@ function App() {
         setUserData={setUserData}
         cart={cart}
         setCart={setCart}
+        token={token}
+        setToken={setToken}
       />
       <Route exact path="/">
         <Home products={products} token={token} />
