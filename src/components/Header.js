@@ -6,6 +6,7 @@ import {
   Badge,
   Button,
   Drawer,
+  Hidden,
   IconButton,
   Link,
   List,
@@ -22,6 +23,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import MenuIcon from '@material-ui/icons/Menu';
 import { Cart } from "./Cart";
 // import Product from "./pages";
 const OrangeToolbar = withStyles((theme) => ({
@@ -33,24 +35,89 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
+const HiddenMenu = ({token,logOut}) => {
+  const history = useHistory();
+  const [state,setState] = useState({'left':false});  
+  const toggleDrawer = (anchor, open) => (event) => {
+    console.log("this opens and closes the cart side window");
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+  return (
+    <>
+    <Hidden smUp>
+      <IconButton
+      onClick={toggleDrawer('left',true)}
+      >
+        <MenuIcon style={{color:'#ffff'}}/>
+      </IconButton>
+      <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left',false)}>
+        
+      <IconButton
+      aria-label="account of current user"
+      aria-controls="menu-appbar"
+      aria-haspopup="true"
+      onClick={()=>{history.push('./myaccount')}}
+    >
+      <AccountCircle />
+    </IconButton>
+    {token ? (
+            <Button color="inherit" onClick={logOut}>
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="inherit"
+              onClick={(event) => {
+                history.push("/login");
+              }}
+            >
+              Login
+            </Button>
+          )}
+    <Button
+            color="inherit"
+            onClick={(event) => {
+              history.push("/about");
+              console.log("this link will route you to the About page");
+            }}
+          >
+            {"About"}
+          </Button>
+          <Button
+      color="inherit"
+      onClick={(event) => {
+        history.push("/products");
+        console.log("this link will route you to all the Products page");
+      }}
+    >
+      {"Products"}
+    </Button>
+        
+
+      </Drawer>
+    </Hidden>
+    </>
+  );
+}
+
 const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
   const routes = ["/home", "/myroutines", "/activities", "/products"];
   const icons = [<HomeIcon />, <ListAltIcon />];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-    console.log(
-      "clicking on this brings up a menu for the user for his products and profile"
-    );
-  };
 
   const logOut = () => {
     localStorage.clear();
     setUserData({});
     setToken("");
-    history.push("/home");
+    history.push("/");
   };
 
   const handleClose = () => {
@@ -68,6 +135,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
     }
     setState({ ...state, [anchor]: open });
   };
+
   const list = (anchor) => (
     <div
       role="presentation"
@@ -79,7 +147,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           Shopping Cart:
         </Link>
       </div>
-      <List style={{ width: "500px" }}>
+      <List style={{ width: "300px" }}>
         {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? ( */}
         <ListItem
@@ -117,6 +185,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
+        <HiddenMenu token={token} logOut={logOut}/>
         <div style={{ display: "flex", flexFlow: "row", alignItems: "center" }}>
           <Avatar
             alt="RC"
@@ -133,7 +202,8 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             <div className="siteName">Rhino Coffee</div>
           </Link>
         </div>
-        <div>
+        <div >
+          <Hidden xsDown>
           {/* <Button
             color="inherit"
             onClick={(event) => {
@@ -162,8 +232,10 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           >
             {"Products"}
           </Button>
+          </Hidden>
         </div>
         <div>
+        <Hidden xsDown>
           {token ? (
             <Button color="inherit" onClick={logOut}>
               Logout
@@ -182,29 +254,12 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={handleMenu}
+            onClick={()=>{history.push('./myaccount')}}
             color="inherit"
           >
             <AccountCircle />
           </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My Orders</MenuItem>
-          </Menu>
+          </Hidden>
           <IconButton aria-label="show shopping cart" color="inherit">
             <Badge badgeContent={29} color="secondary">
               <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
