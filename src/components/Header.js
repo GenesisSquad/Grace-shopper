@@ -35,11 +35,20 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
+const HiddenItem = withStyles((theme)=>({
+  root: {
+    padding:'30px',
+    color:'#ffff',
+    border:'2px solid #fff',
+    borderRadius:'0',
+    width:'70%'
+  }
+}))(Button);
+
 const HiddenMenu = ({token,logOut}) => {
   const history = useHistory();
   const [state,setState] = useState({'left':false});  
   const toggleDrawer = (anchor, open) => (event) => {
-    console.log("this opens and closes the cart side window");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -56,40 +65,39 @@ const HiddenMenu = ({token,logOut}) => {
       >
         <MenuIcon style={{color:'#ffff'}}/>
       </IconButton>
-      <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left',false)}>
-        
-      <IconButton
-      aria-label="account of current user"
-      aria-controls="menu-appbar"
-      aria-haspopup="true"
-      onClick={()=>{history.push('./myaccount')}}
-    >
-      <AccountCircle />
-    </IconButton>
+      <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left',false)} style={{width:'100%',height:'100%'}}>
+        <List style={{width:window.outerWidth,display:'flex',flexFlow:'column', justifyContent:'space-evenly',alignItems:'center',height:'100%',background:'#9B7D46'}} onClick={toggleDrawer('left', false)}>
+          
+      <HiddenItem
+      onClick={()=>{history.push('./myaccount')}}>
+        My Account
+      </HiddenItem>
     {token ? (
-            <Button color="inherit" onClick={logOut}>
+            <HiddenItem color="inherit" onClick={logOut}>
               Logout
-            </Button>
+            </HiddenItem>
           ) : (
-            <Button
+            <HiddenItem
               color="inherit"
               onClick={(event) => {
                 history.push("/login");
+               
               }}
             >
               Login
-            </Button>
+            </HiddenItem>
           )}
-    <Button
+    <HiddenItem
             color="inherit"
             onClick={(event) => {
+              
               history.push("/about");
               console.log("this link will route you to the About page");
             }}
           >
             {"About"}
-          </Button>
-          <Button
+          </HiddenItem>
+          <HiddenItem
       color="inherit"
       onClick={(event) => {
         history.push("/products");
@@ -97,8 +105,9 @@ const HiddenMenu = ({token,logOut}) => {
       }}
     >
       {"Products"}
-    </Button>
+    </HiddenItem>
         
+        </List>
 
       </Drawer>
     </Hidden>
