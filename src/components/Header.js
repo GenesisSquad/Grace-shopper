@@ -13,18 +13,16 @@ import {
   ListItem,
   // ListItemIcon,
   // ListItemText,
-  Menu,
-  MenuItem,
   Toolbar,
   withStyles,
 } from "@material-ui/core";
 import "./Header.css";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import HomeIcon from "@material-ui/icons/Home";
+// import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ListAltIcon from "@material-ui/icons/ListAlt";
+// import ListAltIcon from "@material-ui/icons/ListAlt";
 import MenuIcon from '@material-ui/icons/Menu';
-import { Cart } from "./Cart";
+// import { Cart } from "./Cart";
 // import Product from "./pages";
 const OrangeToolbar = withStyles((theme) => ({
   root: {
@@ -59,7 +57,7 @@ const HiddenMenu = ({token,logOut}) => {
   };
   return (
     <>
-    <Hidden smUp>
+    <Hidden mdUp>
       <IconButton
       onClick={toggleDrawer('left',true)}
       >
@@ -117,20 +115,12 @@ const HiddenMenu = ({token,logOut}) => {
 
 const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
-  const routes = ["/home", "/myroutines", "/activities", "/products"];
-  const icons = [<HomeIcon />, <ListAltIcon />];
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
   const logOut = () => {
     localStorage.clear();
     setUserData({});
     setToken("");
     history.push("/");
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   const [state, setState] = useState({ left: false });
@@ -212,7 +202,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Link>
         </div>
         <div >
-          <Hidden xsDown>
+          <Hidden smDown>
           {/* <Button
             color="inherit"
             onClick={(event) => {
@@ -244,7 +234,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Hidden>
         </div>
         <div>
-        <Hidden xsDown>
+        <Hidden smDown>
           {token ? (
             <Button color="inherit" onClick={logOut}>
               Logout
