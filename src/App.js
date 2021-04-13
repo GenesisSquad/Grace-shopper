@@ -29,18 +29,18 @@ function App() {
   const [cart, setCart] = useState(localStorage.getItem("cart") || {});
 
   useEffect(() => {
-    const getProducts = async () => {
+    const getData = async () => {
       try {
         const products = await fetchProducts();
-        const userData = await fetchUserData(token);
-        const username = userData.username;
         if (products) {
           setProducts(products);
           console.log("List of all products:", products);
         }
 
         if (token) {
+          const userData = await fetchUserData(token);
           setUserData(userData);
+          const username = userData.username;
           console.log("username is :", username);
         }
       } catch (error) {
@@ -48,7 +48,7 @@ function App() {
       }
     };
 
-    getProducts();
+    getData();
   }, [token]);
 
   return (
