@@ -62,11 +62,11 @@ const ProductCard = ({ product }) => {
         </CardContent>
         <CardActions className={classes.bottomCard} disableSpacing>
           <div>
-            <IconButton aria-label="addShopping cart icon">
-              <AddShoppingCartIcon onClick={handleAddItem} />
+            <IconButton aria-label="addShopping cart icon" onClick={handleAddItem}>
+              <AddShoppingCartIcon  />
             </IconButton>
-            <IconButton aria-label="remove shopping cart icon">
-              <RemoveShoppingCartIcon onClick={handleRemoveItem} />
+            <IconButton aria-label="remove shopping cart icon" onClick={handleRemoveItem}>
+              <RemoveShoppingCartIcon  />
             </IconButton>
           </div>
           <Button variant="contained" color="primary" onClick={handleClick}>

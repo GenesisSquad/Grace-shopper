@@ -269,9 +269,9 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             <AccountCircle />
           </IconButton>
           </Hidden>
-          <IconButton aria-label="show shopping cart" color="inherit">
+          <IconButton aria-label="show shopping cart" color="inherit" onClick={toggleDrawer("right", true)}>
             <Badge badgeContent={29} color="secondary">
-              <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
+              <ShoppingCartIcon  />
             </Badge>
           </IconButton>
         </div>
