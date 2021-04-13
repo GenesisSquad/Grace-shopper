@@ -39,6 +39,7 @@ function App() {
 
         if (token) {
           const userData = await fetchUserData(token);
+          localStorage.setItem("user", JSON.stringify(userData));
           setUserData(userData);
           const username = userData.username;
           console.log("username is :", username);
