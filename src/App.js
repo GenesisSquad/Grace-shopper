@@ -25,7 +25,7 @@ const fetchUserData = async (token) => {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(localStorage.getItem("user"));
   const [cart, setCart] = useState(localStorage.getItem("cart") || {});
 
   useEffect(() => {
