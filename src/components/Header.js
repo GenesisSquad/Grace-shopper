@@ -23,7 +23,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
 import { Cart } from "./Cart";
 // import Product from "./pages";
 const OrangeToolbar = withStyles((theme) => ({
@@ -35,19 +35,19 @@ const OrangeToolbar = withStyles((theme) => ({
   },
 }))(Toolbar);
 
-const HiddenItem = withStyles((theme)=>({
+const HiddenItem = withStyles((theme) => ({
   root: {
-    padding:'30px',
-    color:'#ffff',
-    border:'2px solid #fff',
-    borderRadius:'0',
-    width:'70%'
-  }
+    padding: "30px",
+    color: "#ffff",
+    border: "2px solid #fff",
+    borderRadius: "0",
+    width: "70%",
+  },
 }))(Button);
 
-const HiddenMenu = ({token,logOut}) => {
+const HiddenMenu = ({ token, logOut }) => {
   const history = useHistory();
-  const [state,setState] = useState({'left':false});  
+  const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -59,61 +59,75 @@ const HiddenMenu = ({token,logOut}) => {
   };
   return (
     <>
-    <Hidden smUp>
-      <IconButton
-      onClick={toggleDrawer('left',true)}
-      >
-        <MenuIcon style={{color:'#ffff'}}/>
-      </IconButton>
-      <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left',false)} style={{width:'100%',height:'100%'}}>
-        <List style={{width:window.outerWidth,display:'flex',flexFlow:'column', justifyContent:'space-evenly',alignItems:'center',height:'100%',background:'#9B7D46'}} onClick={toggleDrawer('left', false)}>
-          
-      <HiddenItem
-      onClick={()=>{history.push('./myaccount')}}>
-        My Account
-      </HiddenItem>
-    {token ? (
-            <HiddenItem color="inherit" onClick={logOut}>
-              Logout
+      <Hidden smUp>
+        <IconButton onClick={toggleDrawer("left", true)}>
+          <MenuIcon style={{ color: "#ffff" }} />
+        </IconButton>
+        <Drawer
+          anchor="left"
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <List
+            style={{
+              width: window.outerWidth,
+              display: "flex",
+              flexFlow: "column",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              height: "100%",
+              background: "#9B7D46",
+            }}
+            onClick={toggleDrawer("left", false)}
+          >
+            <HiddenItem
+              onClick={() => {
+                history.push("./myaccount");
+              }}
+            >
+              My Account
             </HiddenItem>
-          ) : (
+            {token ? (
+              <HiddenItem color="inherit" onClick={logOut}>
+                Logout
+              </HiddenItem>
+            ) : (
+              <HiddenItem
+                color="inherit"
+                onClick={(event) => {
+                  history.push("/login");
+                }}
+              >
+                Login
+              </HiddenItem>
+            )}
             <HiddenItem
               color="inherit"
               onClick={(event) => {
-                history.push("/login");
-               
+                history.push("/about");
+                console.log("this link will route you to the About page");
               }}
             >
-              Login
+              {"About"}
             </HiddenItem>
-          )}
-    <HiddenItem
-            color="inherit"
-            onClick={(event) => {
-              
-              history.push("/about");
-              console.log("this link will route you to the About page");
-            }}
-          >
-            {"About"}
-          </HiddenItem>
-          <HiddenItem
-      color="inherit"
-      onClick={(event) => {
-        history.push("/products");
-        console.log("this link will route you to all the Products page");
-      }}
-    >
-      {"Products"}
-    </HiddenItem>
-        
-        </List>
-
-      </Drawer>
-    </Hidden>
+            <HiddenItem
+              color="inherit"
+              onClick={(event) => {
+                history.push("/products");
+                console.log(
+                  "this link will route you to all the Products page"
+                );
+              }}
+            >
+              {"Products"}
+            </HiddenItem>
+          </List>
+        </Drawer>
+      </Hidden>
     </>
   );
-}
+};
 
 const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
@@ -194,7 +208,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
   return (
     <AppBar position="static">
       <OrangeToolbar className="header" color="primary">
-        <HiddenMenu token={token} logOut={logOut}/>
+        <HiddenMenu token={token} logOut={logOut} />
         <div style={{ display: "flex", flexFlow: "row", alignItems: "center" }}>
           <Avatar
             alt="RC"
@@ -211,9 +225,9 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             <div className="siteName">Rhino Coffee</div>
           </Link>
         </div>
-        <div >
+        <div>
           <Hidden xsDown>
-          {/* <Button
+            {/* <Button
             color="inherit"
             onClick={(event) => {
               history.push("/");
@@ -222,52 +236,56 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           >
             {"Home"}
           </Button> */}
-          <Button
-            color="inherit"
-            onClick={(event) => {
-              history.push("/about");
-              console.log("this link will route you to the About page");
-            }}
-          >
-            {"About"}
-          </Button>
-
-          <Button
-            color="inherit"
-            onClick={(event) => {
-              history.push("/products");
-              console.log("this link will route you to all the Products page");
-            }}
-          >
-            {"Products"}
-          </Button>
-          </Hidden>
-        </div>
-        <div>
-        <Hidden xsDown>
-          {token ? (
-            <Button color="inherit" onClick={logOut}>
-              Logout
-            </Button>
-          ) : (
             <Button
               color="inherit"
               onClick={(event) => {
-                history.push("/login");
+                history.push("/about");
+                console.log("this link will route you to the About page");
               }}
             >
-              Login
+              {"About"}
             </Button>
-          )}
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={()=>{history.push('./myaccount')}}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+
+            <Button
+              color="inherit"
+              onClick={(event) => {
+                history.push("/products");
+                console.log(
+                  "this link will route you to all the Products page"
+                );
+              }}
+            >
+              {"Products"}
+            </Button>
+          </Hidden>
+        </div>
+        <div>
+          <Hidden xsDown>
+            {token ? (
+              <Button color="inherit" onClick={logOut}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={(event) => {
+                  history.push("/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={() => {
+                history.push("./account");
+              }}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Hidden>
           <IconButton aria-label="show shopping cart" color="inherit">
             <Badge badgeContent={29} color="secondary">
