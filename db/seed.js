@@ -105,12 +105,12 @@ const products = [
   },
   {
     inStock: true,
-    name: "Juno's Morning Tea",
-    description: "A delicious green tea made from the leaves of Juno's hedge",
+    name: "Bella London Fog",
+    description: "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
     category: "TEA",
-    price: "$900",
+    price: "$1200",
     imageURL:
-      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
+      "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
   },
   {
     inStock: true,
