@@ -217,7 +217,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Link>
         </div>
         <div >
-          <Hidden smDown class='hidden'>
+          <Hidden xsDown class='hidden'>
           {/* <Button
 
         <div>
@@ -255,26 +255,6 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Hidden>
         </div>
         <div>
-        <Hidden smDown>
-          {token ? (
-            <Button color="inherit" onClick={logOut}>
-              Logout
-            </Button>
-
-            <Button
-              color="inherit"
-              onClick={(event) => {
-                history.push("/products");
-                console.log(
-                  "this link will route you to all the Products page"
-                );
-              }}
-            >
-              {"Products"}
-            </Button>
-          </Hidden>
-        </div>
-        <div>
           <Hidden xsDown>
             {token ? (
               <Button color="inherit" onClick={logOut}>
@@ -295,7 +275,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={() => {
-                history.push("./account");
+                history.push("/account");
               }}
               color="inherit"
             >
