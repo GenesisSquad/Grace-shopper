@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 
 const { usersRouter } = require("./users");
 const { productsRouter } = require("./products");
+const { ordersRouter } = require("./orders");
 const {client, getUserById, rebuildDB} = require('../db');
 
 // all required locally made files go ^
@@ -67,11 +68,12 @@ server.use(async (req, res, next) => {
 
 server.use("/api/products", productsRouter);
 server.use("/api/users", usersRouter);
+server.use("/api/orders", ordersRouter);
 
 
 server.use('*', (req, res, next) => {
 	res.status(404);
-	res.send({ error: "Client sent an invalid request." });
+	res.send({ error: "Request not found." });
 });
   
 server.use((error, req, res, next) => {

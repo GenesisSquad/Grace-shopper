@@ -1,6 +1,7 @@
 const { client } = require("./client");
 const { createProduct } = require("./product");
 const { createUser } = require("./users");
+const { createOrder } = require("./orders");
 
 async function dropTables() {
   try {
@@ -47,11 +48,10 @@ const buildTables = async () => {
         CREATE TABLE orders(
             id SERIAL PRIMARY KEY,
             status TEXT DEFAULT 'created',
-            "userId" INTEGER REFERENCES users(id) NOT NULL,
-            price TEXT NOT NULL,
+            "userId" INTEGER REFERENCES users(id) NOT NULL,            
             "datePlaced" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
         );
-        CREATE TABLE order_products(
+       CREATE TABLE order_products(
             id SERIAL PRIMARY KEY,
             "productId" INTEGER REFERENCES products(id) NOT NULL,
             "orderId" INTEGER REFERENCES orders(id) NOT NULL,
@@ -207,6 +207,30 @@ const users = [
     password: "12345678",
   },
 ];
+
+const orders = [
+  {
+    status: "created",
+    userId: 4,
+  },
+  {
+    status: "created",
+    userId: 4,
+  },
+  {
+    status: "created",
+    userId: 3,
+  },
+  {
+    status: "created",
+    userId: 2,
+  },
+  {
+    status: "created",
+    userId: 1,
+  },
+];
+
 const insertUsers = async () => {
   try {
     await Promise.all(users.map(createUser));
@@ -223,6 +247,14 @@ const insertProducts = async () => {
   }
 };
 
+const insertOrders = async () => {
+  try {
+    await Promise.all(orders.map(createOrder));    
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 async function rebuildDB() {
   try {
     // await client.connect();
@@ -234,6 +266,9 @@ async function rebuildDB() {
     console.log("creating products...");
     await insertProducts();
     console.log("finished creating products...");
+    console.log("creating orders...");
+    await insertOrders();
+    console.log("finished creating orders...");
   } catch (error) {
     throw error;
   }
