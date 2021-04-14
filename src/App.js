@@ -22,11 +22,21 @@ const fetchUserData = async (token) => {
   return data;
 };
 
+const fetchUserOrders = async (userId, token) => {
+  const data = await callApi({
+    url: `users/:${userId}/orders`,
+    token,
+  });
+  console.log("This user's order's are:", data);
+  return data;
+};
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(localStorage.getItem("user"));
   const [cart, setCart] = useState(localStorage.getItem("cart") || {});
+  const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -43,6 +53,9 @@ function App() {
           setUserData(userData);
           const username = userData.username;
           console.log("username is :", username);
+        }
+        if (token && userData) {
+          setUserOrders(await fetchUserOrders(userData.id, token));
         }
       } catch (error) {
         console.error(error);
@@ -83,9 +96,11 @@ function App() {
 
       <Route path="/about">
         <About />
-        </Route>
+      </Route>
       <Route exact path="/account">
-        <User userData={userData} token={token} />
+        <User userData={userData} token={token} 
+        // userOrders={userOrders} 
+        />
       </Route>
     </>
   );

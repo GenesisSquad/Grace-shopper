@@ -1,6 +1,92 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, CircularProgress } from "@material-ui/core";
+import {
+  Button,
+  CircularProgress,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
+const myorders = [
+  {
+    id: 1,
+    status: "completed",
+    quantity: 22,
+    price: "$4",
+  },
+  {
+    id: 2,
+    status: "in progress",
+    quantity: 2,
+    price: "$33",
+  },
+  {
+    id: 3,
+    status: "canceled",
+    quantity: 23,
+    price: "$42",
+  },
+];
+
+function createData(id, status, quantity, price) {
+  return {id, status, quantity, price} ;
+}
+
+const rows = myorders.map((order) => {
+  return createData(order.id, order.status, order.quantity, order.price)
+});
+// [
+//   createData("Order Id #1", "completed", "4", 232, <Button>View Order</Button>),
+//   createData("Order Id #21", "in process", 31, 42, <Button>View Order</Button>),
+//   createData("Order Id #41", "cancelled", 16, 24, <Button>View Order</Button>),
+// ];
+
+const Order = () => {
+  const classes = useStyles();
+
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Order Number (id)</TableCell>
+            <TableCell align="right">Order Status (status)</TableCell>
+            <TableCell align="right">Items in cart (Order length)</TableCell>
+            <TableCell align="right">Price&nbsp;($)(Order subtotal)</TableCell>
+            <TableCell align="right">
+              Action&nbsp;(what do you want to do with it)
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">{row.quantity}</TableCell>
+              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right"><Button>View Order</Button></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
 
 const User = ({ userData, token }) => {
   const history = useHistory();
@@ -23,40 +109,9 @@ const User = ({ userData, token }) => {
           </h1>
         }
       </div>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => {
-          history.push("/my-orders");
-        }}
-      >
-        My orders
-      </Button>
+      <Order />
     </>
   );
 };
-
-// <div>
-// {!token ? (
-//   <div className="sign-in-message">
-//     <h1>
-//       Please <Link to="/login">log in</Link> to view your dashboard
-//     </h1>
-//   </div>
-// ) : (
-//   <>
-//     <div className="dashboard">{<h1>Hello, {userData.firstName}!</h1>}</div>
-//     <Button
-//       variant="outlined"
-//       color="primary"
-//       onClick={() => {
-//         history.push("/my-orders");
-//       }}
-//     >
-//       My orders
-//     </Button>
-//   </>
-// )}
-// </div>;
 
 export default User;
