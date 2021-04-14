@@ -13,25 +13,24 @@ import {
   ListItem,
   // ListItemIcon,
   // ListItemText,
-  Menu,
-  MenuItem,
   Toolbar,
   withStyles,
 } from "@material-ui/core";
 import "./Header.css";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import HomeIcon from "@material-ui/icons/Home";
+// import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ListAltIcon from "@material-ui/icons/ListAlt";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Cart } from "./Cart";
-// import Product from "./pages";
+import MenuIcon from '@material-ui/icons/Menu';
+
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
     color: theme.palette.getContrastText("#9B7D46"),
     backgroundColor: "#9B7D46",
+    display:'flex',
     justifyContent: "space-between",
+    flexDirection:'row',
+    alignItems:'center'
   },
 }))(Toolbar);
 
@@ -131,20 +130,12 @@ const HiddenMenu = ({ token, logOut }) => {
 
 const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
-  const routes = ["/home", "/myroutines", "/activities", "/products"];
-  const icons = [<HomeIcon />, <ListAltIcon />];
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
   const logOut = () => {
     localStorage.clear();
     setUserData({});
     setToken("");
     history.push("/");
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   const [state, setState] = useState({ left: false });
@@ -225,9 +216,14 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             <div className="siteName">Rhino Coffee</div>
           </Link>
         </div>
+        <div >
+          <Hidden smDown class='hidden'>
+          {/* <Button
+
         <div>
           <Hidden xsDown>
             {/* <Button
+
             color="inherit"
             onClick={(event) => {
               history.push("/");
@@ -236,14 +232,33 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           >
             {"Home"}
           </Button> */}
-            <Button
-              color="inherit"
-              onClick={(event) => {
-                history.push("/about");
-                console.log("this link will route you to the About page");
-              }}
-            >
-              {"About"}
+
+          <Button          
+            color="inherit"
+            onClick={(event) => {
+              history.push("/about");
+              console.log("this link will route you to the About page");
+            }}
+          >
+            {"About"}
+          </Button>
+
+          <Button
+            color="inherit"
+            onClick={(event) => {
+              history.push("/products");
+              console.log("this link will route you to all the Products page");
+            }}
+          >
+            {"Products"}
+          </Button>
+          </Hidden>
+        </div>
+        <div>
+        <Hidden smDown>
+          {token ? (
+            <Button color="inherit" onClick={logOut}>
+              Logout
             </Button>
 
             <Button
@@ -287,9 +302,9 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
               <AccountCircle />
             </IconButton>
           </Hidden>
-          <IconButton aria-label="show shopping cart" color="inherit">
+          <IconButton aria-label="show shopping cart" color="inherit" onClick={toggleDrawer("right", true)}>
             <Badge badgeContent={29} color="secondary">
-              <ShoppingCartIcon onClick={toggleDrawer("right", true)} />
+              <ShoppingCartIcon  />
             </Badge>
           </IconButton>
         </div>
