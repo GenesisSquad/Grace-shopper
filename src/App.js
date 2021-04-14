@@ -1,7 +1,7 @@
 // Front end APP.js file
 // import react from "react";
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home } from "./pages";
+import { AccountForm, Product, Products, Home, About } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -62,6 +62,10 @@ function App() {
 
       <Route exact path="/products">
         <Products products={products} />
+      </Route>
+
+      <Route path="/about">
+        <About />
       </Route>
     </>
   );
