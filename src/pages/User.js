@@ -4,6 +4,7 @@ import { Button, CircularProgress } from "@material-ui/core";
 
 const User = ({ userData, token }) => {
   const history = useHistory();
+
   if (!token) {
     return (
       <div className="sign-in-message">
@@ -16,7 +17,11 @@ const User = ({ userData, token }) => {
   return (
     <>
       <div className="dashboard">
-        {<h1>Hello, {userData ? userData.firstName : <CircularProgress/>}!</h1>}
+        {
+          <h1>
+            Hello, {userData ? userData.firstName : <CircularProgress />}!
+          </h1>
+        }
       </div>
       <Button
         variant="outlined"

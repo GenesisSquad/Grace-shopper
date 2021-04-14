@@ -19,14 +19,14 @@ import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: "20px",
+    margin: "20px 60PX 20PX 60PX",
   },
   media: {
     height: 0,
     paddingTop: "56.25%",
   },
-  card: {},
-  paper: { height: "40px" },
+  // card: {height :"450px"},
+  // paper: { maxHeight: "40px" },
   bottomCard: { justifyContent: "space-between" },
 }));
 
@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Grid item xs={5} sm={3}>
+    <Grid item lg={3}>
       <Card className={classes.card}>
         <CardHeader title={product.name} subheader={product.price} />
         <CardMedia
