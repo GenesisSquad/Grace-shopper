@@ -66,6 +66,15 @@ const buildTables = async () => {
   }
 };
 
+const order_products = [
+  {
+    productId:1,
+    orderId:2,
+    price:'$20',
+    quantity:4
+  }
+]
+
 const products = [
   {
     inStock: true,
