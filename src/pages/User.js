@@ -47,11 +47,6 @@ function createData(id, status, quantity, price) {
 const rows = myorders.map((order) => {
   return createData(order.id, order.status, order.quantity, order.price)
 });
-// [
-//   createData("Order Id #1", "completed", "4", 232, <Button>View Order</Button>),
-//   createData("Order Id #21", "in process", 31, 42, <Button>View Order</Button>),
-//   createData("Order Id #41", "cancelled", 16, 24, <Button>View Order</Button>),
-// ];
 
 const Order = () => {
   const classes = useStyles();
