@@ -29,7 +29,10 @@ const OrangeToolbar = withStyles((theme) => ({
     fontFamily: "tahoma",
     color: theme.palette.getContrastText("#9B7D46"),
     backgroundColor: "#9B7D46",
+    display:'flex',
     justifyContent: "space-between",
+    flexDirection:'row',
+    alignItems:'center'
   },
 }))(Toolbar);
 
@@ -202,7 +205,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Link>
         </div>
         <div >
-          <Hidden smDown>
+          <Hidden smDown class='hidden'>
           {/* <Button
             color="inherit"
             onClick={(event) => {
@@ -213,6 +216,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             {"Home"}
           </Button> */}
           <Button
+          
             color="inherit"
             onClick={(event) => {
               history.push("/about");
