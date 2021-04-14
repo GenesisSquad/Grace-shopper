@@ -3,7 +3,7 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
-const { createUser, getUserByUsername, getUser, getAllUsers } = require("../db");
+const { createUser, getUserByUsername, getUser, getAllUsers, getCartByUser } = require("../db");
 const { JWT_SECRET } = process.env;
 
 usersRouter.post("/register", async (req, res, next) => {
@@ -102,7 +102,7 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
 		const { user } = req;
 		if (!user) return res.status(400).send("no token");
 		// console.log(user);
-		return res.send(user);
+		return res.send(req.user);
 	} catch (error) {
 		next(error);
 	}
@@ -116,8 +116,20 @@ try {
 } catch (error) {
 	next(error);
 }
-
 })
+
+//logged in user and owner of object
+usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        if ( userId ) return res.status(400).send("Not authorized to edit cart.") 
+        return res.send(await getCartByUser(id));
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 module.exports = {
 	usersRouter
 }
