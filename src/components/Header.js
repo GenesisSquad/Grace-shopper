@@ -48,6 +48,7 @@ const HiddenMenu = ({ token, logOut }) => {
   const history = useHistory();
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
+    console.log("this opens and closes the cart side window");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -82,7 +83,7 @@ const HiddenMenu = ({ token, logOut }) => {
           >
             <HiddenItem
               onClick={() => {
-                history.push("./myaccount");
+                history.push("/account");
               }}
             >
               My Account
@@ -197,7 +198,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
     </div>
   );
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <OrangeToolbar className="header" color="primary">
         <HiddenMenu token={token} logOut={logOut} />
         <div style={{ display: "flex", flexFlow: "row", alignItems: "center" }}>

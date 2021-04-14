@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     paddingLeft: "60px",
     paddingRight: "60px",
-    marginTop: "1em",
+    // marginTop: "1em",
   },
   gridList: {
     width: 4000,
@@ -79,20 +79,11 @@ const Home = () => {
   return (
     <div className={classes.root}>
       {/* THIS CAN BE USED IN THE ORDER COMPLETE PAGE */}
-      {/* <span>
+      <span>
         <h2 className="homeMessage">
-          Send us your Instagram photos of you all enjoying Rhino Coffee
-          products!{"  "}
-          <a href="https://www.instagram.com/">
-            <img
-              alt="Instagram.com"
-              src="https://i.postimg.cc/BZcwXVqX/insta-icon.png"
-              width="30"
-              height="30"
-            />
-          </a>
+          Welcome to Rhino Coffee... Where Quality meets Taste!!!
         </h2>
-      </span> */}
+      </span>
       <GridList cellHeight={400} spacing={1} className={classes.gridList}>
         {tileData.map((tile) => (
           <GridListTile
@@ -118,6 +109,20 @@ const Home = () => {
           </GridListTile>
         ))}
       </GridList>
+      <span>
+        <h2 className="homeMessage">
+          Send us your Instagram photos of you all enjoying Rhino Coffee
+          products!{"  "}
+          <a href="https://www.instagram.com/">
+            <img
+              alt="Instagram.com"
+              src="https://i.postimg.cc/BZcwXVqX/insta-icon.png"
+              width="30"
+              height="30"
+            />
+          </a>
+        </h2>
+      </span>
     </div>
   );
 };
