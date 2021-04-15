@@ -46,7 +46,9 @@
     "react-material-ui-carousel": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-stripe-checkout": "^2.6.3",
     "react-three-fiber": "^5.3.22",
+    "stripe": "^8.143.0",
     "three": "^0.126.1"
   },
   "browserslist": {
