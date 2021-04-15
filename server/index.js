@@ -18,7 +18,7 @@ const { JWT_SECRET } = process.env;
 
 const server = express();
 
-// client.connect();
+client.connect();
 rebuildDB();
 server.use(morgan("dev"));
 server.use(cors());

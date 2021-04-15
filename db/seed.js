@@ -73,19 +73,19 @@ const order_products = [
     productId:2,
     orderId:2,
     price:'$4',
-    quantity:4
+    quantity:1
   },
   {
     productId:4,
     orderId:2,
     price:'$8',
-    quantity:4
+    quantity:2
   },
   {
     productId:3,
     orderId:1,
     price:'$3',
-    quantity:4
+    quantity:3
   },
   {
     productId:10,
@@ -97,13 +97,13 @@ const order_products = [
     productId:9,
     orderId:3,
     price:'$27',
-    quantity:4
+    quantity:5
   },
   {
     productId:5,
     orderId:3,
     price:'$15',
-    quantity:4
+    quantity:6
   },
 
 ]
@@ -307,7 +307,7 @@ const insertOrders = async () => {
 
 async function rebuildDB() {
   try {
-    await client.connect();
+    // await client.connect();
     await dropTables();
     await buildTables();
     console.log("creating users...");

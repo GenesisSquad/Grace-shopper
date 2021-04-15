@@ -28,7 +28,7 @@ const getOrderById = async (id) => {
 		console.error(error);
 	}
 };
-getOrderById();
+
 
 // select and return an array of orders, include their products
 const getAllOrders = async () => {
@@ -49,13 +49,24 @@ const getAllOrders = async () => {
         `);
 		const res = order_products.reduce((acc, obj, i) => {
             console.log('i:',i, 'acc: ',acc);
-			if (acc[obj.orderId]) {
-				acc[obj.orderId].products.push(
-					products.filter((p) => p.id === obj.productId)[0]
+			const a = acc.findIndex((o)=>o.id===obj.orderId)
+			console.log('a:',a);
+			if (a !== -1) {
+				console.log('55');
+				const c = products.filter((p) => p.id === obj.productId)[0]
+				c.quantity = obj.quantity;
+				
+				acc[a].products.push(
+					c
 				);
 			} else {
-				acc[obj.orderId] = orders.filter((o) => o.id === obj.orderId)[0];
-				acc[obj.orderId].products = products.filter((p) => p.id === obj.productId)
+				console.log('60');
+				const b = orders.filter((o) => o.id === obj.orderId)[0];
+				console.log('b:',b);
+				const c = products.filter((p) => p.id === obj.productId)
+				c[0].quantity = obj.quantity;
+				b.products = c
+				acc.push(b)
 			}
 			return acc;
 		}, []);
