@@ -52,7 +52,7 @@ const onToken = (amount) => async (token) => {
 };
 //! Stripe end
 
-const Cart = ({ cart, setCart }) => {
+const Cart = ({ token }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
