@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const { usersRouter } = require("./users");
 const { productsRouter } = require("./products");
 const { ordersRouter } = require("./orders");
+const { stripeRouter } = require("./stripe");
 const {client, getUserById, rebuildDB} = require('../db');
 
 // all required locally made files go ^
@@ -22,7 +23,7 @@ client.connect();
 rebuildDB();
 server.use(morgan("dev"));
 server.use(cors());
-server.use("/",express.static("/build"));
+// server.use("/",express.static("/build"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
@@ -69,6 +70,7 @@ server.use(async (req, res, next) => {
 server.use("/api/products", productsRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/orders", ordersRouter);
+server.use("/api/stripe", stripeRouter);
 
 
 server.use('*', (req, res, next) => {

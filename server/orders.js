@@ -3,7 +3,12 @@ const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
-const { getAllOrders, getOrdersByUser, getCartByUser, createOrder } = require("../db")
+const { 
+    getAllOrders,
+     getOrdersByUser, 
+    //  getCartByUser, 
+     createOrder 
+    } = require("../db")
 const { JWT_SECRET } = process.env;
 // const { requireAdmin } = require("./admin");
 
@@ -40,7 +45,7 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     try {
         const { user } = req;
         if (!user) return res.status(400).send("Please log in.")
-        return res.send(await createOrder());
+        return res.send(await createOrder('created',user.id));
 
     } catch (error) {
         console.error(error);
