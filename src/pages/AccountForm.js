@@ -19,7 +19,7 @@ import "./AccountForm.css";
 
 const paperStyle = {
   padding: 20,
-  height: 'auto',
+  height: "auto",
   width: 280,
   margin: "20px auto",
 };
@@ -31,14 +31,18 @@ class AccountForm extends Component {
       username: "",
       password: "",
       confirmPass: "",
-      firstName:'', lastName:'', email:'',
+      firstName: "",
+      lastName: "",
+      email: "",
       action: this.props.action,
     };
     this.emptyState = {
       username: "",
       password: "",
       confirmPass: "",
-      firstName:'', lastName:'', email:'',
+      firstName: "",
+      lastName: "",
+      email: "",
     };
     this.isLoading = false;
     this.isLogin = this.state.action === "login";
@@ -68,12 +72,26 @@ class AccountForm extends Component {
   };
 
   handleSubmit = async (event) => {
-    
     event.preventDefault();
-    const { action, password, username, confirmPass, firstName, lastName, email} = this.state;
+    const {
+      action,
+      password,
+      username,
+      confirmPass,
+      firstName,
+      lastName,
+      email,
+    } = this.state;
     if (action === "register") {
       //register a user
-      if (password && username && confirmPass && firstName && lastName && email) {
+      if (
+        password &&
+        username &&
+        confirmPass &&
+        firstName &&
+        lastName &&
+        email
+      ) {
         // all fields are filled in
         if (username.length > 7 && password.length > 7) {
           //password and username are long enough
@@ -82,16 +100,16 @@ class AccountForm extends Component {
             try {
               this.isLoading = true;
               const res = await callApi({
-                url:'users/register',
-                method:'POST',
-                body:{
+                url: "users/register",
+                method: "POST",
+                body: {
                   username,
                   password,
                   firstName,
                   lastName,
-                  email
-                }
-              })
+                  email,
+                },
+              });
               const data = res;
               const token = data?.token;
               const user = data?.user;
@@ -101,7 +119,7 @@ class AccountForm extends Component {
                 this.props.setToken(token);
                 localStorage.setItem("user", JSON.stringify(user));
                 localStorage.setItem("token", user.token);
-                this.props.history.push("/home");
+                this.props.history.push("/");
               }
             } catch (error) {
               console.error(error);
@@ -120,9 +138,7 @@ class AccountForm extends Component {
             return;
           }
         } else {
-          alert(
-            "username & password length must be greater than 7 characters"
-          );
+          alert("username & password length must be greater than 7 characters");
           return;
         }
       } else {
@@ -137,13 +153,13 @@ class AccountForm extends Component {
           try {
             this.isLoading = true;
             const res = await callApi({
-              url:'users/login',
-              method:'POST',
-              body:{
+              url: "users/login",
+              method: "POST",
+              body: {
                 username,
-                password
-              }
-            })
+                password,
+              },
+            });
             const data = res;
             // console.log(data);
             const token = data?.token;
@@ -154,7 +170,7 @@ class AccountForm extends Component {
               this.props.setToken(token);
               // localStorage.setItem("fitness-user", JSON.stringify(user));
               localStorage.setItem("token", token);
-              this.props.history.push("/home");
+              this.props.history.push("/");
             }
           } catch (error) {
             console.error(error);
@@ -169,9 +185,7 @@ class AccountForm extends Component {
             this.isLoading = false;
           }
         } else {
-          alert(
-            "password length must be greater than 7 characters"
-          );
+          alert("password length must be greater than 7 characters");
           return;
         }
       } else {
@@ -182,7 +196,15 @@ class AccountForm extends Component {
   };
 
   render() {
-    const { action, password, username, confirmPass, firstName, lastName, email} = this.state;
+    const {
+      action,
+      password,
+      username,
+      confirmPass,
+      firstName,
+      lastName,
+      email,
+    } = this.state;
     return (
       // <Container maxWidth="xs" className="formmm" style={{ minWidth: "20%" }}>
       //   <CssBaseline>
@@ -219,55 +241,58 @@ class AccountForm extends Component {
               autoFocus
               onChange={this.handleChange}
             />
-              {
-                action === 'register' && <><div style={{display:'flex',flexFlow:'row'}}><TextField
-                disabled={this.isLoading}
-                varient="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="FirstName"
-                label="first name"
-                name="firstName"
-                value={firstName}
-                autoComplete="name"
-                autoFocus
-                onChange={this.handleChange}
-              />
-              <TextField
-                style={{marginLeft:'10px'}}
-                disabled={this.isLoading}
-                varient="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="lastName"
-                label="last name"
-                name="lastName"
-                value={lastName}
-                autoComplete="name"
-                autoFocus
-                onChange={this.handleChange}
-              /></div>
-              <TextField
-                disabled={this.isLoading}
-                varient="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="email"
-                name="email"
-                value={email}
-                autoComplete="name"
-                autoFocus
-                onChange={this.handleChange}
-              /></>
-              }
-              
-            
+            {action === "register" && (
+              <>
+                <div style={{ display: "flex", flexFlow: "row" }}>
+                  <TextField
+                    disabled={this.isLoading}
+                    varient="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="FirstName"
+                    label="first name"
+                    name="firstName"
+                    value={firstName}
+                    autoComplete="name"
+                    autoFocus
+                    onChange={this.handleChange}
+                  />
+                  <TextField
+                    style={{ marginLeft: "10px" }}
+                    disabled={this.isLoading}
+                    varient="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="last name"
+                    name="lastName"
+                    value={lastName}
+                    autoComplete="name"
+                    autoFocus
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <TextField
+                  disabled={this.isLoading}
+                  varient="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="email"
+                  name="email"
+                  value={email}
+                  autoComplete="name"
+                  autoFocus
+                  onChange={this.handleChange}
+                />
+              </>
+            )}
+
             <TextField
-            disabled={this.isLoading}
+              disabled={this.isLoading}
               type="password"
               varient="outlined"
               margin="normal"
@@ -282,7 +307,7 @@ class AccountForm extends Component {
 
             {action === "register" && (
               <TextField
-              disabled={this.isLoading}
+                disabled={this.isLoading}
                 type="password"
                 varient="outlined"
                 margin="normal"
@@ -296,7 +321,7 @@ class AccountForm extends Component {
               />
             )}
             <ColorButton
-            disabled={this.isLoading}
+              disabled={this.isLoading}
               fullWidth
               variant="contained"
               color="secondary"
@@ -313,17 +338,17 @@ class AccountForm extends Component {
               }}
             >
               <Link
-              disabled={this.isLoading}
+                disabled={this.isLoading}
                 to="#"
                 style={{ marginTop: "15px" }}
                 onClick={() => {
                   this.props.history.push(`/${this.oppositeAction}`);
                 }}
               >
-                {this.oppositeMessage}{" "} {this.oppositeAction} here!
-              </Link>              
+                {this.oppositeMessage} {this.oppositeAction} here!
+              </Link>
               <Link
-              disabled={this.isLoading}                
+                disabled={this.isLoading}
                 style={{
                   display: "flex",
                   marginTop: "10px",
@@ -331,7 +356,7 @@ class AccountForm extends Component {
                 }}
                 to="#"
                 onClick={() => {
-                  this.props.history.push(`/home`);
+                  this.props.history.push(`/`);
                 }}
               >
                 Continue as guest
