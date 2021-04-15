@@ -89,7 +89,7 @@ const Products = ({ products, userData }) => {
         justify="center"
         alignItems="center"
       >
-        {!products ? (
+        {/* {!products ? (
           <Grid item>
             LOADING
             <CircularProgress />{" "}
@@ -98,7 +98,21 @@ const Products = ({ products, userData }) => {
           products.map((product, index) => {
             return <ProductCard product={product} key={product.id} />;
           })
-        )}
+        )} */}
+        {
+          products && products.length ? 
+          (
+            products.map((product, index) => {
+              return <ProductCard product={product} key={product.id} />;
+            })
+          )
+          :
+          (
+            <Grid item>
+            <CircularProgress />{" "}
+          </Grid>
+          )
+        }
       </Grid>
     </div>
   );
