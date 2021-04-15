@@ -3,7 +3,12 @@ const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
-const { getAllOrders, getOrdersByUser, getCartByUser, createOrder } = require("../db")
+const { 
+    getAllOrders,
+    //  getOrdersByUser, 
+    //  getCartByUser, 
+    //  createOrder 
+    } = require("../db")
 const { JWT_SECRET } = process.env;
 // const { requireAdmin } = require("./admin");
 
@@ -23,28 +28,28 @@ async (req, res, next) => {
 
 // logged in user
 // status="created" should be returned
-ordersRouter.get("/cart", requireUser, async (req, res, next) => {
-    try {
-        const { user } = req;
-        if (!user) return res.status(400).send("Please log in.")
-        return res.send(await getOrdersByUser());
+// ordersRouter.get("/cart", requireUser, async (req, res, next) => {
+//     try {
+//         const { user } = req;
+//         if (!user) return res.status(400).send("Please log in.")
+//         return res.send(await getOrdersByUser());
 
-    } catch (error) {
-        console.error(error);
-    }
-});
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
 // logged in user
 // should initially be status ="created"
-ordersRouter.post("/", requireUser, async (req, res, next) => {
-    try {
-        const { user } = req;
-        if (!user) return res.status(400).send("Please log in.")
-        return res.send(await createOrder());
+// ordersRouter.post("/", requireUser, async (req, res, next) => {
+//     try {
+//         const { user } = req;
+//         if (!user) return res.status(400).send("Please log in.")
+//         return res.send(await createOrder());
 
-    } catch (error) {
-        console.error(error);
-    }
-});
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
 module.exports = { ordersRouter };

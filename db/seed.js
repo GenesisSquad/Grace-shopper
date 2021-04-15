@@ -2,7 +2,7 @@ const { client } = require("./client");
 const { createProduct } = require("./product");
 const { createUser } = require("./users");
 const { createOrder } = require("./orders");
-
+const { createOrder_product } = require('./order_products')
 async function dropTables() {
   try {
     console.log("Starting to drop tables...");
@@ -27,37 +27,39 @@ const buildTables = async () => {
   try {
     console.log("creating tables...");
     await client.query(`
-        CREATE TABLE products(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            description TEXT NOT NULL,
-            price TEXT NOT NULL,
-            "imageURL" TEXT NOT NULL,
-            "inStock" BOOLEAN DEFAULT false,
-            category TEXT NOT NULL
-        );
+        
+    CREATE TABLE products(
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      description TEXT NOT NULL,
+      price TEXT NOT NULL,
+      "imageURL" TEXT NOT NULL,
+      "inStock" BOOLEAN DEFAULT FALSE,
+      category TEXT NOT NULL
+      );
         CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            "firstName" VARCHAR(255) NOT NULL,
-            "lastName" VARCHAR(255) NOT NULL,
-            email TEXT UNIQUE NOT NULL,
-            username TEXT UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            "isAdmin" BOOLEAN DEFAULT false
+          id SERIAL PRIMARY KEY,
+          "firstName" VARCHAR(255) NOT NULL,
+          "lastName" VARCHAR(255) NOT NULL,
+          email TEXT UNIQUE NOT NULL,
+          username TEXT UNIQUE NOT NULL,
+          password TEXT NOT NULL,
+          "isAdmin" BOOLEAN DEFAULT FALSE
         );
-        CREATE TABLE orders(
-            id SERIAL PRIMARY KEY,
-            status TEXT DEFAULT 'created',
-            "userId" INTEGER REFERENCES users(id) NOT NULL,            
-            "datePlaced" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-        );
-       CREATE TABLE order_products(
-            id SERIAL PRIMARY KEY,
-            "productId" INTEGER REFERENCES products(id) NOT NULL,
-            "orderId" INTEGER REFERENCES orders(id) NOT NULL,
-            price TEXT NOT NULL,
-            quantity INTEGER NOT NULL
-        );
+      CREATE TABLE orders(
+          id SERIAL PRIMARY KEY,
+          status TEXT DEFAULT 'created',
+          "userId" INTEGER REFERENCES users(id) NOT NULL,                     
+          "datePlaced" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE TABLE order_products(
+          id SERIAL PRIMARY KEY,
+          "productId" INTEGER REFERENCES products(id) NOT NULL,
+          "orderId" INTEGER REFERENCES orders(id) NOT NULL,
+          price TEXT NOT NULL,
+          quantity INTEGER NOT NULL
+      );
+       
         `);
     console.log("tables created!");
   } catch (error) {
@@ -68,11 +70,42 @@ const buildTables = async () => {
 
 const order_products = [
   {
-    productId:1,
+    productId:2,
     orderId:2,
-    price:'$20',
+    price:'$4',
     quantity:4
-  }
+  },
+  {
+    productId:4,
+    orderId:2,
+    price:'$8',
+    quantity:4
+  },
+  {
+    productId:3,
+    orderId:1,
+    price:'$3',
+    quantity:4
+  },
+  {
+    productId:10,
+    orderId:1,
+    price:'$10',
+    quantity:4
+  },
+  {
+    productId:9,
+    orderId:3,
+    price:'$27',
+    quantity:4
+  },
+  {
+    productId:5,
+    orderId:3,
+    price:'$15',
+    quantity:4
+  },
+
 ]
 
 const products = [
@@ -240,6 +273,14 @@ const orders = [
   },
 ];
 
+const insertOrder_products = async () => {
+  try {
+    await Promise.all(order_products.map(createOrder_product));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const insertUsers = async () => {
   try {
     await Promise.all(users.map(createUser));
@@ -266,7 +307,7 @@ const insertOrders = async () => {
 
 async function rebuildDB() {
   try {
-    // await client.connect();
+    await client.connect();
     await dropTables();
     await buildTables();
     console.log("creating users...");
@@ -278,6 +319,10 @@ async function rebuildDB() {
     console.log("creating orders...");
     await insertOrders();
     console.log("finished creating orders...");
+    console.log("creating order_products...");
+    await insertOrder_products();
+    console.log("finished order_products...");
+
   } catch (error) {
     throw error;
   }
