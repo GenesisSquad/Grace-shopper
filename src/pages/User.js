@@ -25,6 +25,7 @@ const myorders = [
     status: "completed",
     quantity: 22,
     total: "$4",
+    datePlaced : "01-32-2023",
     products : [
       {
         inStock: true,
@@ -51,6 +52,7 @@ const myorders = [
     status: "in progress",
     quantity: 2,
     total: "$33",
+    datePlaced : "01-12-2020",
     products :[
       {
         inStock: true,
@@ -70,13 +72,14 @@ const myorders = [
         imageURL:
           "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
       },
-    ]
+    ],
   },
   {
     id: 3,
     status: "canceled",
     quantity: 23,
     total: "$42",
+    datePlaced : "01-22-2021",
     products: [
       {
         inStock: true,
@@ -99,8 +102,8 @@ const myorders = [
     ]
   },
 ];
-function createData(id, status, quantity, total) {
-  return { id, status, quantity, total };
+function createData(id, status, quantity, total, datePlaced) {
+  return { id, status, quantity, total, datePlaced };
 }
 
 
@@ -109,7 +112,7 @@ const Orders = () => {
   const history = useHistory();
 
   const rows = myorders.map((order) => {
-    return createData(order.id, order.status, order.quantity, order.total);
+    return createData(order.id, order.status, order.quantity, order.total, order.datePlaced);
   });
   
   return (
@@ -120,6 +123,7 @@ const Orders = () => {
             <TableCell>Order Number (id)</TableCell>
             <TableCell align="right">Order Status (status)</TableCell>
             <TableCell align="right">Items in cart (Order length)</TableCell>
+            <TableCell align="right">Date placed</TableCell>
             <TableCell align="right">Total&nbsp;($)(Order subtotal)</TableCell>
             <TableCell align="right">
               Action&nbsp;(what do you want to do with it)
@@ -134,6 +138,7 @@ const Orders = () => {
               </TableCell>
               <TableCell align="right">{row.status}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
+              <TableCell align="right">{row.datePlaced}</TableCell>
               <TableCell align="right">{row.total}</TableCell>
               <TableCell align="right">
                 <Button

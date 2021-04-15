@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {
   Button,
   CircularProgress,
@@ -18,8 +19,8 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(product, quantity, price) {
-  return { product, quantity, price };
+function createData(orderId, productId, product, price, quantity) {
+  return { orderId, productId, product, price, quantity };
 }
 
 // const rows = [createData("coffee", 159, 6.0)];
@@ -27,12 +28,22 @@ function createData(product, quantity, price) {
 // export default function BasicTable() {
 
 const Order = () => {
+  const history = useHistory();
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
+      <Button
+        onClick={() => {
+          history.push("/account");
+        }}
+      >
+        ← Back to orders
+      </Button>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell>Order Id</TableCell>
+            <TableCell>Product Id </TableCell>
             <TableCell>Product</TableCell>
             <TableCell align="right">Quantity</TableCell>
             <TableCell align="right">Price</TableCell>
@@ -41,6 +52,12 @@ const Order = () => {
         <TableBody>
           {/* {rows.map((row) => ( */}
           <TableRow>
+            <TableCell component="th" scope="row">
+              ORDER ID
+            </TableCell>
+            <TableCell component="th" scope="row">
+              PRODUCT ID
+            </TableCell>
             <TableCell component="th" scope="row">
               PRODUCT
             </TableCell>
