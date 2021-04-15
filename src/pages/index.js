@@ -4,4 +4,5 @@ import { default as Product } from "./Product";
 import { default as Products } from "./Products";
 import { default as About } from "./About";
 import {default as User} from  "./User"
-export { AccountForm, Home, Product, Products,  User, About };
+import {default as Order} from  "./Order"
+export { AccountForm, Home, Product, Products,  User, About, Order };
