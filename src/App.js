@@ -87,6 +87,13 @@ const myorders = [
     ]
   },
 ];
+const fetchCartData = async (token) => {
+  const data = await callApi({
+    url:'orders/cart',
+    token
+  })
+  return data;
+}
 const fetchProducts = async () => {
   const data = await callApi({
     url: "products",
@@ -105,7 +112,7 @@ const fetchUserData = async (token) => {
 
 const fetchUserOrders = async (userId, token) => {
   const data = await callApi({
-    url: `users/:${userId}/orders`,
+    url: `users/${userId}/orders`,
     token,
   });
   console.log("This user's order's are:", data);
@@ -116,7 +123,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(localStorage.getItem("user"));
-  const [cart, setCart] = useState(localStorage.getItem("cart") || {});
+  const [cart, setCart] = useState(localStorage.getItem("cart"));
   const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
@@ -129,14 +136,18 @@ function App() {
         }
 
         if (token) {
-          const userData = await fetchUserData(token);
-          localStorage.setItem("user", JSON.stringify(userData));
-          setUserData(userData);
-          const username = userData.username;
+          const user = await fetchUserData(token);
+          localStorage.setItem("user", JSON.stringify(user));
+          setUserData(user);
+          const username = user.username;
           console.log("username is :", username);
-        }
-        if (token && userData) {
-          setUserOrders(await fetchUserOrders(userData.id, token));
+          const {products:cart} = await fetchCartData(token);
+          localStorage.setItem('cart',JSON.stringify(cart))
+          setCart(cart);
+          console.log('cart is:',cart);
+          if (token && user) {
+            setUserOrders(await fetchUserOrders(user.id, token));
+          }
         }
       } catch (error) {
         console.error(error);
@@ -179,7 +190,7 @@ function App() {
         <About />
       </Route>
       <Route exact path="/account">
-        <User userData={userData} token={token} myorders = {myorders}
+        <User userData={userData} token={token} myorders={myorders}
         // userOrders={userOrders} 
         />
       </Route>

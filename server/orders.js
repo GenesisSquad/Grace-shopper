@@ -5,8 +5,8 @@ require("dotenv").config();
 const { requireUser } = require("./utils");
 const { 
     getAllOrders,
-     getOrdersByUser, 
-    //  getCartByUser, 
+    //  getOrdersByUser, 
+     getCartByUser, 
      createOrder 
     } = require("../db")
 const { JWT_SECRET } = process.env;
@@ -32,7 +32,7 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
     try {
         const { user } = req;
         if (!user) return res.status(400).send("Please log in.")
-        return res.send(await getOrdersByUser());
+        return res.send(await getCartByUser({id:user.id}));
 
     } catch (error) {
         console.error(error);

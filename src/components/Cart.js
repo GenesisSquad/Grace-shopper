@@ -10,6 +10,8 @@ import StripeCheckout from 'react-stripe-checkout';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { GridLoadIcon } from "@material-ui/data-grid";
+import { CircularProgress } from "@material-ui/core";
 
 const STRIPE_KEY =
 'pk_test_51IgESEAwKF3ow8u8iWs1EZ7w7SOHNw8zGEZZJ7cErTdZJfyvQ5iBSzWlQNC4Ngrkb24u8AbPrNP8ezMm1WpY5hhe0086gjXKtA';
@@ -51,75 +53,58 @@ const onToken = (amount) => async (token) => {
   }
 };
 //! Stripe end
+const data = {
+  id: 3,
+  status: "created",
+  userId: 3,
+  datePlaced: "2021-04-15T18:29:18.482Z",
+  products: [
+    {
+      id: 9,
+      name: "joe",
+      description: "GREAT COFFEE!",
+      price: "$22",
+      imageURL:
+        "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+      inStock: true,
+      category: "TEA",
+      quantity: 5,
+    },
+    {
+      id: 5,
+      name: "Bella London Fog",
+      description:
+        "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
+      price: "$1200",
+      imageURL:
+        "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
+      inStock: true,
+      category: "TEA",
+      quantity: 6,
+    },
+  ],
+};
 
-const Cart = ({ token }) => {
+const Cart = ({ token, cart, setCart }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [cart, setCart] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    async function prodToBuy() {
-      // const data = await callApi({
-      //   url: "/orders/cart",
-      //   token: token,
-      // });
-      const data = {
-        id: 3,
-        status: "created",
-        userId: 3,
-        datePlaced: "2021-04-15T18:29:18.482Z",
-        products: [
-          {
-            id: 9,
-            name: "joe",
-            description: "GREAT COFFEE!",
-            price: "$22",
-            imageURL:
-              "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
-            inStock: true,
-            category: "TEA",
-            quantity: 5,
-          },
-          {
-            id: 5,
-            name: "Bella London Fog",
-            description:
-              "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
-            price: "$1200",
-            imageURL:
-              "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
-            inStock: true,
-            category: "TEA",
-            quantity: 6,
-          },
-        ],
-      };
-      console.log("DATA:", data);
-      if (data && data.name) {
-        setCart(data.products);
-        setPrice(getTotalSum());
-        console.log("SEE ARRAY");
-      } else {
-        // console.log('DIDN'T WORK!!!')
-      }
-    }
-    prodToBuy();
-  });
   //! STRIPE styling start
   const classes = useStyles();
   //! STRIPE styling end
 
   const getTotalSum = () => {
     return cart.reduce(
-      (sum, { cost, quantity }) => sum + parseFloat(cost.slice(1)) * quantity,
+      (sum, { price, quantity }) => sum + parseFloat(price.slice(1)) * quantity,
       0
     );
   };
 
   const clearCart = () => {
     setCart([]);
+    localStorage.setItem('cart','')
   };
 
   const setQuantity = (product, amount) => {
@@ -137,7 +122,7 @@ const Cart = ({ token }) => {
       {cart && cart.length ? (
         <>
           <h1>My Cart</h1>
-          {cart.length > 0 && <button onClick={clearCart}>Clear Cart</button>}
+          <button onClick={clearCart}>Clear Cart</button>
           <div className="products">
             {cart.map((product, idx) => (
               <div className="product" key={idx}>
@@ -171,7 +156,7 @@ const Cart = ({ token }) => {
       {/* STRIPE end */}
         </>
       ) : (
-        <h3>Your cart is empty</h3>
+        <CircularProgress />
       )}
     </>
   );
