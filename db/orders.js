@@ -117,9 +117,17 @@ const getAllOrders = async () => {
 // select one user's order (look up by orders."userId")
 // ...an order that that has status = created
 // return the order, include the order's products
-// const getCartByUser = async({ id }) => {
-
-// }
+const getCartByUser = async({ id }) => {
+	const orders = await getAllOrders();
+	const cart = orders.filter(({userId,status})=>id===userId && status==='created')[0]
+	if( cart && cart.products ){
+		return cart;
+	} else {
+		const res = await createOrder({status:'created',id})
+		res.products = [];
+		return res;
+	}
+}
 
 //create and return the new order
 const createOrder = async ({ status, userId }) => {
@@ -147,6 +155,6 @@ module.exports = {
 	getAllOrders,
 	// getOrdersByUser,
 	// getOrdersByProduct,
-	// getCartByUser,
+	getCartByUser,
 	createOrder,
 };
