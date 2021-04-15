@@ -132,13 +132,6 @@ const Cart = ({ cart, setCart }) => {
     setCart(cart.filter((product) => product !== productToRemove));
   };
 
-  const getTotalSum = () => {
-    return cart.reduce(
-      (sum, { price, quantity }) => sum + parseFloat(price.slice(1)) * quantity,
-      0
-    );
-  };
-
   return (
     <>
       {cart && cart.length ? (
