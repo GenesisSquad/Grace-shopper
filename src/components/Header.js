@@ -20,17 +20,18 @@ import "./Header.css";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 // import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
+import Cart from "./Cart";
 
 const OrangeToolbar = withStyles((theme) => ({
   root: {
     fontFamily: "tahoma",
     color: theme.palette.getContrastText("#9B7D46"),
     backgroundColor: "#9B7D46",
-    display:'flex',
+    display: "flex",
     justifyContent: "space-between",
-    flexDirection:'row',
-    alignItems:'center'
+    flexDirection: "row",
+    alignItems: "center",
   },
 }))(Toolbar);
 
@@ -157,28 +158,34 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <div>
+      {/* <div>
         <Link className="shoppingCart" to="/products">
           Shopping Cart:
         </Link>
+      </div> */}
+      <div>
+        <h1>Shopping Cart:</h1>
       </div>
+
+      <Cart />
+
       <List style={{ width: "300px" }}>
         {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
           i !== 1 ? ( */}
-        <ListItem
+        {/* <ListItem
           // button
           // key={text}
           onClick={() => {
             // history.push(routes[i]);
             console.log("this will card you to the specific product page");
           }}
-        >
-          {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
-          {/* <ListItemText primary={text} /> */}
-          {/* <Products /> */}
-          {/* <Product /> */}I am a shopping cart item!!! when this works we
+        > */}
+        {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
+        {/* <ListItemText primary={text} /> */}
+        {/* <Products /> */}
+        {/* <Product />I am a shopping cart item!!! when this works we
           should render and array of items in the users shopping cart
-        </ListItem>
+        </ListItem> */}
         {/* ) : (
             token && (
               <ListItem
@@ -217,9 +224,9 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             <div className="siteName">Rhino Coffee</div>
           </Link>
         </div>
-        <div >
-          <Hidden xsDown class='hidden'>
-          {/* <Button
+        <div>
+          <Hidden xsDown class="hidden">
+            {/* <Button
 
         <div>
           <Hidden xsDown>
@@ -234,25 +241,27 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             {"Home"}
           </Button> */}
 
-          <Button          
-            color="inherit"
-            onClick={(event) => {
-              history.push("/about");
-              console.log("this link will route you to the About page");
-            }}
-          >
-            {"About"}
-          </Button>
+            <Button
+              color="inherit"
+              onClick={(event) => {
+                history.push("/about");
+                console.log("this link will route you to the About page");
+              }}
+            >
+              {"About"}
+            </Button>
 
-          <Button
-            color="inherit"
-            onClick={(event) => {
-              history.push("/products");
-              console.log("this link will route you to all the Products page");
-            }}
-          >
-            {"Products"}
-          </Button>
+            <Button
+              color="inherit"
+              onClick={(event) => {
+                history.push("/products");
+                console.log(
+                  "this link will route you to all the Products page"
+                );
+              }}
+            >
+              {"Products"}
+            </Button>
           </Hidden>
         </div>
         <div>
@@ -283,9 +292,13 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
               <AccountCircle />
             </IconButton>
           </Hidden>
-          <IconButton aria-label="show shopping cart" color="inherit" onClick={toggleDrawer("right", true)}>
+          <IconButton
+            aria-label="show shopping cart"
+            color="inherit"
+            onClick={toggleDrawer("right", true)}
+          >
             <Badge badgeContent={29} color="secondary">
-              <ShoppingCartIcon  />
+              <ShoppingCartIcon />
             </Badge>
           </IconButton>
         </div>
