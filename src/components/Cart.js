@@ -161,19 +161,9 @@ const Cart = ({ cart, setCart }) => {
               </div>
             ))}
           </div>
-<<<<<<< HEAD
 
           <div>Total price: ${getTotalSum()}</div>
-        </>
-      ) : (
-        <h3>Your cart is empty</h3>
-      )}
-=======
-        ))}
-      </div>     
-      <div>Total Cost: ${getTotalSum()}</div>
-       {/* STRIPE start */}
-       <Route exact path="/pay">
+          {/* STRIPE start */}
       <Paper className={classes.paper}>
          <StripeCheckout
           token={onToken(10000)}
@@ -185,9 +175,11 @@ const Cart = ({ cart, setCart }) => {
          />
          <Button>Pay Order</Button>
          </Paper>
-      </Route>
       {/* STRIPE end */}
->>>>>>> master
+        </>
+      ) : (
+        <h3>Your cart is empty</h3>
+      )}
     </>
   );
 };
