@@ -22,7 +22,7 @@ client.connect();
 rebuildDB();
 server.use(morgan("dev"));
 server.use(cors());
-server.use("/",express.static("/build"));
+// server.use("/",express.static("/build"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
