@@ -1,4 +1,5 @@
 const { client } = require("./client");
+const { getAllProducts } = require("./product");
 
 // return the order, include the order's products
 const getOrderById = async (id) => {
@@ -78,21 +79,14 @@ const getAllOrders = async () => {
 };
 
 // // select and return an array of orders made by user, include their products
-// const getOrdersByUser = async({ id }) => {
-//     try {
-//         // const {rows: [orders] } = await client.query(`
-//         // SELECT *
-//         // FROM orders
-//         // WHERE id = $1;
-//         // `,[id]);
-//         const allOrders = await getAllOrders();
-//         console.log("allOrders", allOrders);
-//         return allOrders.filter((orders) => orders.userId === id)
-
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+const getOrdersByUser = async({ id }) => {
+    try {
+		const orders = await getAllOrders();
+		return orders.filter(o=>o.userId===id)
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 // // select and return an array of orders which have a specific productId
 // // in their order_products join, include their products
@@ -123,7 +117,7 @@ const getCartByUser = async({ id }) => {
 	if( cart && cart.products ){
 		return cart;
 	} else {
-		const res = await createOrder({status:'created',id})
+		const res = await createOrder({status:'created',userId:id})
 		res.products = [];
 		return res;
 	}
@@ -153,7 +147,7 @@ const createOrder = async ({ status, userId }) => {
 module.exports = {
 	getOrderById,
 	getAllOrders,
-	// getOrdersByUser,
+	getOrdersByUser,
 	// getOrdersByProduct,
 	getCartByUser,
 	createOrder,
