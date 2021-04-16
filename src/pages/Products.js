@@ -53,7 +53,9 @@ const ProductCard = ({ product }) => {
         <CardMedia
           className={classes.media}
           image={product.imageURL}
+          style={{backgroundSize:'contain'}}
           title="Beverage"
+          
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">

@@ -292,8 +292,8 @@ const orders = [
     userId: 4,
   },
   {
-    status: "created",
-    userId: 5,
+    status: "closed",
+    userId: 1,
   },
 ];
 
