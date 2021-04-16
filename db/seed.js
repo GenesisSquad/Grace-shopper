@@ -253,15 +253,7 @@ const users = [
 const orders = [
   {
     status: "created",
-    userId: 4,
-  },
-  {
-    status: "created",
-    userId: 4,
-  },
-  {
-    status: "created",
-    userId: 3,
+    userId: 1,
   },
   {
     status: "created",
@@ -269,7 +261,15 @@ const orders = [
   },
   {
     status: "created",
-    userId: 1,
+    userId: 3,
+  },
+  {
+    status: "created",
+    userId: 4,
+  },
+  {
+    status: "created",
+    userId: 5,
   },
 ];
 
