@@ -249,7 +249,10 @@ const Header = ({
             color="inherit"
             onClick={toggleDrawer("right", true)}
           >
-            <Badge badgeContent={29} color="secondary">
+            <Badge
+              badgeContent={cart && cart.length ? cart.length : 0}
+              color="secondary"
+            >
               <ShoppingCartIcon />
             </Badge>
           </IconButton>

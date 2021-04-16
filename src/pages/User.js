@@ -25,8 +25,8 @@ const myorders = [
     status: "completed",
     quantity: 22,
     total: "$4",
-    datePlaced : "01-32-2023",
-    products : [
+    datePlaced: "01-32-2023",
+    products: [
       {
         inStock: true,
         name: "Nick's DD Brew",
@@ -39,21 +39,22 @@ const myorders = [
       {
         inStock: true,
         name: "Bella London Fog",
-        description: "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
+        description:
+          "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
         category: "TEA",
         price: "$1200",
         imageURL:
           "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
-      }
-    ]
+      },
+    ],
   },
   {
     id: 2,
     status: "in progress",
     quantity: 2,
     total: "$33",
-    datePlaced : "01-12-2020",
-    products :[
+    datePlaced: "01-12-2020",
+    products: [
       {
         inStock: true,
         name: "Capuccino 2.0",
@@ -66,7 +67,8 @@ const myorders = [
       {
         inStock: true,
         name: "Juno's Morning Tea",
-        description: "A delicious green tea made from the leaves of Juno's hedge",
+        description:
+          "A delicious green tea made from the leaves of Juno's hedge",
         category: "TEA",
         price: "$900",
         imageURL:
@@ -79,7 +81,7 @@ const myorders = [
     status: "canceled",
     quantity: 23,
     total: "$42",
-    datePlaced : "01-22-2021",
+    datePlaced: "01-22-2021",
     products: [
       {
         inStock: true,
@@ -99,22 +101,27 @@ const myorders = [
         imageURL:
           "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
       },
-    ]
+    ],
   },
 ];
 function createData(id, status, quantity, total, datePlaced) {
   return { id, status, quantity, total, datePlaced };
 }
 
-
 const Orders = () => {
   const classes = useStyles();
   const history = useHistory();
 
   const rows = myorders.map((order) => {
-    return createData(order.id, order.status, order.quantity, order.total, order.datePlaced);
+    return createData(
+      order.id,
+      order.status,
+      order.quantity,
+      order.total,
+      order.datePlaced
+    );
   });
-  
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -181,7 +188,7 @@ const User = ({ userData, token }) => {
         }
       </div>
 
-      <Orders/>
+      <Orders />
     </>
   );
 };
