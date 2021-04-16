@@ -10,9 +10,7 @@ import {
   IconButton,
   Link,
   List,
-  ListItem,
-  // ListItemIcon,
-  // ListItemText,
+  Divider,
   Toolbar,
   withStyles,
 } from "@material-ui/core";
@@ -130,7 +128,15 @@ const HiddenMenu = ({ token, logOut }) => {
   );
 };
 
-const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) => {
+const Header = ({
+  name,
+  token,
+  setToken,
+  products,
+  setUserData,
+  cart,
+  setCart,
+}) => {
   const history = useHistory();
 
   const logOut = () => {
@@ -158,50 +164,11 @@ const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) =
       // onClick={toggleDrawer(anchor, false)}
       // onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <div>
-        <Link className="shoppingCart" to="/products">
-          Shopping Cart:
-        </Link>
-      </div> */}
+      <Divider />
       <div>
-        <h1>Shopping Cart:</h1>
+        <h1 className="shoppingCart">Shopping Cart:</h1>
       </div>
-
-      <Cart token={token} cart={cart} setCart={setCart}/>
-
-      <List style={{ width: "300px" }}>
-        {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
-          i !== 1 ? ( */}
-        {/* <ListItem
-          // button
-          // key={text}
-          onClick={() => {
-            // history.push(routes[i]);
-            console.log("this will card you to the specific product page");
-          }}
-        > */}
-        {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
-        {/* <ListItemText primary={text} /> */}
-        {/* <Products /> */}
-        {/* <Product />I am a shopping cart item!!! when this works we
-          should render and array of items in the users shopping cart
-        </ListItem> */}
-        {/* ) : (
-            token && (
-              <ListItem
-                button
-                key={text}
-                onClick={() => {
-                  history.push(routes[i]);
-                }}
-              >
-                <ListItemIcon>{icons[i]}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ) */}
-        {/* )
-        )} */}
-      </List>
+      <Cart token={token} cart={cart} setCart={setCart} />
     </div>
   );
   return (
@@ -226,21 +193,6 @@ const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) =
         </div>
         <div>
           <Hidden xsDown>
-            {/* <Button
-
-        <div>
-          <Hidden xsDown>
-            {/* <Button
-
-            color="inherit"
-            onClick={(event) => {
-              history.push("/");
-              console.log("this link will guide you to the Home page");
-            }}
-          >
-            {"Home"}
-          </Button> */}
-
             <Button
               color="inherit"
               onClick={(event) => {
