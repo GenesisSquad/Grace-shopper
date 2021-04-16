@@ -138,6 +138,7 @@ const Cart = ({ token, cart, setCart }) => {
                         {product.price}
                       </Typography>
                       <input
+                        style={{ maxWidth: "40px", marginRight: "10px" }}
                         type="number"
                         size="1"
                         maxLength="1"
