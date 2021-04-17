@@ -103,19 +103,24 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
       const newCart = [...cart];
       newCart.find((item) => item.name === product.name).quantity = amount;
       localStorage.setItem('cart',JSON.stringify(newCart))
-      const orders = await callApi({token,
-        url:`order_products/${product.id}`,
-      })
-      const order = orders.filter(o=>o.userId===userData.id && o.status === 'created')[0]
-      console.log("order: ",order);
-      const data = await callApi({
-        token,
-        url:`order_products/${order.id}`,
-        method:'PATCH',
-        body:{product:{quantity:product.quantity}}
-      })
+      if(userData || JSON.parse(localStorage.getItem('user'))){
+        const userD = JSON.parse(localStorage.getItem('user'))
+        console.log(userD);
+        const orders = await callApi({token,
+          url:`order_products/${product.id}`,
+        })
+        console.log(orders);
+        const order = orders.filter(o=>o.userId===userD.id && o.status==="created")[0]
+        console.log("order: ",order);
+        const data = await callApi({
+          token,
+          url:`order_products/${order.id}`,
+          method:'PATCH',
+          body:{product:{quantity:product.quantity}}
+        })
+        console.log(data);
+      }
       setCart(newCart);
-      console.log(data);
     }
   };
 
