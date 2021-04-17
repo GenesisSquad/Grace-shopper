@@ -31,15 +31,29 @@ const useStyles = makeStyles((theme) => ({
   bottomCard: { justifyContent: "space-between" },
 }));
 
-const ProductCard = ({product , cart, setCart}) => {
+const ProductCard = ({ product, cart, setCart }) => {
   const classes = useStyles();
 
   const history = useHistory();
 
   const handleAddItem = async (product) => {
-    setCart( [...cart, product])
-    console.log("added item!!!, " , product) ;
-    console.log("updated cart is ", cart)
+    let updatedCart = [...cart]
+    let productInCart = updatedCart.find(
+      (cartProduct) => product.id  === cartProduct.id
+    );
+    if (productInCart){
+      productInCart.quantity++
+    } else {
+      productInCart = {
+        ...product,
+        quantity :1,
+     
+      }
+      updatedCart.push(productInCart)
+    }
+    setCart(updatedCart);
+    console.log("added item!!!, ", product);
+    console.log("updated cart is ", cart);
     // const data = await callApi({
     //   url: `/orders/${orderId}/products`,
     //   token,
@@ -74,7 +88,7 @@ const ProductCard = ({product , cart, setCart}) => {
           <div>
             <IconButton
               aria-label="addShopping cart icon"
-              onClick={()=> handleAddItem(product)}
+              onClick={() => handleAddItem(product)}
             >
               <AddShoppingCartIcon />
             </IconButton>
@@ -91,7 +105,7 @@ const ProductCard = ({product , cart, setCart}) => {
   );
 };
 
-const Products = ( {products, userData, cart, setCart} ) => {
+const Products = ({ products, userData, cart, setCart }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -114,7 +128,14 @@ const Products = ( {products, userData, cart, setCart} ) => {
         )} */}
         {products && products.length ? (
           products.map((product, index) => {
-            return <ProductCard product={product} key={product.id} cart={cart} setCart= {setCart}/>;
+            return (
+              <ProductCard
+                product={product}
+                key={product.id}
+                cart={cart}
+                setCart={setCart}
+              />
+            );
           })
         ) : (
           <Grid item>

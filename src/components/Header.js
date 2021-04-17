@@ -146,7 +146,9 @@ const Header = ({
     setToken("");
     history.push("/");
   };
-
+  const cartQuantity = () => {
+    return cart.reduce((sum, { quantity }) => sum + quantity, 0);
+  };
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
     console.log("this opens and closes the cart side window");
@@ -251,7 +253,7 @@ const Header = ({
             onClick={toggleDrawer("right", true)}
           >
             <Badge
-              badgeContent={cart && cart.length ? cart.length : 0}
+              badgeContent={cart && cart.length ? cartQuantity() : 0}
               color="secondary"
             >
               <ShoppingCartIcon />
