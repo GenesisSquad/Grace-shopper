@@ -35,21 +35,14 @@ const getOrderProductById = async (id) => {
     }
 }
 
-const updateOrderProduct = async(id,fields) => {
-    try {
-        const setString = Object.keys(fields)
-		.map((key, index) => `"${key}"=$${index + 1}`)
-		.join(", ");
-        if (setString.length === 0) {
-            return;
-        }
-    
+const updateOrderProduct = async(id,{quantity}) => {
+    try {    
         const {rows:[orderProduct]} = await client.query(`
         UPDATE order_products 
-        SET ${setString}
+        SET quantity=$1
         WHERE id = ${id}
         RETURNING *;
-        `,[Object.values(fields)])
+        `,[parseInt(quantity)])
         return orderProduct;
     } catch (error) {
         console.error(error);

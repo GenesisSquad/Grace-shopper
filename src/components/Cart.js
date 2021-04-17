@@ -98,20 +98,30 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-  const setQuantity = (product, amount) => {
-    const newCart = [...cart];
-    newCart.find((item) => item.name === product.name).quantity = amount;
-    setCart(newCart);
+  const setQuantity = async(product, amount) => {
+    if (amount > 0){
+      const newCart = [...cart];
+      newCart.find((item) => item.name === product.name).quantity = amount;
+      localStorage.setItem('cart',JSON.stringify(newCart))
+      const data = await callApi({
+        token,
+        url:`orders/order_products/${product.id}`,
+        method:'PATCH',
+        body:{product:{quantity:product.quantity}}
+      })
+      setCart(newCart);
+      console.log(data);
+    }
   };
 
   const removeFromCart = async (productToRemove) => {
     const newCart = cart.filter((product) => product.id !== productToRemove.id)
-    setCart(newCart);
     const data = await callApi({
       token,
       method:'DELETE',
       url:`orders/order_products/${productToRemove.id}`,
     })
+    setCart(newCart);
     console.log(data);
   };
 
