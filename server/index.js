@@ -10,6 +10,8 @@ const jwt = require('jsonwebtoken');
 const { usersRouter } = require("./users");
 const { productsRouter } = require("./products");
 const { ordersRouter } = require("./orders");
+const { orderProductsRouter } = require("./orderProducts");
+
 const { stripeRouter } = require("./stripe");
 const {client, getUserById, rebuildDB} = require('../db');
 
@@ -71,7 +73,7 @@ server.use("/api/products", productsRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/orders", ordersRouter);
 server.use("/api/stripe", stripeRouter);
-
+server.use("/api/order_products", orderProductsRouter)
 
 server.use('*', (req, res, next) => {
 	res.status(404);

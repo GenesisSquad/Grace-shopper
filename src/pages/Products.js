@@ -20,13 +20,14 @@ import { callApi } from "../api";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    minWidth:'350px',
     margin: "20px 60PX 20PX 60PX",
   },
   media: {
     height: 0,
     paddingTop: "56.25%",
   },
-  // card: {height :"450px"},
+  card: {minWidth :"280px"},
   // paper: { maxHeight: "40px" },
   bottomCard: { justifyContent: "space-between" },
 }));
@@ -129,6 +130,7 @@ const Products = ({ products, userData, cart, setCart }) => {
           products.map((product, index) => {
             return (
               <ProductCard
+              
                 product={product}
                 key={product.id}
                 cart={cart}
