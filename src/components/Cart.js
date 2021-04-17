@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { callApi } from "../api";
-
 //! Stripe start
-import { Route } from "react-router-dom";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { GridLoadIcon } from "@material-ui/data-grid";
 import {
@@ -76,11 +72,11 @@ const onToken = (amount) => async (token) => {
 };
 //! Stripe end
 
-const Cart = ({ token, cart, setCart, real, toggleDrawer }) => { 
-  // const [name, setName] = useState(""); 
-  // const [description, setDescription] = useState(""); 
-  // const [price, setPrice] = useState(""); 
-  const history = useHistory(); 
+const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [price, setPrice] = useState("");
+  const history = useHistory();
 
   //! STRIPE styling start
   const classes = useStyles();
@@ -98,29 +94,29 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-  const setQuantity = async(product, amount) => {
-    if (amount > 0){
+  const setQuantity = async (product, amount) => {
+    if (amount > 0) {
       const newCart = [...cart];
       newCart.find((item) => item.name === product.name).quantity = amount;
-      localStorage.setItem('cart',JSON.stringify(newCart))
+      localStorage.setItem("cart", JSON.stringify(newCart));
       const data = await callApi({
         token,
-        url:`orders/order_products/${product.id}`,
-        method:'PATCH',
-        body:{product:{quantity:product.quantity}}
-      })
+        url: `orders/order_products/${product.id}`,
+        method: "PATCH",
+        body: { product: { quantity: product.quantity } },
+      });
       setCart(newCart);
       console.log(data);
     }
   };
 
   const removeFromCart = async (productToRemove) => {
-    const newCart = cart.filter((product) => product.id !== productToRemove.id)
+    const newCart = cart.filter((product) => product.id !== productToRemove.id);
     const data = await callApi({
       token,
-      method:'DELETE',
-      url:`orders/order_products/${productToRemove.id}`,
-    })
+      method: "DELETE",
+      url: `orders/order_products/${productToRemove.id}`,
+    });
     setCart(newCart);
     console.log(data);
   };
@@ -129,96 +125,108 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
     <>
       {cart && cart.length ? (
         <>
-          <Grid style={{width:'400px'}}>
+          <Grid style={{ width: "400px" }}>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <div className="products">
-                  { cart && cart.length > 0 ? cart.map((product, idx) => (
-                    <div className="product" key={idx} >
-                      {/* <h3>{product.name}</h3> */}
-                      <Typography variant="h5" component="h2"
-                      //  style={{textAlign:'center'}}
-                      >
-                        {product.name}
-                      </Typography>
-                      <div style={{display:'flex',flexFlow:'row', justifyContent:'space-around', alignItems:'center'}}>
-                      {/* <h4>{product.description}</h4> */}
-                      {/* <h4>{product.price}</h4> */}
-                      <Typography className={classes.pos} color="textSecondary">
-                        {product.price}
-                      </Typography>
-                      <input
-                        style={{ maxWidth: "40px", marginRight: "10px" }}
-                        type="number"
-                        size="1"
-                        maxLength="1"
-                        value={product.quantity}
-                        onChange={(e) =>
-                          setQuantity(product, parseInt(e.target.value))
-                        }
-                      />
-                      {/* <img src={product.imageUrl} alt={product.name} /> */}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        onClick={() => removeFromCart(product)}
-                      >
-                        Remove
-                      </Button>
+                  {cart && cart.length > 0 ? (
+                    cart.map((product, idx) => (
+                      <div className="product" key={idx}>
+                        <Typography variant="h5" component="h2">
+                          {product.name}
+                        </Typography>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexFlow: "row",
+                            justifyContent: "space-around",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Typography
+                            className={classes.pos}
+                            color="textSecondary"
+                          >
+                            {product.price}
+                          </Typography>
+                          <input
+                            style={{ maxWidth: "40px", marginRight: "10px" }}
+                            type="number"
+                            size="1"
+                            maxLength="1"
+                            value={product.quantity}
+                            onChange={(e) =>
+                              setQuantity(product, parseInt(e.target.value))
+                            }
+                          />
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={() => removeFromCart(product)}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                        <Divider style={{ marginTop: "10px" }} />
                       </div>
-                      <Divider style={{marginTop:'10px'}}/>
-                    </div>
-                  )): <CircularProgress />}
+                    ))
+                  ) : (
+                    <CircularProgress />
+                  )}
                 </div>
                 <br />
                 <br />
                 <Typography variant="h5" component="h2">
                   Total: ${getTotalSum()}
                 </Typography>
-                {/* <div>Total price: ${getTotalSum()}</div> */}
               </CardContent>
             </Card>
           </Grid>
           {/* STRIPE start */}
-          {/* <Paper className={classes.paper}> */}
-          <div style={{display:'flex',flexFlow:'row', justifyContent:'space-around', marginTop:'10px'}}>
-          
-          <Button
-            variant="contained"
-            color="secondary"
-            size="small"
-            onClick={clearCart}
-            style={{marginRight:'10px'}}
+          <div
+            style={{
+              display: "flex",
+              flexFlow: "row",
+              justifyContent: "space-around",
+              marginTop: "10px",
+            }}
           >
-            Clear Cart
-          </Button>
-          { real ? <StripeCheckout
-            token={onToken(10000)}
-            stripeKey={STRIPE_KEY}
-            name="Rhino Coffee"
-            amount={getTotalSum() * 100}
-            currency={CURRENCY}
-            billingAddress
-            shippingAddress
-            style={{marginLeft:'10px'}}
-          />:<ColorButton 
-          onClick={()=>{
-            history.push('/checkout')
-            toggleDrawer('right',false)
-          }}
-          >
-            Checkout
-          </ColorButton>
-        
-        }
+            <Button
+              variant="contained"
+              color="secondary"
+              size="small"
+              onClick={clearCart}
+              style={{ marginRight: "10px" }}
+            >
+              Clear Cart
+            </Button>
+            {real ? (
+              <StripeCheckout
+                token={onToken(10000)}
+                stripeKey={STRIPE_KEY}
+                name="Rhino Coffee"
+                amount={getTotalSum() * 100}
+                currency={CURRENCY}
+                billingAddress
+                shippingAddress
+                style={{ marginLeft: "10px" }}
+              />
+            ) : (
+              <ColorButton
+                onClick={() => {
+                  history.push("/checkout");
+                  toggleDrawer("right", false);
+                }}
+              >
+                Checkout
+              </ColorButton>
+            )}
           </div>
-          {/* </Paper> */}
           {/* STRIPE end */}
         </>
       ) : (
         <h3> Your cart is empty.</h3>
-        // <CircularProgress />
       )}
     </>
   );
