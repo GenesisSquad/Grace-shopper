@@ -16,7 +16,14 @@ const createOrder_product = async ({orderId,productId,price,quantity}) => {
 
 const addProductToOrder = async ({orderId,productId,price,quantity}) => {
     const order = await getOrderById(orderId);
+    const product = order.products.filter(p=>p.id===productId) 
+    if(product && product.id){
+        return await updateOrderProduct(order.id,{price,quantity})
+    } else {
+       return await createOrder_product({orderId,productId,price,quantity})
+    }
 }
+
 const getOrderProductById = async (id) => {
     try {
         const {rows:[orderProduct]} = await client.query(`
@@ -30,8 +37,6 @@ const getOrderProductById = async (id) => {
 
 const updateOrderProduct = async(id,fields) => {
     try {
-
-
         const setString = Object.keys(fields)
 		.map((key, index) => `"${key}"=$${index + 1}`)
 		.join(", ");
