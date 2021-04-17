@@ -164,8 +164,8 @@ const Header = ({
   const list = (anchor) => (
     <div
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
     >
       <Divider />
       <div>
