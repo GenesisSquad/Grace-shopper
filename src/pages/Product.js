@@ -18,8 +18,36 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductGrid = ({ product }) => {
+const ProductGrid = ({ product, cart, setCart }) => {
   const history = useHistory();
+
+  const handleAddItem = async (product) => {
+    let updatedCart = [...cart];
+    let productInCart = updatedCart.find(
+      (cartProduct) => product.id === cartProduct.id
+    );
+    if (productInCart) {
+      productInCart.quantity++;
+    } else {
+      productInCart = {
+        ...product,
+        quantity: 1,
+      };
+      updatedCart.push(productInCart);
+    }
+    setCart(updatedCart);
+    console.log("added item!!!, ", product);
+    console.log("updated cart is ", cart);
+    // const data = await callApi({
+    //   url: `/orders/${orderId}/products`,
+    //   token,
+    //   body:{product}
+    // });
+    // return data;
+  };
+  // const handleRemoveItem = () => {
+  //   console.log("item removed!!!");
+  // };
   return (
     <Grid
       container
@@ -53,7 +81,11 @@ const ProductGrid = ({ product }) => {
           </Box>
           <Box mt="auto">
             <Typography variant="h5">{product.price}</Typography>
-            <Button variant="contained" color="secondary">
+            <Button
+              onClick={() => handleAddItem(product)}
+              variant="contained"
+              color="secondary"
+            >
               {" "}
               Add to cart
             </Button>
@@ -64,7 +96,7 @@ const ProductGrid = ({ product }) => {
   );
 };
 
-const Product = ({ products }) => {
+const Product = ({ products, cart, setCart }) => {
   let { productId } = useParams();
   productId = parseInt(productId, 10);
   const product = products.find((product) => productId === product.id);
@@ -73,11 +105,11 @@ const Product = ({ products }) => {
   return (
     <>
       {product ? (
-        <ProductGrid product={product} />
+        <ProductGrid product={product} cart={cart} setCart={setCart} />
       ) : (
         <div>
           <CircularProgress />
-          <h1>Loading</h1> 
+          <h1>Loading</h1>
         </div>
       )}
     </>

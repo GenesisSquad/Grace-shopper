@@ -37,19 +37,18 @@ const ProductCard = ({ product, cart, setCart }) => {
   const history = useHistory();
 
   const handleAddItem = async (product) => {
-    let updatedCart = [...cart]
+    let updatedCart = [...cart];
     let productInCart = updatedCart.find(
-      (cartProduct) => product.id  === cartProduct.id
+      (cartProduct) => product.id === cartProduct.id
     );
-    if (productInCart){
-      productInCart.quantity++
+    if (productInCart) {
+      productInCart.quantity++;
     } else {
       productInCart = {
         ...product,
-        quantity :1,
-     
-      }
-      updatedCart.push(productInCart)
+        quantity: 1,
+      };
+      updatedCart.push(productInCart);
     }
     setCart(updatedCart);
     console.log("added item!!!, ", product);

@@ -1,7 +1,16 @@
 // Front end APP.js file
 // import react from "react";
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home, About, User, Order, Checkout } from "./pages";
+import {
+  AccountForm,
+  Product,
+  Products,
+  Home,
+  About,
+  User,
+  Order,
+  Checkout,
+} from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -41,8 +50,12 @@ const fetchUserOrders = async (userId, token) => {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")) || {});
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
@@ -96,7 +109,7 @@ function App() {
         <AccountForm action="register" setToken={setToken} />
       </Route>
       <Route exact path="/products/:productId">
-        <Product products={products} />
+        <Product products={products} cart={cart} setCart={setCart} />
       </Route>
 
       <Route exact path="/products">
@@ -118,8 +131,8 @@ function App() {
         <Order />
       </Route>
 
-      <Route exact path='/checkout'>
-        <Checkout token={token} cart={cart} setCart={setCart}/>
+      <Route exact path="/checkout">
+        <Checkout token={token} cart={cart} setCart={setCart} />
       </Route>
     </>
   );
