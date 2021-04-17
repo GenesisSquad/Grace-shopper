@@ -13,7 +13,7 @@ const { ordersRouter } = require("./orders");
 const { orderProductsRouter } = require("./orderProducts");
 
 const { stripeRouter } = require("./stripe");
-const {client, getUserById, rebuildDB} = require('../db');
+const {client, getUserById} = require('../db');
 
 // all required locally made files go ^
 
@@ -22,10 +22,10 @@ const { JWT_SECRET } = process.env;
 const server = express();
 
 client.connect();
-rebuildDB();
+
 server.use(morgan("dev"));
 server.use(cors());
-// server.use("/",express.static("/build"));
+server.use(express.static("build"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
