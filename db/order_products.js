@@ -11,7 +11,17 @@ const createOrder_product = async ({orderId,productId,price,quantity}) => {
     } catch (error) {
         console.error(error);
     }
+}
 
+const getOrderProductsByProductId = async (productId) => {
+    try {
+        const {rows} = await client.query(`
+        SELECT * FROM order_products WHERE "productId" = $1;
+        `,[productId])
+        return rows; 
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 const addProductToOrder = async ({orderId,productId,price,quantity}) => {
@@ -66,4 +76,5 @@ module.exports = {
     addProductToOrder,
     updateOrderProduct,
     createOrder_product,
+    getOrderProductsByProductId,
 }
