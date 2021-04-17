@@ -101,8 +101,9 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
   const setQuantity = async (product, amount) => {
     if (amount > 0) {
       const newCart = [...cart];
-      newCart.find((item) => item.name === product.name).quantity = amount;
-      localStorage.setItem('cart',JSON.stringify(newCart))
+     const a = newCart.indexOf((item) => item.name === product.name)
+     if(a) newCart[a].quantity = amount; 
+      // localStorage.setItem('cart',JSON.stringify(newCart))
       if(userData || JSON.parse(localStorage.getItem('user'))){
         const userD = JSON.parse(localStorage.getItem('user'))
         console.log(userD);
