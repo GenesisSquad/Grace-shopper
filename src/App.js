@@ -1,7 +1,7 @@
 // Front end APP.js file
 // import react from "react";
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home, About, User, Order, Checkout } from "./pages";
+import { AccountForm, Product, Products, Home, About, User, Order, Checkout, Admin } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -119,7 +119,7 @@ function App() {
       </Route>
 
       <Route exact path='/checkout'>
-        <Checkout token={token} cart={cart} setCart={setCart}/>
+        <Checkout token={token} cart={cart} setCart={setCart} userData={userData}/>
       </Route>
     </>
   );

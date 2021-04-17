@@ -3,23 +3,21 @@ const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
+const { requireAdmin } = require("./utils");
+const { JWT_SECRET } = process.env;
 const { 
     getAllOrders,
-    //  getOrdersByUser, 
      getCartByUser, 
      createOrder 
     } = require("../db");
 const { addProductToOrder, updateOrderProduct,destroyOrderProduct } = require("../db/order_products");
-const { JWT_SECRET } = process.env;
 // const { requireAdmin } = require("./admin");
 
 //Admin is user
-ordersRouter.get("/", 
-// requireAdmin, 
-async (req, res, next) => {
+ordersRouter.get("/", requireAdmin, async (req, res, next) => {
     try {
-        // const { admin } = req;
-        // if(!admin) return res.status(400).send("Not an admin!");
+        const { isAdmin } = req;
+        if(!isAdmin) return res.status(400).send("Not an Admin!");
         return res.send(await getAllOrders());
 
     } catch (error) {
