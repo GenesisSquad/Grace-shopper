@@ -79,7 +79,6 @@ const HiddenMenu = ({ token, logOut }) => {
               height: "100%",
               background: "#9B7D46",
             }}
-            onClick={toggleDrawer("left", false)}
           >
             <HiddenItem
               onClick={() => {
@@ -164,8 +163,6 @@ const Header = ({
   const list = (anchor) => (
     <div
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <Divider />
       <div>
