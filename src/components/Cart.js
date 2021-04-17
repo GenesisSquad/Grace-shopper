@@ -76,7 +76,7 @@ const onToken = (amount) => async (token) => {
 };
 //! Stripe end
 
-const Cart = ({ token, cart, setCart, real, toggleDrawer }) => { 
+const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => { 
   // const [name, setName] = useState(""); 
   // const [description, setDescription] = useState(""); 
   // const [price, setPrice] = useState(""); 
@@ -93,9 +93,13 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
     );
   };
 
-  const clearCart = () => {
+  const clearCart = async() => {
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
+    // const data = await callApi({
+    //   url:'',
+    //   m
+    // })
   };
 
   const setQuantity = async(product, amount) => {
@@ -103,9 +107,14 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
       const newCart = [...cart];
       newCart.find((item) => item.name === product.name).quantity = amount;
       localStorage.setItem('cart',JSON.stringify(newCart))
+      const orders = await callApi({token,
+        url:`order_products/${product.id}`,
+      })
+      const order = orders.filter(o=>o.userId===userData.id && o.status === 'created')[0]
+      console.log("order: ",order);
       const data = await callApi({
         token,
-        url:`orders/order_products/${product.id}`,
+        url:`order_products/${order.id}`,
         method:'PATCH',
         body:{product:{quantity:product.quantity}}
       })
@@ -119,7 +128,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
     const data = await callApi({
       token,
       method:'DELETE',
-      url:`orders/order_products/${productToRemove.id}`,
+      url:`order_products/${productToRemove.id}`,
     })
     setCart(newCart);
     console.log(data);

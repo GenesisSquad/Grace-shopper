@@ -64,29 +64,5 @@ ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/order_products/:orderProductId", requireUser, async (req, res, next) => {
-    try {
-        const {orderProductId} = req.params;
-        const {product} = req.body
-        console.log("product:",product);
-        console.log("orderProductId:",orderProductId);
 
-        const data = await updateOrderProduct(orderProductId,product)
-        res.send(data);
-    } catch (error) {
-        next({error})
-        console.error(error);
-    }
-});
-
-ordersRouter.delete("/order_products/:orderProductId", requireUser, async (req, res, next) => {
-    try {
-        const {orderProductId} = req.params;
-        const data = await destroyOrderProduct(orderProductId)
-        res.send(data);
-    } catch (error) {
-        next({error})
-        console.error(error);
-    }
-});
 module.exports = { ordersRouter };
