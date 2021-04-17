@@ -3,7 +3,8 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
-const { createUser, getUserByUsername, getUser, getAllUsers,getOrdersByUser } = require("../db");
+const { requireAdmin } = require("./utils");
+const { createUser, getUserByUsername, getUser, getAllUsers, getCartByUser,getOrdersByUser } = require("../db");
 const { JWT_SECRET } = process.env;
 
 usersRouter.post("/register", async (req, res, next) => {
@@ -108,11 +109,12 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
 	}
 });
 
-usersRouter.get('/',
-// requireAdmin,
-async (req, res, next) => {
+usersRouter.get('/', requireAdmin, async (req, res, next) => {
 try {
+	const { isAdmin } = req;
+	if(!isAdmin) return res.status(400).send("Not an Admin!"); 
 	return res.send(await getAllUsers())
+	
 } catch (error) {
 	next(error);
 }
