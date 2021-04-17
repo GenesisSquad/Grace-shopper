@@ -68,6 +68,9 @@ ordersRouter.patch("/order_products/:orderProductId", requireUser, async (req, r
     try {
         const {orderProductId} = req.params;
         const {product} = req.body
+        console.log("product:",product);
+        console.log("orderProductId:",orderProductId);
+
         const data = await updateOrderProduct(orderProductId,product)
         res.send(data);
     } catch (error) {
