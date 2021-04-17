@@ -6,4 +6,6 @@ import { default as About } from "./About";
 import {default as User} from  "./User"
 import {default as Order} from  "./Order"
 import {default as Admin} from "./Admin"
-export { AccountForm, Home, Product, Products,  User, About, Order, Admin };
+import {default as Checkout} from  "./Checkout"
+
+export { AccountForm, Home, Product, Products,  User, About, Order, Checkout, Admin };

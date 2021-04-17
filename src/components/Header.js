@@ -10,9 +10,7 @@ import {
   IconButton,
   Link,
   List,
-  ListItem,
-  // ListItemIcon,
-  // ListItemText,
+  Divider,
   Toolbar,
   withStyles,
 } from "@material-ui/core";
@@ -46,6 +44,7 @@ const HiddenItem = withStyles((theme) => ({
 }))(Button);
 
 const HiddenMenu = ({ token, logOut }) => {
+  
   const history = useHistory();
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
@@ -130,7 +129,15 @@ const HiddenMenu = ({ token, logOut }) => {
   );
 };
 
-const Header = ({ name, token, setToken, products, setUserData }) => {
+const Header = ({
+  name,
+  token,
+  setToken,
+  products,
+  setUserData,
+  cart,
+  setCart,
+}) => {
   const history = useHistory();
 
   const logOut = () => {
@@ -139,7 +146,9 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
     setToken("");
     history.push("/");
   };
-
+  const cartQuantity = () => {
+    return cart.reduce((sum, { quantity }) => sum + quantity, 0);
+  };
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
     console.log("this opens and closes the cart side window");
@@ -158,50 +167,11 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <div>
-        <Link className="shoppingCart" to="/products">
-          Shopping Cart:
-        </Link>
-      </div> */}
+      <Divider />
       <div>
-        <h1>Shopping Cart:</h1>
+        <h1 className="shoppingCart">Shopping Cart:</h1>
       </div>
-
-      <Cart />
-
-      <List style={{ width: "300px" }}>
-        {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
-          i !== 1 ? ( */}
-        {/* <ListItem
-          // button
-          // key={text}
-          onClick={() => {
-            // history.push(routes[i]);
-            console.log("this will card you to the specific product page");
-          }}
-        > */}
-        {/* <ListItemIcon>{icons[i]}</ListItemIcon> */}
-        {/* <ListItemText primary={text} /> */}
-        {/* <Products /> */}
-        {/* <Product />I am a shopping cart item!!! when this works we
-          should render and array of items in the users shopping cart
-        </ListItem> */}
-        {/* ) : (
-            token && (
-              <ListItem
-                button
-                key={text}
-                onClick={() => {
-                  history.push(routes[i]);
-                }}
-              >
-                <ListItemIcon>{icons[i]}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ) */}
-        {/* )
-        )} */}
-      </List>
+      <Cart real={false} token={token} cart={cart} setCart={setCart} toggleDrawer={toggleDrawer}/>
     </div>
   );
   return (
@@ -225,22 +195,7 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
           </Link>
         </div>
         <div>
-          <Hidden xsDown class="hidden">
-            {/* <Button
-
-        <div>
           <Hidden xsDown>
-            {/* <Button
-
-            color="inherit"
-            onClick={(event) => {
-              history.push("/");
-              console.log("this link will guide you to the Home page");
-            }}
-          >
-            {"Home"}
-          </Button> */}
-
             <Button
               color="inherit"
               onClick={(event) => {
@@ -297,7 +252,10 @@ const Header = ({ name, token, setToken, products, setUserData }) => {
             color="inherit"
             onClick={toggleDrawer("right", true)}
           >
-            <Badge badgeContent={29} color="secondary">
+            <Badge
+              badgeContent={cart && cart.length ? cartQuantity() : 0}
+              color="secondary"
+            >
               <ShoppingCartIcon />
             </Badge>
           </IconButton>

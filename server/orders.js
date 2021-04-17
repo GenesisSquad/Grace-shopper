@@ -8,9 +8,10 @@ const { JWT_SECRET } = process.env;
 const { 
     getAllOrders,
      getCartByUser, 
-     createOrder, 
-    } = require("../db")
-
+     createOrder 
+    } = require("../db");
+const { addProductToOrder, updateOrderProduct,destroyOrderProduct } = require("../db/order_products");
+// const { requireAdmin } = require("./admin");
 
 //Admin is user
 ordersRouter.get("/", requireAdmin, async (req, res, next) => {
@@ -42,7 +43,6 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
 ordersRouter.post("/", requireUser, async (req, res, next) => {
     try {
         const { user } = req;
-        if (!user) return res.status(400).send("Please log in.")
         return res.send(await createOrder('created',user.id));
 
     } catch (error) {
@@ -50,4 +50,41 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
+ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
+    try {
+        const {orderId} = req.params;
+        const {product} = req.body
+        const data = await addProductToOrder({...product,orderId})
+        res.send(data);
+    } catch (error) {
+        next({error})
+        console.error(error);
+    }
+});
+
+ordersRouter.patch("/order_products/:orderProductId", requireUser, async (req, res, next) => {
+    try {
+        const {orderProductId} = req.params;
+        const {product} = req.body
+        console.log("product:",product);
+        console.log("orderProductId:",orderProductId);
+
+        const data = await updateOrderProduct(orderProductId,product)
+        res.send(data);
+    } catch (error) {
+        next({error})
+        console.error(error);
+    }
+});
+
+ordersRouter.delete("/order_products/:orderProductId", requireUser, async (req, res, next) => {
+    try {
+        const {orderProductId} = req.params;
+        const data = await destroyOrderProduct(orderProductId)
+        res.send(data);
+    } catch (error) {
+        next({error})
+        console.error(error);
+    }
+});
 module.exports = { ordersRouter };

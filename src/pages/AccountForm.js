@@ -23,7 +23,7 @@ const paperStyle = {
   width: 280,
   margin: "20px auto",
 };
-const avatarStyle = { backgroundColor: "#00008B" };
+const avatarStyle = { backgroundColor: "rgb(74, 37, 37)" };
 class AccountForm extends Component {
   constructor(props) {
     super(props);

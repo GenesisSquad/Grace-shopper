@@ -19,102 +19,40 @@ const useStyles = makeStyles({
   },
 });
 
-const myorders = [
-  {
-    id: 1,
-    status: "completed",
-    quantity: 22,
-    total: "$4",
-    datePlaced : "01-32-2023",
-    products : [
-      {
-        inStock: true,
-        name: "Nick's DD Brew",
-        description: "Nick's interpretation of DUnkin Donuts Coffee",
-        category: "COFFEE",
-        price: "$4",
-        imageURL:
-          "https://topsecretrecipes.com/images/product/dunkin-donuts-coolatta-copycat-recipe.jpg",
-      },
-      {
-        inStock: true,
-        name: "Bella London Fog",
-        description: "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
-        category: "TEA",
-        price: "$1200",
-        imageURL:
-          "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
-      }
-    ]
-  },
-  {
-    id: 2,
-    status: "in progress",
-    quantity: 2,
-    total: "$33",
-    datePlaced : "01-12-2020",
-    products :[
-      {
-        inStock: true,
-        name: "Capuccino 2.0",
-        description: "Delicious foamy cofi",
-        category: "Coffee",
-        price: "$23",
-        imageURL:
-          "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
-      },
-      {
-        inStock: true,
-        name: "Juno's Morning Tea",
-        description: "A delicious green tea made from the leaves of Juno's hedge",
-        category: "TEA",
-        price: "$900",
-        imageURL:
-          "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
-      },
-    ],
-  },
-  {
-    id: 3,
-    status: "canceled",
-    quantity: 23,
-    total: "$42",
-    datePlaced : "01-22-2021",
-    products: [
-      {
-        inStock: true,
-        name: "joe",
-        description: "GREAT COFFEE!",
-        category: "COFFEE",
-        price: "$22",
-        imageURL:
-          "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
-      },
-      {
-        inStock: true,
-        name: "joe",
-        description: "GREAT COFFEE!",
-        category: "TEA",
-        price: "$22",
-        imageURL:
-          "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
-      },
-    ]
-  },
-];
-function createData(id, status, quantity, total, datePlaced) {
-  return { id, status, quantity, total, datePlaced };
+// const userOrders =[ {id: 3, status: "created", userId: 3, datePlaced: "2021-04-16T00:17:01.955Z", products: Array(2)},
+// {id: 4, status: "cancelled", userId: 3, datePlaced: "2021-07-16T00:17:01.955Z", products: Array(10)}
+// ]
+
+function createData(
+  id,
+  status,
+  quantity,
+  // total,
+  datePlaced
+) {
+  return {
+    id,
+    status,
+     quantity,
+    //  total,
+    datePlaced,
+  };
 }
 
-
-const Orders = () => {
+const Orders = ({userOrders}) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const rows = myorders.map((order) => {
-    return createData(order.id, order.status, order.quantity, order.total, order.datePlaced);
+  const rows = userOrders.map((order) => {
+    return createData(
+      order.id,
+      order.status,
+      order.products.length,
+      // order.total,
+      order.datePlaced
+    );
   });
-  
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -124,7 +62,7 @@ const Orders = () => {
             <TableCell align="right">Order Status (status)</TableCell>
             <TableCell align="right">Items in cart (Order length)</TableCell>
             <TableCell align="right">Date placed</TableCell>
-            <TableCell align="right">Total&nbsp;($)(Order subtotal)</TableCell>
+            {/* <TableCell align="right">Total&nbsp;($)(Order subtotal)</TableCell> */}
             <TableCell align="right">
               Action&nbsp;(what do you want to do with it)
             </TableCell>
@@ -139,7 +77,7 @@ const Orders = () => {
               <TableCell align="right">{row.status}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">{row.datePlaced}</TableCell>
-              <TableCell align="right">{row.total}</TableCell>
+              {/* <TableCell align="right">{row.total}</TableCell> */}
               <TableCell align="right">
                 <Button
                   onClick={() => {
@@ -159,9 +97,7 @@ const Orders = () => {
   );
 };
 
-const User = ({ userData, token }) => {
-  const history = useHistory();
-
+const User = ({ userOrders, userData, token }) => {
   if (!token) {
     return (
       <div className="sign-in-message">
@@ -180,8 +116,8 @@ const User = ({ userData, token }) => {
           </h1>
         }
       </div>
-
-      <Orders/>
+      {userOrders.datePlaced}
+      <Orders userOrders={userOrders} />
     </>
   );
 };

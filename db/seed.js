@@ -2,7 +2,7 @@ const { client } = require("./client");
 const { createProduct } = require("./product");
 const { createUser } = require("./users");
 const { createOrder } = require("./orders");
-const { createOrder_product } = require('./order_products')
+const { createOrder_product } = require("./order_products");
 async function dropTables() {
   try {
     console.log("Starting to drop tables...");
@@ -70,152 +70,176 @@ const buildTables = async () => {
 
 const order_products = [
   {
-    productId:2,
-    orderId:2,
-    price:'$4',
-    quantity:1
+    productId: 2,
+    orderId: 2,
+    price: "$4",
+    quantity: 1,
   },
   {
-    productId:4,
-    orderId:2,
-    price:'$8',
-    quantity:2
+    productId: 4,
+    orderId: 2,
+    price: "$8",
+    quantity: 2,
   },
   {
-    productId:3,
-    orderId:1,
-    price:'$3',
-    quantity:3
+    productId: 3,
+    orderId: 1,
+    price: "$3",
+    quantity: 3,
   },
   {
-    productId:10,
-    orderId:1,
-    price:'$10',
-    quantity:4
+    productId: 10,
+    orderId: 1,
+    price: "$10",
+    quantity: 4,
   },
   {
-    productId:9,
-    orderId:3,
-    price:'$27',
-    quantity:5
+    productId: 9,
+    orderId: 3,
+    price: "$27",
+    quantity: 5,
   },
   {
-    productId:5,
-    orderId:3,
-    price:'$15',
-    quantity:6
+    productId: 5,
+    orderId: 3,
+    price: "$15",
+    quantity: 6,
   },
-
-]
+];
 
 const products = [
   {
     inStock: true,
-    name: "joe",
-    description: "GREAT COFFEE!",
+    name: "Devil's Delight",
+    description:
+      "Rhino Coffee's very own dark roast with highest octane of caffeine you can find on the market.  Drink at your own risk! | 16oz",
     category: "COFFEE",
-    price: "$22",
-    imageURL:
-      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+    price: "$49",
+    imageURL: "https://i.postimg.cc/hvrVMQ4x/coffee-bag-2-red.png",
   },
   {
     inStock: true,
-    name: "capuccino",
-    description: "veri foami",
+    name: "Rhino's Horn",
+    description: "Egypt's finest dark roast | 16oz",
     category: "COFFEE",
-    price: "$332",
-    imageURL:
-      "https://i.ndtvimg.com/i/2016-05/coffee-625_625x350_41463660832.jpg",
+    price: "$45",
+    imageURL: "https://i.postimg.cc/DyxqXGM3/coffee-bag-5.png",
   },
   {
     inStock: false,
-    name: "mega tea",
-    description: "Tea imported from Japan",
-    category: "TEA",
+    name: "Purple Nurple",
+    description:
+      "Medium roast coffee with hints of Lavender for a smooth soothing taste. | 16oz",
+    category: "COFFEE",
     price: "$42",
-    imageURL:
-      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+    imageURL: "https://i.postimg.cc/DwswTksp/coffee-bag-2-purple.png",
   },
   {
     inStock: true,
-    name: "Nick's DD Brew",
-    description: "Nick's interpretation of DUnkin Donuts Coffee",
+    name: "Jasper's Tropical Paradise",
+    description:
+      "Light roast delivers a rich flavor with mild fruit notes with an all day drinkability. | 16oz",
     category: "COFFEE",
-    price: "$4",
-    imageURL:
-      "https://topsecretrecipes.com/images/product/dunkin-donuts-coolatta-copycat-recipe.jpg",
+    price: "$42",
+    imageURL: "https://i.postimg.cc/J7krJCYr/coffee-bag-3-orange.png",
   },
   {
     inStock: true,
-    name: "Bella London Fog",
-    description: "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla.",
-    category: "TEA",
-    price: "$1200",
-    imageURL:
-      "https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/london-fog-tea-latte.jpg",
-  },
-  {
-    inStock: true,
-    name: "Capuccino 2.0",
-    description: "Delicious foamy cofi",
-    category: "Coffee",
-    price: "$23",
-    imageURL:
-      "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/cappuccino-2029-e80b7c6d318c7862df2c4c8623a11f99@1x.jpg",
-  },
-  {
-    inStock: true,
-    name: "Juno's Morning Tea",
-    description: "A delicious green tea made from the leaves of Juno's hedge",
-    category: "TEA",
-    price: "$900",
-    imageURL:
-      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
-  },
-  {
-    inStock: true,
-    name: "joe",
-    description: "GREAT COFFEE!",
+    name: "Sumatra Dark",
+    description:
+      "Surprisingly smooth dark roast that makes for a great picker-upper. | 16oz",
     category: "COFFEE",
-    price: "$22",
-    imageURL:
-      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
+    price: "$40",
+    imageURL: "https://i.postimg.cc/T3Yvtz0W/coffee-bag-4.png",
   },
   {
     inStock: true,
-    name: "joe",
-    description: "GREAT COFFEE!",
-    category: "TEA",
-    price: "$22",
-    imageURL:
-      "https://images.squarespace-cdn.com/content/v1/57b7c57b44024338a6700bdf/1588704248137-5U0TCBQRZCKTVVLM8QUO/ke17ZwdGBToddI8pDm48kA_SSaoz4elkj-HsZd8gX3Z7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWPwZyNcweDIvdeL5kotwkIXjs9g0WibSO_cU-Ijy4Pwg6poS-6WGGnXqDacZer4yQ/IMG_3607.jpg",
-  },
-  {
-    inStock: true,
-    name: "Juno's Morning Tea",
-    description: "A delicious green tea made from the leaves of Juno's hedge",
-    category: "TEA",
-    price: "$900",
-    imageURL:
-      "https://cdn.vox-cdn.com/thumbor/_bow8R4lJX0KrCxxvQZ9bDfve-8=/44x0:755x533/1200x800/filters:focal(44x0:755x533)/cdn.vox-cdn.com/uploads/chorus_image/image/46335946/_MG_0202.0.0.0.jpg",
-  },
-  {
-    inStock: true,
-    name: "capuccino",
-    description: "veri foami",
+    name: "Nick's Cappuccino 2.0",
+    description: "Delicious foamy cup every time. | 16oz",
     category: "COFFEE",
-    price: "$332",
-    imageURL:
-      "https://i.ndtvimg.com/i/2016-05/coffee-625_625x350_41463660832.jpg",
+    price: "$46",
+    imageURL: "https://i.postimg.cc/bJvG8VqG/coffee-bag-3-blue.png",
+  },
+  {
+    inStock: true,
+    name: "El Padrino",
+    description:
+      "A Colombian coffee from the region (Spanish: Eje Cafetero), also known as the Coffee Triangle. | 8oz",
+    category: "COFFEE",
+    price: "$26",
+    imageURL: "https://i.postimg.cc/hvtGW2RC/coffee-bag-1-mustard.png",
+  },
+  {
+    inStock: true,
+    name: "The Dark Side",
+    description:
+      "Columbia's best Arabica beans are roasted to perfection. | 8oz",
+    category: "COFFEE",
+    price: "$24",
+    imageURL: "https://i.postimg.cc/W1Hg9JgL/coffee-bag-1-black.png",
+  },
+  {
+    inStock: true,
+    name: "Ride the Rhino",
+    description:
+      "This is a special limited blend that really kick's like a Rhino! | 8oz",
+    category: "TEA",
+    price: "$28",
+    imageURL: "https://i.postimg.cc/sg7sLkZj/coffee-bag-1.png",
+  },
+  {
+    inStock: true,
+    name: "Ya'mon",
+    description:
+      "Jamaican Blue Mountain Coffee, 100% Pure, Whole Bean, Fresh Roasted. | 8oz",
+    category: "COFFEE",
+    price: "$20",
+    imageURL: "https://i.postimg.cc/9QhQcX2R/coffee-bag-1-lightblue.gif",
+  },
+  {
+    inStock: true,
+    name: "Peruvian Gold Tea",
+    description:
+      "We struck gold with this full-bodied, high-quality golden tips tea (Black Tea) with caramel and brown sugar aromas. | 8oz",
+    category: "TEA",
+    price: "$24",
+    imageURL: "https://i.postimg.cc/ZqjRfG19/tea-tin-1-tan.png",
   },
   {
     inStock: false,
-    name: "mega tea",
-    description: "Tea imported from Japan",
+    name: "Lavender Love Tea",
+    description:
+      "Purple buds of the Lavandula angustifolia. This tea is is great to calm nerves, lead to better sleep, improve skin health, and provide many other health benefits. | 2.67 Ounces, 30 Sachets",
     category: "TEA",
-    price: "$42",
-    imageURL:
-      "https://www.hellomagazine.com/imagenes/healthandbeauty/2020010982936/drinking-tea-makes-you-life-longer/0-399-751/tea-bag-z.jpg?ezimgfmt=rs:363x242/rscb5/ng:webp/ngcb5",
+    price: "$18",
+    imageURL: "https://i.postimg.cc/v84rVhV7/tea-tin-1-purple.png",
+  },
+  {
+    inStock: true,
+    name: "Rhino Matcha Green Tea",
+    description:
+      "Ceremonial Grade Matcha Green Tea Powder, antioxidants, energy, & amino acids. Premium, First Harvest from Kagoshima, Japan | 2.67 Ounces, 30 Sachets",
+    category: "TEA",
+    price: "$19",
+    imageURL: "https://i.postimg.cc/t4NWjmKb/tea-tin-1-green.png",
+  },
+  {
+    inStock: true,
+    name: "Jasper's Realitea",
+    description:
+      "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla. | 2.67 Ounces, 30 Sachets",
+    category: "TEA",
+    price: "$12",
+    imageURL: "https://i.postimg.cc/bJtvzZZn/tea-tin-1-grey.png",
+  },
+  {
+    inStock: true,
+    name: "Lady's Love Tea",
+    description:
+      "Damiana Tea: Made from the Aphrodite root for stimulation with instant effects. This is one herb that can work wonders! | 2.67 Ounces, 30 Sachets",
+    category: "TEA",
+    price: "$25",
+    imageURL: "https://i.postimg.cc/rpvrCXWS/tea-tin-1-pink.png",
   },
 ];
 const users = [
@@ -253,15 +277,7 @@ const users = [
 const orders = [
   {
     status: "created",
-    userId: 4,
-  },
-  {
-    status: "created",
-    userId: 4,
-  },
-  {
-    status: "created",
-    userId: 3,
+    userId: 1,
   },
   {
     status: "created",
@@ -269,6 +285,14 @@ const orders = [
   },
   {
     status: "created",
+    userId: 3,
+  },
+  {
+    status: "created",
+    userId: 4,
+  },
+  {
+    status: "closed",
     userId: 1,
   },
 ];
@@ -279,7 +303,7 @@ const insertOrder_products = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 const insertUsers = async () => {
   try {
@@ -299,7 +323,7 @@ const insertProducts = async () => {
 
 const insertOrders = async () => {
   try {
-    await Promise.all(orders.map(createOrder));    
+    await Promise.all(orders.map(createOrder));
   } catch (error) {
     console.error(error);
   }
@@ -322,7 +346,6 @@ async function rebuildDB() {
     console.log("creating order_products...");
     await insertOrder_products();
     console.log("finished order_products...");
-
   } catch (error) {
     throw error;
   }

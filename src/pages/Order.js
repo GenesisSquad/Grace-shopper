@@ -19,6 +19,14 @@ const useStyles = makeStyles({
   },
 });
 
+const orderProducts = {
+  id: 3,
+  productId: 3,
+  orderId: 1,
+  price: "$3",
+  quantity: 3,
+};
+
 function createData(orderId, productId, product, price, quantity) {
   return { orderId, productId, product, price, quantity };
 }
@@ -53,20 +61,21 @@ const Order = () => {
           {/* {rows.map((row) => ( */}
           <TableRow>
             <TableCell component="th" scope="row">
-              ORDER ID
+              {orderProducts.orderId}
             </TableCell>
             <TableCell component="th" scope="row">
-              PRODUCT ID
+              {orderProducts.productId}
             </TableCell>
             <TableCell component="th" scope="row">
               PRODUCT
             </TableCell>
-            <TableCell align="right">QUANTITY</TableCell>
-            <TableCell align="right">PRICE</TableCell>
+            <TableCell align="right">{orderProducts.quantity}</TableCell>
+            <TableCell align="right">{orderProducts.price}</TableCell>
           </TableRow>
           {/* ))} */}
         </TableBody>
-        <Button
+      </Table>
+      <Button
           onClick={() => {
             console.log("edit button here");
           }}
@@ -84,7 +93,6 @@ const Order = () => {
         >
           Cancel Order
         </Button>{" "}
-      </Table>
     </TableContainer>
   );
 };
