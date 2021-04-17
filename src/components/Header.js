@@ -130,7 +130,7 @@ const HiddenMenu = ({ token, logOut }) => {
   );
 };
 
-const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) => {
+const Header = ({ name, token, setToken, products, setUserData }) => {
   const history = useHistory();
 
   const logOut = () => {
@@ -155,8 +155,8 @@ const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) =
   const list = (anchor) => (
     <div
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
     >
       {/* <div>
         <Link className="shoppingCart" to="/products">
@@ -167,7 +167,7 @@ const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) =
         <h1>Shopping Cart:</h1>
       </div>
 
-      <Cart token={token} cart={cart} setCart={setCart}/>
+      <Cart />
 
       <List style={{ width: "300px" }}>
         {/* {["Home", "MyRoutines", "Activities", "Routines"].map((text, i) =>
@@ -225,7 +225,7 @@ const Header = ({ name, token, setToken, products, setUserData,cart,setCart }) =
           </Link>
         </div>
         <div>
-          <Hidden xsDown>
+          <Hidden xsDown class="hidden">
             {/* <Button
 
         <div>

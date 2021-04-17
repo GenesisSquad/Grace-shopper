@@ -172,6 +172,7 @@ class AccountForm extends Component {
               localStorage.setItem("token", token);
               this.props.history.push("/");
             }
+            // if (userData == isAdmin) ? this.props.history.push("/admin")
           } catch (error) {
             console.error(error);
             alert("incorrect login");
