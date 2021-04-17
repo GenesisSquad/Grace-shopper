@@ -212,7 +212,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
             </Button>
             {real ? (
               <StripeCheckout
-                token={onToken(10000)}
+                token={onToken(getTotalSum() * 100)}
                 stripeKey={STRIPE_KEY}
                 name="Rhino Coffee"
                 amount={getTotalSum() * 100}
