@@ -38,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
   //! //////OG BELOW///
   paper: {
     marginTop: theme.spacing(3),
@@ -114,24 +111,20 @@ const Cart = ({ token, cart, setCart }) => {
     <>
       {cart && cart.length ? (
         <>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="small"
-            onClick={clearCart}
-          >
-            Clear Cart
-          </Button>
-          <Grid>
+          
+          <Grid style={{width:'400px'}}>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <div className="products">
                   {cart.map((product, idx) => (
-                    <div className="product" key={idx}>
+                    <div className="product" key={idx} >
                       {/* <h3>{product.name}</h3> */}
-                      <Typography variant="h5" component="h2">
+                      <Typography variant="h5" component="h2"
+                      //  style={{textAlign:'center'}}
+                      >
                         {product.name}
                       </Typography>
+                      <div style={{display:'flex',flexFlow:'row', justifyContent:'space-around', alignItems:'center'}}>
                       {/* <h4>{product.description}</h4> */}
                       {/* <h4>{product.price}</h4> */}
                       <Typography className={classes.pos} color="textSecondary">
@@ -156,7 +149,8 @@ const Cart = ({ token, cart, setCart }) => {
                       >
                         Remove
                       </Button>
-                      <Divider />
+                      </div>
+                      <Divider style={{marginTop:'10px'}}/>
                     </div>
                   ))}
                 </div>
@@ -171,6 +165,16 @@ const Cart = ({ token, cart, setCart }) => {
           </Grid>
           {/* STRIPE start */}
           {/* <Paper className={classes.paper}> */}
+          <div style={{display:'flex',flexFlow:'row', justifyContent:'space-around', marginTop:'10px'}}>
+          
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={clearCart}
+          >
+            Clear Cart
+          </Button>
           <StripeCheckout
             token={onToken(10000)}
             stripeKey={STRIPE_KEY}
@@ -179,6 +183,7 @@ const Cart = ({ token, cart, setCart }) => {
             currency={CURRENCY}
             shippingAddress
           />
+          </div>
           {/* </Paper> */}
           {/* STRIPE end */}
         </>
