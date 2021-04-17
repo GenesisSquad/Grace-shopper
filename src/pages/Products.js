@@ -14,7 +14,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+// import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import { callApi } from "../api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,17 +31,25 @@ const useStyles = makeStyles((theme) => ({
   bottomCard: { justifyContent: "space-between" },
 }));
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({product , cart, setCart}) => {
   const classes = useStyles();
 
   const history = useHistory();
 
-  const handleAddItem = () => {
-    console.log("added item!!!");
+  const handleAddItem = async (product) => {
+    setCart( [...cart, product])
+    console.log("added item!!!, " , product) ;
+    console.log("updated cart is ", cart)
+    // const data = await callApi({
+    //   url: `/orders/${orderId}/products`,
+    //   token,
+    //   body:{product}
+    // });
+    // return data;
   };
-  const handleRemoveItem = () => {
-    console.log("item removed!!!");
-  };
+  // const handleRemoveItem = () => {
+  //   console.log("item removed!!!");
+  // };
 
   const handleClick = (event) => {
     history.push(`/products/${product.id}`);
@@ -53,9 +62,8 @@ const ProductCard = ({ product }) => {
         <CardMedia
           className={classes.media}
           image={product.imageURL}
-          style={{backgroundSize:'contain'}}
+          style={{ backgroundSize: "contain" }}
           title="Beverage"
-          
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -64,12 +72,15 @@ const ProductCard = ({ product }) => {
         </CardContent>
         <CardActions className={classes.bottomCard} disableSpacing>
           <div>
-            <IconButton aria-label="addShopping cart icon" onClick={handleAddItem}>
-              <AddShoppingCartIcon  />
+            <IconButton
+              aria-label="addShopping cart icon"
+              onClick={()=> handleAddItem(product)}
+            >
+              <AddShoppingCartIcon />
             </IconButton>
-            <IconButton aria-label="remove shopping cart icon" onClick={handleRemoveItem}>
+            {/* <IconButton aria-label="remove shopping cart icon" onClick={handleRemoveItem}>
               <RemoveShoppingCartIcon  />
-            </IconButton>
+            </IconButton> */}
           </div>
           <Button variant="contained" color="primary" onClick={handleClick}>
             More info
@@ -80,7 +91,7 @@ const ProductCard = ({ product }) => {
   );
 };
 
-const Products = ({ products, userData }) => {
+const Products = ( {products, userData, cart, setCart} ) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -101,20 +112,15 @@ const Products = ({ products, userData }) => {
             return <ProductCard product={product} key={product.id} />;
           })
         )} */}
-        {
-          products && products.length ? 
-          (
-            products.map((product, index) => {
-              return <ProductCard product={product} key={product.id} />;
-            })
-          )
-          :
-          (
-            <Grid item>
+        {products && products.length ? (
+          products.map((product, index) => {
+            return <ProductCard product={product} key={product.id} cart={cart} setCart= {setCart}/>;
+          })
+        ) : (
+          <Grid item>
             <CircularProgress />{" "}
           </Grid>
-          )
-        }
+        )}
       </Grid>
     </div>
   );
