@@ -154,7 +154,7 @@ const products = [
   },
   {
     inStock: true,
-    name: "Nick's Capuccino 2.0",
+    name: "Nick's Cappuccino 2.0",
     description: "Delicious foamy cup every time. | 16oz",
     category: "COFFEE",
     price: "$46",
@@ -225,7 +225,7 @@ const products = [
   },
   {
     inStock: true,
-    name: "Bella London Fog Tea",
+    name: "Jasper's Realitea",
     description:
       "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla. | 2.67 Ounces, 30 Sachets",
     category: "TEA",
@@ -292,8 +292,8 @@ const orders = [
     userId: 4,
   },
   {
-    status: "created",
-    userId: 5,
+    status: "closed",
+    userId: 1,
   },
 ];
 

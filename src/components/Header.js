@@ -44,6 +44,7 @@ const HiddenItem = withStyles((theme) => ({
 }))(Button);
 
 const HiddenMenu = ({ token, logOut }) => {
+  
   const history = useHistory();
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
@@ -145,7 +146,9 @@ const Header = ({
     setToken("");
     history.push("/");
   };
-
+  const cartQuantity = () => {
+    return cart.reduce((sum, { quantity }) => sum + quantity, 0);
+  };
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
     console.log("this opens and closes the cart side window");
@@ -168,7 +171,7 @@ const Header = ({
       <div>
         <h1 className="shoppingCart">Shopping Cart:</h1>
       </div>
-      <Cart token={token} cart={cart} setCart={setCart} />
+      <Cart real={false} token={token} cart={cart} setCart={setCart} toggleDrawer={toggleDrawer}/>
     </div>
   );
   return (
@@ -250,7 +253,7 @@ const Header = ({
             onClick={toggleDrawer("right", true)}
           >
             <Badge
-              badgeContent={cart && cart.length ? cart.length : 0}
+              badgeContent={cart && cart.length ? cartQuantity() : 0}
               color="secondary"
             >
               <ShoppingCartIcon />

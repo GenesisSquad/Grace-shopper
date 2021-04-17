@@ -19,9 +19,9 @@ const useStyles = makeStyles({
   },
 });
 
-const userOrders =[ {id: 3, status: "created", userId: 3, datePlaced: "2021-04-16T00:17:01.955Z", products: Array(2)},
-{id: 4, status: "cancelled", userId: 3, datePlaced: "2021-07-16T00:17:01.955Z", products: Array(10)}
-]
+// const userOrders =[ {id: 3, status: "created", userId: 3, datePlaced: "2021-04-16T00:17:01.955Z", products: Array(2)},
+// {id: 4, status: "cancelled", userId: 3, datePlaced: "2021-07-16T00:17:01.955Z", products: Array(10)}
+// ]
 
 function createData(
   id,
@@ -39,7 +39,7 @@ function createData(
   };
 }
 
-const Orders = () => {
+const Orders = ({userOrders}) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -97,7 +97,7 @@ const Orders = () => {
   );
 };
 
-const User = ({ userData, token }) => {
+const User = ({ userOrders, userData, token }) => {
   if (!token) {
     return (
       <div className="sign-in-message">
