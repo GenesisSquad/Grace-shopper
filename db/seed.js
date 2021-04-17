@@ -225,7 +225,7 @@ const products = [
   },
   {
     inStock: true,
-    name: "Bella London Fog Tea",
+    name: "Jasper's Realitea",
     description:
       "Delicious blend of Earl Grey tea with sultry oat milk foam. Notes of lavender and vanilla. | 2.67 Ounces, 30 Sachets",
     category: "TEA",
