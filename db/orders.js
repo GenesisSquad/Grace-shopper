@@ -4,28 +4,9 @@ const { getAllProducts } = require("./product");
 // return the order, include the order's products
 const getOrderById = async (id) => {
 	try {
-		const { rows: order } = await client.query(
-			`
-            SELECT *
-            FROM orders
-            WHERE id = $1;
-        `,
-			[id]
-		);
-
-		const { rows: products } = await client.query(
-			`
-            SELECT *
-            FROM products
-            JOIN order_products ON order_products."productId" = product.id
-            WHERE order_products."orderId" = $1;
-        `,
-			[order.id]
-		);
-
-		console.log("order.products", order.products);
-		return (order.products = products);
-	} catch (error) {
+		const orders = await getAllOrders();
+		return orders.filter(o=>o.id===id)
+	}catch(error){
 		console.error(error);
 	}
 };
