@@ -35,7 +35,7 @@ const ProductGrid = ({ product }) => {
           >
             ← Back to products
           </Button>
-          <img src={product.imageURL} width="100%" />
+          <img src={product.imageURL} width="100%" alt={product.name}/>
         </Paper>
       </Grid>
       <Grid item sm={6}>
