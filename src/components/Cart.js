@@ -177,6 +177,7 @@ const Cart = ({ token, cart, setCart }) => {
             name="Rhino Coffee"
             amount={10000 / 100}
             currency={CURRENCY}
+            billingAddress
             shippingAddress
           />
           {/* </Paper> */}
