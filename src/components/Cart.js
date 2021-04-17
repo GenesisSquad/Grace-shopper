@@ -199,6 +199,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer }) => {
             name="Rhino Coffee"
             amount={getTotalSum() * 100}
             currency={CURRENCY}
+            billingAddress
             shippingAddress
             style={{marginLeft:'10px'}}
           />:<ColorButton 
