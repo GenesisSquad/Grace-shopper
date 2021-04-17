@@ -10,7 +10,7 @@
 // 	add an Admin nav link
 // 	Make a username clickable in the users list that can be used to navigate to the /users/:userId component (*admin)
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory, useParams } from "react-router-dom";
 import { callApi } from "../api";
 import { Button } from "@material-ui/core";
 import "./Admin.css";
@@ -31,19 +31,19 @@ const Admin = (token, requireAdmin, productId, userId) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const fetchUsers = async () => {
-    const userData = await callApi({
-      url: `users`,
-    });
-    console.log("fetchUsers", userData);
-    return userData;
-  };
+  // const fetchUsers = async () => {
+  //   const userData = await callApi({
+  //     url: `users`,
+  //   });
+  //   // console.log("fetchUsers", userData);
+  //   return userData;
+  // };
 
   const fetchOrders = async () => {
     const orderData = await callApi({
       url: `products/${productId}/orders`,
     });
-    console.log("fetchOrders", orderData);
+    // console.log("fetchOrders", orderData);
     return orderData;
   };
 
@@ -62,8 +62,8 @@ const Admin = (token, requireAdmin, productId, userId) => {
     const myOtherFunc = async () => {
         try {
           // const [orders, setOrders] = useState([])
-          const orders = await fetchOrders();
-          console.log("useEffect", orders);
+          await fetchOrders();
+          // console.log("useEffect", orders);
         } catch (error) {
           console.error("useEffect", error);
         }
@@ -74,25 +74,25 @@ const Admin = (token, requireAdmin, productId, userId) => {
 
   const handleEditProducts = async (event) => {
     event.preventDefault();
-    const updateProducts = await callApi({
+    await callApi({
       url: `products/${productId}`,
       body: { name, description, price, imageURL, inStock, category },
       method: "PATCH",
       token,
     });
     // if (body) {return res.send(updateProducts)}
-    console.log("handleEditProducts", updateProducts);
+    // console.log("handleEditProducts", updateProducts);
   };
 
   const handleEditUsers = async (event) => {
     event.preventDefault();
-    const updateUsers = await callApi({
+    await callApi({
       url: `users/${userId}`,
       body: { firstName, lastName, email, username, password },
       method: "PATCH",
       token,
     });
-    console.log("handleEditUsers", updateUsers);
+    // console.log("handleEditUsers", updateUsers);
   };
 
   return (

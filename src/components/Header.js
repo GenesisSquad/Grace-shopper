@@ -48,7 +48,7 @@ const HiddenMenu = ({ token, logOut }) => {
   const history = useHistory();
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
-    console.log("this opens and closes the cart side window");
+    // console.log("this opens and closes the cart side window");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -105,7 +105,7 @@ const HiddenMenu = ({ token, logOut }) => {
               color="inherit"
               onClick={(event) => {
                 history.push("/about");
-                console.log("this link will route you to the About page");
+                // console.log("this link will route you to the About page");
               }}
             >
               {"About"}
@@ -114,9 +114,9 @@ const HiddenMenu = ({ token, logOut }) => {
               color="inherit"
               onClick={(event) => {
                 history.push("/products");
-                console.log(
-                  "this link will route you to all the Products page"
-                );
+                // console.log(
+                //   "this link will route you to all the Products page"
+                // );
               }}
             >
               {"Products"}
@@ -150,7 +150,7 @@ const Header = ({
   };
   const [state, setState] = useState({ left: false });
   const toggleDrawer = (anchor, open) => (event) => {
-    console.log("this opens and closes the cart side window");
+    // console.log("this opens and closes the cart side window");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -185,7 +185,7 @@ const Header = ({
             style={{ textDecoration: "none" }}
             onClick={(event) => {
               history.push("/");
-              console.log("this link will guide you to the Home page");
+              // console.log("this link will guide you to the Home page");
             }}
           >
             <div className="siteName">Rhino Coffee</div>
@@ -197,7 +197,7 @@ const Header = ({
               color="inherit"
               onClick={(event) => {
                 history.push("/about");
-                console.log("this link will route you to the About page");
+                // console.log("this link will route you to the About page");
               }}
             >
               {"About"}
@@ -207,9 +207,9 @@ const Header = ({
               color="inherit"
               onClick={(event) => {
                 history.push("/products");
-                console.log(
-                  "this link will route you to all the Products page"
-                );
+                // console.log(
+                //   "this link will route you to all the Products page"
+                // );
               }}
             >
               {"Products"}

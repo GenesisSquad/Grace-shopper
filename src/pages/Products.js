@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 // import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
-import { callApi } from "../api";
+// import { callApi } from "../api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,8 +53,8 @@ const ProductCard = ({ product, cart, setCart }) => {
       updatedCart.push(productInCart)
     }
     setCart(updatedCart);
-    console.log("added item!!!, ", product);
-    console.log("updated cart is ", cart);
+    // console.log("added item!!!, ", product);
+    // console.log("updated cart is ", cart);
     // const data = await callApi({
     //   url: `/orders/${orderId}/products`,
     //   token,

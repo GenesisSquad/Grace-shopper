@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { callApi } from "../api";
 //! Stripe start
@@ -6,12 +6,12 @@ import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { GridLoadIcon } from "@material-ui/data-grid";
+// import { GridLoadIcon } from "@material-ui/data-grid";
 import {
   CircularProgress,
   Grid,
   Card,
-  TextField,
+  // TextField,
   CardContent,
   Divider,
   Typography,
@@ -58,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const onToken = (amount) => async (token) => {
-  console.log("Token is:", token);
+  // console.log("Token is:", token);
   try {
-    const response = await axios.post(PAYMENT_URL, {
+     await axios.post(PAYMENT_URL, {
       source: token.id,
       currency: CURRENCY,
       amount,
     });
-    console.log("Success!", response);
+    // console.log("Success!", response);
   } catch (error) {
     console.error(error);
   }
@@ -106,20 +106,20 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
       // localStorage.setItem('cart',JSON.stringify(newCart))
       if(userData || JSON.parse(localStorage.getItem('user'))){
         const userD = JSON.parse(localStorage.getItem('user'))
-        console.log(userD);
+        // console.log(userD);
         const orders = await callApi({token,
           url:`order_products/${product.id}`,
         })
-        console.log(orders);
+        // console.log(orders);
         const order = orders.filter(o=>o.userId===userD.id && o.status==="created")[0]
-        console.log("order: ",order);
-        const data = await callApi({
+        // console.log("order: ",order);
+         await callApi({
           token,
           url:`order_products/${order.id}`,
           method:'PATCH',
           body:{product:{quantity:product.quantity}}
         })
-        console.log(data);
+        // console.log(data);
       }
       setCart(newCart);
     }
@@ -127,13 +127,13 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 
   const removeFromCart = async (productToRemove) => {
     const newCart = cart.filter((product) => product.id !== productToRemove.id);
-    const data = await callApi({
+    await callApi({
       token,
       method:'DELETE',
       url:`order_products/${productToRemove.id}`,
     })
     setCart(newCart);
-    console.log(data);
+    // console.log(data);
   };
 
   return (

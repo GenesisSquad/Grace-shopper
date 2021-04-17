@@ -1,6 +1,6 @@
 const DEV = true;
 export const BASE_URL = DEV ? "http://localhost:3001/api/" : "/api/";
-console.log('dev:', process.env.DEV);
+// console.log('dev:', process.env.DEV);
 export const callApi = async ({ url, method, token, body }) => {
   // console.log("callApi: ", { url, method, token, body });
   try {
@@ -14,8 +14,8 @@ export const callApi = async ({ url, method, token, body }) => {
     if (token) {
       options.headers["Authorization"] = `Bearer ${token}`;
     }
-    console.log("request url: ", BASE_URL + url);
-    console.log("options: ", options);
+    // console.log("request url: ", BASE_URL + url);
+    // console.log("options: ", options);
     const response = await fetch(`${BASE_URL}${url}`, options);
     const data = await response.json();
     // console.log("data: ", data);

@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import {
   Button,
-  CircularProgress,
+  // CircularProgress,
   makeStyles,
   Paper,
   Table,
@@ -27,9 +27,9 @@ const orderProducts = {
   quantity: 3,
 };
 
-function createData(orderId, productId, product, price, quantity) {
-  return { orderId, productId, product, price, quantity };
-}
+// function createData(orderId, productId, product, price, quantity) {
+//   return { orderId, productId, product, price, quantity };
+// }
 
 // const rows = [createData("coffee", 159, 6.0)];
 
@@ -77,7 +77,7 @@ const Order = () => {
       </Table>
       <Button
           onClick={() => {
-            console.log("edit button here");
+            // console.log("edit button here");
           }}
           variant="contained"
           color="secondary"
@@ -86,7 +86,7 @@ const Order = () => {
         </Button>{" "}
         <Button
           onClick={() => {
-            console.log("cancel button here");
+            // console.log("cancel button here");
           }}
           variant="contained"
           color="secondary"

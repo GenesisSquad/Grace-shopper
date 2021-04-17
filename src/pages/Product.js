@@ -7,16 +7,16 @@ import {
   CircularProgress,
   Divider,
   Grid,
-  makeStyles,
+  // makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     maxWidth: 400,
+//   },
+// });
 
 const ProductGrid = ({ product }) => {
   const history = useHistory();
@@ -68,8 +68,8 @@ const Product = ({ products }) => {
   let { productId } = useParams();
   productId = parseInt(productId, 10);
   const product = products.find((product) => productId === product.id);
-  console.log("products being passed into Product component", products);
-  console.log("This is the product being rendered:", product);
+  // console.log("products being passed into Product component", products);
+  // console.log("This is the product being rendered:", product);
   return (
     <>
       {product ? (
