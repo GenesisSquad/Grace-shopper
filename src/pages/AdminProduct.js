@@ -46,79 +46,79 @@ class AdminProduct extends Component {
     this.setState({ [event.target.name]: a });
   };
 
-//   handleSubmit = async (event) => {
-//     event.preventDefault();
-//     const { action, name, description, category, price, imageURL } = this.state;
-//     if (action === "create") {
-//       if (name && description && category && price && imageURL) {
-//         try {
-//           this.isLoading = true;
-//           const res = await callApi({
-//             url: "products",
-//             method: "POST",
-//             body: {
-//               name,
-//               description,
-//               category,
-//               price,
-//               imageURL,
-//             },
-//           });
-//           const newProduct = res;
-//           const products = this.props.products;
-//           if (newProduct) {
-//             this.props.setProducts([...products, newProduct]);
-//             this.props.history.push("/products");
-//             console.log("newproducucucu", newProduct)
-//           }
-//         } catch (error) {
-//           console.error(error);
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    const { action, name, description, category, price, imageURL } = this.state;
+    if (action === "create") {
+      if (name && description && category && price && imageURL) {
+        try {
+          this.isLoading = true;
+          const res = await callApi({
+            url: "products",
+            method: "POST",
+            body: {
+              name,
+              description,
+              category,
+              price,
+              imageURL,
+            },
+          });
+          const newProduct = res;
+          const products = this.props.products;
+          if (newProduct) {
+            this.props.setProducts([...products, newProduct]);
+            this.props.history.push("/products");
+            console.log("newproducucucu", newProduct)
+          }
+        } catch (error) {
+          console.error(error);
  
-//         } finally {
-//           this.setState({ ...this.emptyState });
-//           this.isLoading = false;
-//         }
-//       }
+        } finally {
+          this.setState({ ...this.emptyState });
+          this.isLoading = false;
+        }
+      }
 
-//     } else {
-//       if (name && description && category && price && imageURL) {
-//         try {
-//           this.isLoading = true;
-//           const res = await callApi({
-//             url: "products/:productId",
-//             method: "PATCH",
-//             body: {
-//               name,
-//               description,
-//               category,
-//               price,
-//               imageURL,
-//             },
-//           });
-//           const data = res;
-//           // console.log(data);
-//           const token = data?.token;
-//           // const user = data?.user;
-//           // delete user.password;
-//           if (token) {
-//             this.props.setToken(token);
-//             localStorage.setItem("token", token);
-//             this.props.history.push("/");
-//           }
-//         } catch (error) {
-//           console.error(error);
-//           alert("incorrect login");
-//           return;
-//         } finally {
-//           this.isLoading = false;
-//         }
+    } else {
+      if (name && description && category && price && imageURL) {
+        try {
+          this.isLoading = true;
+          const res = await callApi({
+            url: "products/:productId",
+            method: "PATCH",
+            body: {
+              name,
+              description,
+              category,
+              price,
+              imageURL,
+            },
+          });
+          const data = res;
+          // console.log(data);
+          const token = data?.token;
+          // const user = data?.user;
+          // delete user.password;
+          if (token) {
+            this.props.setToken(token);
+            localStorage.setItem("token", token);
+            this.props.history.push("/");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("incorrect login");
+          return;
+        } finally {
+          this.isLoading = false;
+        }
 
-//       } else {
-//         alert("Not all required fields have been filled in");
-//         return;
-//       }
-//     }
-//   };
+      } else {
+        alert("Not all required fields have been filled in");
+        return;
+      }
+    }
+  };
 
   render() {
     const { action, name, description, category, price, imageURL } = this.state;

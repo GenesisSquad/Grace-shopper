@@ -100,7 +100,7 @@ function App() {
         <AccountForm action="register" setToken={setToken} />
       </Route>
       <Route exact path="/products/:productId">
-        <Product products={products} cart={cart} setCart={setCart} />
+        <Product products={products} cart={cart} setCart={setCart} token={token} />
       </Route>
 
       <Route exact path="/products">

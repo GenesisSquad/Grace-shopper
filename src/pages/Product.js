@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
+import { callApi } from "../api";
 import {
   Box,
   Button,
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductGrid = ({ product, cart, setCart }) => {
+const ProductGrid = ({ product, cart, setCart, token }) => {
   const history = useHistory();
 
   const handleAddItem = async (product) => {
@@ -37,13 +38,31 @@ const ProductGrid = ({ product, cart, setCart }) => {
     }
     setCart(updatedCart);
     console.log("added item!!!, ", product);
-    console.log("updated cart is ", cart);
-    // const data = await callApi({
-    //   url: `/orders/${orderId}/products`,
-    //   token,
-    //   body:{product}
-    // });
-    // return data;
+    console.log("updated cart ID is ", updatedCart.id);
+    try {
+      if (JSON.parse(localStorage.getItem("user"))) {
+        const userD = JSON.parse(localStorage.getItem("user"));
+
+        console.log(userD);
+        const orders = await callApi({
+          token,
+          url: `order_products/${product.id}`,
+        });
+        console.log(orders);
+        const order = orders.filter(
+          (o) => o.userId === userD.id && o.status === "created"
+        )[0];
+        console.log("order: ", order);
+        const res = callApi({
+          method: "POST",
+          url: `orders/${order.id}/products`,
+          body: { product },
+          token
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
   };
   // const handleRemoveItem = () => {
   //   console.log("item removed!!!");
