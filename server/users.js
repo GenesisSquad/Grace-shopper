@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
 const { requireAdmin } = require("./utils");
-const { createUser, getUserByUsername, getUser, getAllUsers, getCartByUser,getOrdersByUser } = require("../db");
+const { createUser, getUserByUsername, getUser, getAllUsers, getOrdersByUser } = require("../db");
 const { JWT_SECRET } = process.env;
 
 usersRouter.post("/register", async (req, res, next) => {

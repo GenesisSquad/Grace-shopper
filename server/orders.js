@@ -1,16 +1,16 @@
 const express = require("express");
 const ordersRouter = express.Router();
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
 const { requireAdmin } = require("./utils");
-const { JWT_SECRET } = process.env;
+// const { JWT_SECRET } = process.env;
 const { 
     getAllOrders,
      getCartByUser, 
      createOrder 
     } = require("../db");
-const { addProductToOrder, updateOrderProduct,destroyOrderProduct } = require("../db/order_products");
+const { addProductToOrder} = require("../db/order_products");
 // const { requireAdmin } = require("./admin");
 
 //Admin is user

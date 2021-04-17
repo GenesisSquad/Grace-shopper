@@ -1,6 +1,6 @@
 const express = require("express");
 const orderProductsRouter = express.Router();
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
 const { updateOrderProduct,destroyOrderProduct, getOrderProductsByProductId } = require("../db/order_products");
