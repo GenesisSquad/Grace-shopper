@@ -20,6 +20,7 @@ import {
   Divider,
   Typography,
 } from "@material-ui/core";
+import ColorButton from "./ColorButton";
 
 const STRIPE_KEY =
   "pk_test_51IgESEAwKF3ow8u8iWs1EZ7w7SOHNw8zGEZZJ7cErTdZJfyvQ5iBSzWlQNC4Ngrkb24u8AbPrNP8ezMm1WpY5hhe0086gjXKtA";
@@ -75,11 +76,11 @@ const onToken = (amount) => async (token) => {
 };
 //! Stripe end
 
-const Cart = ({ token, cart, setCart }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const history = useHistory();
+const Cart = ({ token, cart, setCart, real, toggleDrawer }) => { 
+  // const [name, setName] = useState(""); 
+  // const [description, setDescription] = useState(""); 
+  // const [price, setPrice] = useState(""); 
+  const history = useHistory(); 
 
   //! STRIPE styling start
   const classes = useStyles();
@@ -94,7 +95,7 @@ const Cart = ({ token, cart, setCart }) => {
 
   const clearCart = () => {
     setCart([]);
-    localStorage.setItem("cart", "");
+    localStorage.setItem("cart", JSON.stringify([]));
   };
 
   const setQuantity = (product, amount) => {
@@ -103,20 +104,26 @@ const Cart = ({ token, cart, setCart }) => {
     setCart(newCart);
   };
 
-  const removeFromCart = (productToRemove) => {
-    setCart(cart.filter((product) => product !== productToRemove));
+  const removeFromCart = async (productToRemove) => {
+    const newCart = cart.filter((product) => product.id !== productToRemove.id)
+    setCart(newCart);
+    const data = await callApi({
+      token,
+      method:'DELETE',
+      url:`orders/order_products/${productToRemove.id}`,
+    })
+    console.log(data);
   };
 
   return (
     <>
       {cart && cart.length ? (
         <>
-          
           <Grid style={{width:'400px'}}>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <div className="products">
-                  {cart.map((product, idx) => (
+                  { cart && cart.length > 0 ? cart.map((product, idx) => (
                     <div className="product" key={idx} >
                       {/* <h3>{product.name}</h3> */}
                       <Typography variant="h5" component="h2"
@@ -152,7 +159,7 @@ const Cart = ({ token, cart, setCart }) => {
                       </div>
                       <Divider style={{marginTop:'10px'}}/>
                     </div>
-                  ))}
+                  )): <CircularProgress />}
                 </div>
                 <br />
                 <br />
@@ -172,17 +179,28 @@ const Cart = ({ token, cart, setCart }) => {
             color="secondary"
             size="small"
             onClick={clearCart}
+            style={{marginRight:'10px'}}
           >
             Clear Cart
           </Button>
-          <StripeCheckout
+          { real ? <StripeCheckout
             token={onToken(10000)}
             stripeKey={STRIPE_KEY}
             name="Rhino Coffee"
-            amount={10000 / 100}
+            amount={getTotalSum() * 100}
             currency={CURRENCY}
             shippingAddress
-          />
+            style={{marginLeft:'10px'}}
+          />:<ColorButton 
+          onClick={()=>{
+            history.push('/checkout')
+            toggleDrawer('right',false)
+          }}
+          >
+            Checkout
+          </ColorButton>
+        
+        }
           </div>
           {/* </Paper> */}
           {/* STRIPE end */}

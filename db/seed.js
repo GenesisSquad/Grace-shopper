@@ -154,7 +154,7 @@ const products = [
   },
   {
     inStock: true,
-    name: "Nick's Capuccino 2.0",
+    name: "Nick's Cappuccino 2.0",
     description: "Delicious foamy cup every time. | 16oz",
     category: "COFFEE",
     price: "$46",

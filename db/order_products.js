@@ -59,7 +59,7 @@ const updateOrderProduct = async(id,fields) => {
 const destroyOrderProduct = async (id) => {
     try {
         const {rows:[orderProduct]} = await client.query(`
-        DELETE order_products WHERE id = ${id} RETURNING *;
+        DELETE FROM order_products WHERE id = ${id} RETURNING *;
         `)
         return orderProduct;
     } catch (error) {

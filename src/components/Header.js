@@ -169,7 +169,7 @@ const Header = ({
       <div>
         <h1 className="shoppingCart">Shopping Cart:</h1>
       </div>
-      <Cart token={token} cart={cart} setCart={setCart} />
+      <Cart real={false} token={token} cart={cart} setCart={setCart} toggleDrawer={toggleDrawer}/>
     </div>
   );
   return (
