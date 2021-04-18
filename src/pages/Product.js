@@ -8,18 +8,13 @@ import {
   CircularProgress,
   Divider,
   Grid,
-  makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-  },
-});
 
-const ProductGrid = ({ product, cart, setCart, token }) => {
+
+const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
   const history = useHistory();
 
   const handleAddItem = async (product) => {
@@ -38,27 +33,21 @@ const ProductGrid = ({ product, cart, setCart, token }) => {
     }
     setCart(updatedCart);
     console.log("added item!!!, ", product);
-    console.log("updated cart ID is ", updatedCart.id);
     try {
       if (JSON.parse(localStorage.getItem("user"))) {
         const userD = JSON.parse(localStorage.getItem("user"));
 
         console.log(userD);
-        const orders = await callApi({
-          token,
-          url: `order_products/${product.id}`,
-        });
-        console.log(orders);
-        const order = orders.filter(
-          (o) => o.userId === userD.id && o.status === "created"
-        )[0];
-        console.log("order: ", order);
-        const res = callApi({
+
+        const order = userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0]
+        console.log("order: ",order.id);
+        const data = await callApi({
           method: "POST",
           url: `orders/${order.id}/products`,
-          body: { product },
-          token
+          body:  {product},
+          token,
         });
+        console.log(data, "new cart!!!")
       }
     } catch (error) {
       throw error;
@@ -82,7 +71,7 @@ const ProductGrid = ({ product, cart, setCart, token }) => {
           >
             ← Back to products
           </Button>
-          <img src={product.imageURL} width="100%" alt={product.name}/>
+          <img src={product.imageURL} width="100%" alt={product.name} />
         </Paper>
       </Grid>
       <Grid item sm={6}>
@@ -115,7 +104,7 @@ const ProductGrid = ({ product, cart, setCart, token }) => {
   );
 };
 
-const Product = ({ products, cart, setCart }) => {
+const Product = ({ products, cart, setCart, token, userOrders }) => {
   let { productId } = useParams();
   productId = parseInt(productId, 10);
   const product = products.find((product) => productId === product.id);
@@ -124,7 +113,13 @@ const Product = ({ products, cart, setCart }) => {
   return (
     <>
       {product ? (
-        <ProductGrid product={product} cart={cart} setCart={setCart} />
+        <ProductGrid
+          product={product}
+          cart={cart}
+          setCart={setCart}
+          token={token}
+          userOrders={userOrders}
+        />
       ) : (
         <div>
           <CircularProgress />
