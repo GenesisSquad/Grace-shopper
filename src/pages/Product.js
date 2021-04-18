@@ -38,7 +38,7 @@ const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
         const userD = JSON.parse(localStorage.getItem("user"));
 
         console.log(userD);
-
+        console.log("NAME", product.name)
         const order = userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0]
         console.log("order: ",order.id);
         const data = await callApi({
