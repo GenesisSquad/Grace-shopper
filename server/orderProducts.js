@@ -10,6 +10,7 @@ orderProductsRouter.get("/:productId", requireUser, async (req, res, next) => {
     try {
         const {productId} = req.params;
         const data = await getOrderProductsByProductId(productId)
+        console.log("orders:",data);
         res.send(data);
     } catch (error) {
         next({error})

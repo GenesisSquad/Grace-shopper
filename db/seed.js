@@ -331,7 +331,7 @@ const insertOrders = async () => {
 
 async function rebuildDB() {
   try {
-    client.connect();
+    // client.connect();
     await dropTables();
     await buildTables();
     console.log("creating users...");

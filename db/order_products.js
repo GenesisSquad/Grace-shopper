@@ -16,10 +16,11 @@ const createOrder_product = async ({orderId,productId,price,quantity}) => {
 const getOrderProductsByProductId = async (productId) => {
     try {
         const {rows} = await client.query(`
-        SELECT * FROM order_products 
+        SELECT order_products.id,"productId","orderId",quantity,status,"datePlaced","userId" FROM order_products 
         JOIN orders ON orders.id = order_products."orderId"
         WHERE order_products."productId" = $1;
         `,[productId])
+        console.log("rows:",rows);
         return rows; 
     } catch (error) {
         console.error(error);
@@ -28,11 +29,15 @@ const getOrderProductsByProductId = async (productId) => {
 
 const addProductToOrder = async ({orderId,productId,price,quantity}) => {
     const order = await getOrderById(orderId);
-    const product = order.products.filter(p=>p.id===productId) 
-    if(product && product.id){
-        return await updateOrderProduct(order.id,{price,quantity})
+    if(order && order.products){
+        const product = order.products.filter(p=>p.id===productId) 
+        if(product && product.id){
+            return await updateOrderProduct(order.id,{price,quantity})
+        } else {
+           return await createOrder_product({orderId,productId,price,quantity})
+        }
     } else {
-       return await createOrder_product({orderId,productId,price,quantity})
+        return await createOrder_product({orderId,productId,price,quantity})
     }
 }
 

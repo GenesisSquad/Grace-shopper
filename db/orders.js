@@ -95,7 +95,7 @@ const getOrdersByUser = async({ id }) => {
 const getCartByUser = async({ id }) => {
 	const orders = await getAllOrders();
 	const cart = orders.filter(({userId,status})=>id===userId && status==='created')[0]
-	if( cart && cart.products ){
+	if( cart ){
 		return cart;
 	} else {
 		const res = await createOrder({status:'created',userId:id})

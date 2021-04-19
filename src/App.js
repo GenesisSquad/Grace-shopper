@@ -1,7 +1,9 @@
 // Front end APP.js file
 // import react from "react";
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home, About, User, Order, Checkout} from "./pages";
+import { AccountForm, Product, Products, Home, About, User, Order, Checkout,
+  //  Admin,
+    AdminProduct } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -41,8 +43,12 @@ const fetchUserOrders = async (userId, token) => {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [products, setProducts] = useState([]);
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")) || {});
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
@@ -61,7 +67,7 @@ function App() {
           // const username = user.username;
           // console.log("username is :", username);
           const { products: cart } = await fetchCartData(token);
-          localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem("cart", JSON.stringify(cart) || JSON.stringify([]));
           setCart(cart);
           // console.log("cart is:", cart);
           setUserOrders(await fetchUserOrders(user.id, token));
@@ -96,7 +102,7 @@ function App() {
         <AccountForm action="register" setToken={setToken} />
       </Route>
       <Route exact path="/products/:productId">
-        <Product products={products} />
+        <Product products={products} cart={cart} setCart={setCart} token={token} userOrders= {userOrders} />
       </Route>
 
       <Route exact path="/products">
@@ -120,6 +126,12 @@ function App() {
 
       <Route exact path='/checkout'>
         <Checkout token={token} cart={cart} setCart={setCart} userData={userData}/>
+      </Route>
+      <Route exact path='/admin-create-product'>
+        <AdminProduct action ="create" userData={userData} token={token} setToken={setToken} products={products} setProducts={setProducts}/>
+      </Route>
+      <Route exact path='/admin-update/:productId'>
+        <AdminProduct action ="login" userData={userData} token={token} setToken={setToken} products={products} setProducts={setProducts}/>
       </Route>
     </>
   );
