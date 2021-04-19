@@ -26,7 +26,7 @@ client.connect();
 
 server.use(morgan("dev"));
 server.use(cors());
-server.use(express.static(path.join(__dirname, 'build')));
+server.use('/',express.static('build'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
