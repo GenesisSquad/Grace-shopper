@@ -8,7 +8,7 @@
     "start-dev-win": "CHOKIDAR_USEPOLLING=true react-scripts start",
     "build": "react-scripts build",
     "test:watch": "jest --watchAll --runInBand --verbose",
-    "start-server": "nodemon server/index.js",
+    "start": "nodemon server/index.js",
     "seed": "node ./db/seed.js"
   },
   "repository": {
