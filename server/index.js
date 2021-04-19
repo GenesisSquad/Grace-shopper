@@ -2,7 +2,7 @@ require("dotenv").config();
 const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
-const path = require('path');
+// const path = require('path');
 // const axios = require("axios");
 var cors = require('cors')
 const jwt = require('jsonwebtoken');

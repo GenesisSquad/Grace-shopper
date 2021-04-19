@@ -1,5 +1,4 @@
-const DEV = true;
-export const BASE_URL = DEV ? "http://localhost:3001/api/" : "/api/";
+export const BASE_URL = "https://rhinocoffee.herokuapp.com/api/";
 // console.log('dev:', process.env.DEV);
 export const callApi = async ({ url, method, token, body }) => {
   // console.log("callApi: ", { url, method, token, body });
