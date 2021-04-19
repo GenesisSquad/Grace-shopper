@@ -16,10 +16,11 @@ const createOrder_product = async ({orderId,productId,price,quantity}) => {
 const getOrderProductsByProductId = async (productId) => {
     try {
         const {rows} = await client.query(`
-        SELECT * FROM order_products 
+        SELECT order_products.id,"productId","orderId",quantity,status,"datePlaced","userId" FROM order_products 
         JOIN orders ON orders.id = order_products."orderId"
         WHERE order_products."productId" = $1;
         `,[productId])
+        console.log("rows:",rows);
         return rows; 
     } catch (error) {
         console.error(error);

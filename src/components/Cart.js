@@ -118,7 +118,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
         console.log("order: ",order);
         const data = await callApi({
           token,
-          url:`order_products/${order.productId}`,
+          url:`order_products/${order.id}`,
           method:'PATCH',
           body:{product:{quantity:product.quantity}}
         })
@@ -129,6 +129,14 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
   };
 
   const removeFromCart = async (productToRemove) => {
+    if(userData || JSON.parse(localStorage.getItem('user'))){
+      const userD = JSON.parse(localStorage.getItem('user'))
+    const orders = await callApi({token,
+      url:`order_products/${productToRemove.id}`,
+    })
+    console.log(orders);
+    const order = orders.filter(o=>o.userId===userD.id && o.status==="created")[0]
+    console.log("order: ",order);
     const newCart = cart.filter((product) => product.id !== productToRemove.id);
     const data = await callApi({
       token,
@@ -137,6 +145,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
     })
     setCart(newCart);
     console.log(data);
+  }
   };
 
   return (
