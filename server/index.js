@@ -2,6 +2,7 @@ require("dotenv").config();
 const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
+const path = require('path');
 // const axios = require("axios");
 var cors = require('cors')
 const jwt = require('jsonwebtoken');
@@ -25,7 +26,7 @@ client.connect();
 
 server.use(morgan("dev"));
 server.use(cors());
-server.use(express.static("build"));
+server.use(express.static(path.join(__dirname, 'build')));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
