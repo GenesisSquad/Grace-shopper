@@ -61,7 +61,7 @@ function App() {
           const username = user.username;
           console.log("username is :", username);
           const { products: cart } = await fetchCartData(token);
-          localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem("cart", JSON.stringify(cart) || JSON.stringify([]));
           setCart(cart);
           console.log("cart is:", cart);
           setUserOrders(await fetchUserOrders(user.id, token));
