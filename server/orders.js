@@ -17,7 +17,7 @@ const { addProductToOrder, updateOrderProduct,destroyOrderProduct } = require(".
 ordersRouter.get("/", requireAdmin, async (req, res, next) => {
     try {
         const { isAdmin } = req;
-        if(!isAdmin) return res.status(400).send("Not an Admin!");
+        if(!isAdmin) return next({message:'not an Admin'})
         return res.send(await getAllOrders());
 
     } catch (error) {
