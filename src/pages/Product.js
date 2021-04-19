@@ -1,25 +1,61 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
+import { callApi } from "../api";
 import {
   Box,
   Button,
   CircularProgress,
   Divider,
   Grid,
-  makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-  },
-});
 
-const ProductGrid = ({ product }) => {
+
+const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
   const history = useHistory();
+
+  const handleAddItem = async (product) => {
+    let updatedCart = [...cart];
+    let productInCart = updatedCart.find(
+      (cartProduct) => product.id === cartProduct.id
+    );
+    if (productInCart) {
+      productInCart.quantity++;
+    } else {
+      productInCart = {
+        ...product,
+        quantity: 1,
+      };
+      updatedCart.push(productInCart);
+    }
+    setCart(updatedCart);
+    console.log("added item!!!, ", product);
+    try {
+      if (JSON.parse(localStorage.getItem("user"))) {
+        const userD = JSON.parse(localStorage.getItem("user"));
+
+        console.log(userD);
+        console.log("NAME", product.name)
+        const order = userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0]
+        console.log("order: ",order.id);
+        const data = await callApi({
+          method: "POST",
+          url: `orders/${order.id}/products`,
+          body:  {product},
+          token,
+        });
+        console.log(data, "new cart!!!")
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+  // const handleRemoveItem = () => {
+  //   console.log("item removed!!!");
+  // };
   return (
     <Grid
       container
@@ -35,7 +71,7 @@ const ProductGrid = ({ product }) => {
           >
             ← Back to products
           </Button>
-          <img src={product.imageURL} width="100%" alt={product.name}/>
+          <img src={product.imageURL} width="100%" alt={product.name} />
         </Paper>
       </Grid>
       <Grid item sm={6}>
@@ -53,7 +89,11 @@ const ProductGrid = ({ product }) => {
           </Box>
           <Box mt="auto">
             <Typography variant="h5">{product.price}</Typography>
-            <Button variant="contained" color="secondary">
+            <Button
+              onClick={() => handleAddItem(product)}
+              variant="contained"
+              color="secondary"
+            >
               {" "}
               Add to cart
             </Button>
@@ -64,7 +104,7 @@ const ProductGrid = ({ product }) => {
   );
 };
 
-const Product = ({ products }) => {
+const Product = ({ products, cart, setCart, token, userOrders }) => {
   let { productId } = useParams();
   productId = parseInt(productId, 10);
   const product = products.find((product) => productId === product.id);
@@ -73,11 +113,17 @@ const Product = ({ products }) => {
   return (
     <>
       {product ? (
-        <ProductGrid product={product} />
+        <ProductGrid
+          product={product}
+          cart={cart}
+          setCart={setCart}
+          token={token}
+          userOrders={userOrders}
+        />
       ) : (
         <div>
           <CircularProgress />
-          <h1>Loading</h1> 
+          <h1>Loading</h1>
         </div>
       )}
     </>
