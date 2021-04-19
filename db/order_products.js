@@ -28,11 +28,15 @@ const getOrderProductsByProductId = async (productId) => {
 
 const addProductToOrder = async ({orderId,productId,price,quantity}) => {
     const order = await getOrderById(orderId);
-    const product = order.products.filter(p=>p.id===productId) 
-    if(product && product.id){
-        return await updateOrderProduct(order.id,{price,quantity})
+    if(order && order.products){
+        const product = order.products.filter(p=>p.id===productId) 
+        if(product && product.id){
+            return await updateOrderProduct(order.id,{price,quantity})
+        } else {
+           return await createOrder_product({orderId,productId,price,quantity})
+        }
     } else {
-       return await createOrder_product({orderId,productId,price,quantity})
+        return await createOrder_product({orderId,productId,price,quantity})
     }
 }
 

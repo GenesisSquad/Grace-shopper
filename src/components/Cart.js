@@ -100,9 +100,12 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 
   const setQuantity = async (product, amount) => {
     if (amount > 0) {
+      console.log('amount:',amount);
       const newCart = [...cart];
-     const a = newCart.indexOf((item) => item.name === product.name)
-     if(a) newCart[a].quantity = amount; 
+      console.log("newCart",newCart);
+     const a = newCart.indexOf(product)
+     console.log(a);
+     if(a >= 0) {newCart[a].quantity = amount;} 
       // localStorage.setItem('cart',JSON.stringify(newCart))
       if(userData || JSON.parse(localStorage.getItem('user'))){
         const userD = JSON.parse(localStorage.getItem('user'))
@@ -115,7 +118,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
         console.log("order: ",order);
         const data = await callApi({
           token,
-          url:`order_products/${order.id}`,
+          url:`order_products/${order.productId}`,
           method:'PATCH',
           body:{product:{quantity:product.quantity}}
         })
