@@ -229,5 +229,5 @@ class AdminProduct extends Component {
   }
 }
 
-export default AdminProduct;
+export default withRouter(AdminProduct);
 
