@@ -5,7 +5,7 @@ const { client } = require("./client");
 const getOrderById = async (id) => {
 	try {
 		const orders = await getAllOrders();
-		return orders.filter(o=>o.id===id)
+		return orders.filter(o=>o.id===id)[0]
 	}catch(error){
 		console.error(error);
 	}
