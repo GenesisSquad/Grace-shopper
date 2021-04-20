@@ -35,7 +35,7 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
 
     } catch (error) {
         console.error(error);
-    }
+    } 
 });
 
 // logged in user
