@@ -43,7 +43,7 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
 ordersRouter.post("/", requireUser, async (req, res, next) => {
     try {
         const { user } = req;
-        return res.send(await createOrder('created',user.id));
+        return res.send(await createOrder({status:'created',userId:user.id}));
 
     } catch (error) {
         console.error(error);
