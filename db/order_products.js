@@ -6,7 +6,7 @@ const createOrder_product = async ({orderId,productId,price,quantity}) => {
         const {rows:[order_product]} = await client.query(`
         INSERT INTO order_products("productId","orderId",price,quantity) VALUES($1,$2,$3,$4) RETURNING *;
         `,[productId,orderId,price,quantity])
-        console.log(order_product);
+        // console.log(order_product);
         return order_product; 
     } catch (error) {
         console.error(error);
@@ -27,20 +27,29 @@ const getOrderProductsByProductId = async (productId) => {
     }
 }
 
-const addProductToOrder = async ({orderId,productId,price,quantity}) => {
+const addProductToOrder = async ({orderId,productId,price,userId}) => {
+    console.log('orderId: ',orderId);
+    console.log("productId: ",productId);
+    console.log('price :>> ', price);
+    console.log('userId :>> ', userId);
     const order = await getOrderById(orderId);
+    console.log(order);
     try {
         if(order && order.products){
+            console.log('this way');
             const product = order.products.filter(p=>p.id===productId)[0] 
+            console.log("product:",product);
             if(product && product.id){
-                return await updateOrderProduct(order.id,{price,quantity})
+                console.log('this way');
+                return await updateOrderProduct(order.id,{quantity:product.quantity + 1})
             } else {
-               return await createOrder_product({orderId,productId,price,quantity})
+                console.log('not this way');
+               return await createOrder_product({orderId,productId,price,quantity:'1'})
             }
         } else {
-            const {id:userId} = order;
+            console.log('not this');
             const newOrder = await createOrder({status:'created',userId});
-            return await createOrder_product({orderId:newOrder.id,productId,price,quantity})
+            return await createOrder_product({orderId:newOrder.id,productId,price,quantity:'1'})
         }
     } catch (error) {
         console.error(error);
@@ -51,7 +60,7 @@ const getOrderProductById = async (id) => {
     try {
         const {rows:[orderProduct]} = await client.query(`
         SELECT * FROM order_products WHERE id = $1;
-        `)
+        `,[id])
         return orderProduct;
     } catch (error) {
         console.error(error);
@@ -60,12 +69,15 @@ const getOrderProductById = async (id) => {
 
 const updateOrderProduct = async(id,{quantity}) => {
     try {    
+        console.log('id :>> ', id);
+        console.log('quantity :>> ', quantity);
         const {rows:[orderProduct]} = await client.query(`
         UPDATE order_products 
         SET quantity=$1
         WHERE id = ${id}
         RETURNING *;
         `,[parseInt(quantity)])
+        console.log('orderProduct :>> ', orderProduct);
         return orderProduct;
     } catch (error) {
         console.error(error);

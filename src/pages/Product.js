@@ -36,18 +36,29 @@ const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
     try {
       if (JSON.parse(localStorage.getItem("user"))) {
         const userD = JSON.parse(localStorage.getItem("user"));
-
         console.log(userD);
         console.log("NAME", product.name)
         const order = userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0]
         console.log("order: ",order.id);
-        const data = await callApi({
-          method: "POST",
-          url: `orders/${order.id}/products`,
-          body:  {product},
-          token,
-        });
-        console.log(data, "new cart!!!")
+        if(cart && cart.filter(p=>p.id===product.id)[0]){
+          const copyProduct = cart.filter(p=>p.id===product.id)[0];
+          console.log('copyProduct :>> ', copyProduct);
+          const data = await callApi({
+            token,
+            url: `order_products/${order.id}`,
+            method: "PATCH",
+            body: { product:{...copyProduct,quantity:copyProduct.quantity+1} },
+          });
+          console.log(data);
+        } else {
+          const data = await callApi({
+            method: "POST",
+            url: `orders/${order.id}/products`,
+            body:{product},
+            token,
+          });
+          console.log(data, "new cart!!!")
+        }
       }
     } catch (error) {
       throw error;

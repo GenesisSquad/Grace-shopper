@@ -52,9 +52,10 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
 
 ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
     try {
+        const {user} = req;
         const {orderId} = req.params;
         const {product} = req.body
-        const data = await addProductToOrder({...product,orderId})
+        const data = await addProductToOrder({price:product.price,productId:product.id,orderId,userId:user.id})
         res.send(data);
     } catch (error) {
         next({error})
