@@ -9,11 +9,10 @@ import {
   CardMedia,
   CircularProgress,
   Grid,
-  IconButton,
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+
 // import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 // import { callApi } from "../api";
 
@@ -36,12 +35,6 @@ const ProductCard = ({ product, cart, setCart,userOrders,token }) => {
   const classes = useStyles();
 
   const history = useHistory();
-
-  
-  // const handleRemoveItem = () => {
-  //   console.log("item removed!!!");
-  // };
-
   const handleClick = (event) => {
     history.push(`/products/${product.id}`);
   };
@@ -63,9 +56,7 @@ const ProductCard = ({ product, cart, setCart,userOrders,token }) => {
         </CardContent>
         <CardActions className={classes.bottomCard} disableSpacing>
           <div>
-            {/* <IconButton aria-label="remove shopping cart icon" onClick={handleRemoveItem}>
-              <RemoveShoppingCartIcon  />
-            </IconButton> */}
+
           </div>
           <Button variant="contained" color="primary" onClick={handleClick}>
             More info
@@ -87,16 +78,7 @@ const Products = ({ products, userData, cart, setCart,userOrders,token }) => {
         justify="center"
         alignItems="center"
       >
-        {/* {!products ? (
-          <Grid item>
-            LOADING
-            <CircularProgress />{" "}
-          </Grid>
-        ) : (
-          products.map((product, index) => {
-            return <ProductCard product={product} key={product.id} />;
-          })
-        )} */}
+        
         {products && products.length ? (
           products.map((product, index) => {
             return (
