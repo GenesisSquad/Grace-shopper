@@ -34,7 +34,7 @@ server.use("/orders/:orderId", express.static("build"));
 server.use("/admin-create-product", express.static("build"));
 server.use("/admin-update/:productId", express.static("build"));
 server.use("/products/:productId", express.static("build"));
-server.use("checkout", express.static("build"));
+server.use("/checkout", express.static("build"));
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
