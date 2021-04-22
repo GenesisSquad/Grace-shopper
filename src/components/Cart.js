@@ -14,8 +14,10 @@ import {
 	CardContent,
 	Divider,
 	Typography,
+	Link,
 } from "@material-ui/core";
 import ColorButton from "./ColorButton";
+import { useState } from "react";
 
 const STRIPE_KEY =
 	"pk_test_51IgESEAwKF3ow8u8iWs1EZ7w7SOHNw8zGEZZJ7cErTdZJfyvQ5iBSzWlQNC4Ngrkb24u8AbPrNP8ezMm1WpY5hhe0086gjXKtA";
@@ -56,20 +58,35 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const onToken = (amount) => async (token) => {
-	try {
-		await axios.post(PAYMENT_URL, {
-			source: token.id,
-			currency: CURRENCY,
-			amount,
-		});
-	} catch (error) {
-		console.error(error);
-	}
-};
 //! Stripe end
 
 const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
+	const [paymentState,setPaymentState] = useState('inProgress')
+	const [receiptLink,setReceiptLink] = useState('');
+	const onToken = (amount) => async (token) => {
+		console.log("Token is:", token);
+		try {
+			const {data} = await axios.post(PAYMENT_URL, {
+				source: token.id,
+				currency: CURRENCY,
+				amount,
+			});
+			console.log("Success!", data);
+			if(data && data.success && data.success.paid){
+				setPaymentState('PAID')
+				setReceiptLink(data.success.receipt_url)
+				window.location.href = data.success.receipt_url;
+				// clearCart();
+		// 		setCart([]);
+		// localStorage.setItem("cart", JSON.stringify([]));
+			} else {
+				setPaymentState('ERROR')
+				alert('there has been an error with your payment please try again')
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	const history = useHistory();
 
 	//! STRIPE styling start
@@ -86,6 +103,10 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 	const clearCart = async () => {
 		setCart([]);
 		localStorage.setItem("cart", JSON.stringify([]));
+		
+		if(cart && cart.length && token){
+			await Promise.all(cart.map(removeFromCart));
+		}
 	};
 
 	const setQuantity = async (product, amount) => {
@@ -251,9 +272,15 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 					</div>
 					{/* STRIPE end */}
 				</>
-			) : (
+			) : paymentState==="PAID" ? 
+			(
+				<Link href={receiptLink} underline target="_blank"> RECEIPT </Link>
+			)
+			: 
+			(
 				<h3> Your cart is empty.</h3>
-			)}
+			)
+			}
 		</>
 	);
 };

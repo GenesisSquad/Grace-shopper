@@ -32,35 +32,12 @@ const useStyles = makeStyles((theme) => ({
   bottomCard: { justifyContent: "space-between" },
 }));
 
-const ProductCard = ({ product, cart, setCart }) => {
+const ProductCard = ({ product, cart, setCart,userOrders,token }) => {
   const classes = useStyles();
 
   const history = useHistory();
 
-  const handleAddItem = async (product) => {
-    let updatedCart = [...cart];
-    let productInCart = updatedCart.find(
-      (cartProduct) => product.id === cartProduct.id
-    );
-    if (productInCart) {
-      productInCart.quantity++;
-    } else {
-      productInCart = {
-        ...product,
-        quantity: 1,
-      };
-      updatedCart.push(productInCart);
-    }
-    setCart(updatedCart);
-    // console.log("added item!!!, ", product);
-    // console.log("updated cart is ", cart);
-    // const data = await callApi({
-    //   url: `/orders/${orderId}/products`,
-    //   token,
-    //   body:{product}
-    // });
-    // return data;
-  };
+  
   // const handleRemoveItem = () => {
   //   console.log("item removed!!!");
   // };
@@ -86,12 +63,6 @@ const ProductCard = ({ product, cart, setCart }) => {
         </CardContent>
         <CardActions className={classes.bottomCard} disableSpacing>
           <div>
-            <IconButton
-              aria-label="addShopping cart icon"
-              onClick={() => handleAddItem(product)}
-            >
-              <AddShoppingCartIcon />
-            </IconButton>
             {/* <IconButton aria-label="remove shopping cart icon" onClick={handleRemoveItem}>
               <RemoveShoppingCartIcon  />
             </IconButton> */}
@@ -105,7 +76,7 @@ const ProductCard = ({ product, cart, setCart }) => {
   );
 };
 
-const Products = ({ products, userData, cart, setCart }) => {
+const Products = ({ products, userData, cart, setCart,userOrders,token }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>

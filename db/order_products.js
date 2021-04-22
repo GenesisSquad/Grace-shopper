@@ -7,15 +7,13 @@ const createOrder_product = async ({ orderId, productId, price, quantity }) => {
 		} = await client.query(
 			`
         INSERT INTO order_products("productId","orderId",price,quantity) VALUES($1,$2,$3,$4) RETURNING *;
-        `,
-			[productId, orderId, price, quantity]
-		);
-		console.log(order_product);
-		return order_product;
-	} catch (error) {
-		console.error(error);
-	}
-};
+        `,[productId,orderId,price,quantity])
+        // console.log(order_product);
+        return order_product; 
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const getOrderProductsByProductId = async (productId) => {
 	try {
@@ -34,35 +32,30 @@ const getOrderProductsByProductId = async (productId) => {
 	}
 };
 
-const addProductToOrder = async ({ orderId, productId, price, quantity }) => {
-	const order = await getOrderById(orderId);
-	try {
-		if (order && order.products) {
-			const product = order.products.filter((p) => p.id === productId)[0];
-			if (product && product.id) {
-				return await updateOrderProduct(order.id, { price, quantity });
-			} else {
-				return await createOrder_product({
-					orderId,
-					productId,
-					price,
-					quantity,
-				});
-			}
-		} else {
-			const { id: userId } = order;
-			const newOrder = await createOrder({ status: "created", userId });
-			return await createOrder_product({
-				orderId: newOrder.id,
-				productId,
-				price,
-				quantity,
-			});
-		}
-	} catch (error) {
-		console.error(error);
-	}
-};
+const addProductToOrder = async ({orderId,productId,price,userId}) => {
+    const order = await getOrderById(orderId);
+
+    try {
+        if(order && order.products){
+ 
+            const product = order.products.filter(p=>p.id===productId)[0] 
+            console.log("product:",product);
+            if(product && product.id){
+   
+                return await updateOrderProduct(order.id,{quantity:product.quantity + 1})
+            } else {
+
+               return await createOrder_product({orderId,productId,price,quantity:'1'})
+            }
+        } else {
+ 
+            const newOrder = await createOrder({status:'created',userId});
+            return await createOrder_product({orderId:newOrder.id,productId,price,quantity:'1'})
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const getOrderProductById = async (id) => {
 	try {
@@ -70,31 +63,29 @@ const getOrderProductById = async (id) => {
 			rows: [orderProduct],
 		} = await client.query(`
         SELECT * FROM order_products WHERE id = $1;
-        `);
-		return orderProduct;
-	} catch (error) {
-		console.error(error);
-	}
-};
+        `,[id])
+        return orderProduct;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-const updateOrderProduct = async (id, { quantity }) => {
-	try {
-		const {
-			rows: [orderProduct],
-		} = await client.query(
-			`
+const updateOrderProduct = async(id,{quantity}) => {
+    try {    
+        console.log('id :>> ', id);
+        console.log('quantity :>> ', quantity);
+        const {rows:[orderProduct]} = await client.query(`
         UPDATE order_products 
         SET quantity=$1
         WHERE id = ${id}
         RETURNING *;
-        `,
-			[parseInt(quantity)]
-		);
-		return orderProduct;
-	} catch (error) {
-		console.error(error);
-	}
-};
+        `,[parseInt(quantity)])
+
+        return orderProduct;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const destroyOrderProduct = async (id) => {
 	try {

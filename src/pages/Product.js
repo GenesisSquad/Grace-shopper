@@ -18,36 +18,64 @@ const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
   const history = useHistory();
 
   const handleAddItem = async (product) => {
-    let updatedCart = [...cart];
-    let productInCart = updatedCart.find(
-      (cartProduct) => product.id === cartProduct.id
-    );
-    if (productInCart) {
-      productInCart.quantity++;
+    let updatedCart;
+    if(cart && cart.length){
+      updatedCart = [...cart];
+      let productInCart = updatedCart.find(
+        (cartProduct) => product.id === cartProduct.id
+      );
+      if (productInCart) {
+        productInCart.quantity++;
+      } else {
+        productInCart = {
+          ...product,
+          quantity: 1,
+        };
+        updatedCart.push(productInCart);
+      }
     } else {
-      productInCart = {
-        ...product,
-        quantity: 1,
-      };
-      updatedCart.push(productInCart);
+       updatedCart = [{...product,quantity: 1}]
     }
+
     setCart(updatedCart);
+    localStorage.setItem('cart',JSON.stringify(updatedCart))
     console.log("added item!!!, ", product);
     try {
       if (JSON.parse(localStorage.getItem("user"))) {
         const userD = JSON.parse(localStorage.getItem("user"));
-
         console.log(userD);
         console.log("NAME", product.name)
-        const order = userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0]
-        console.log("order: ",order.id);
-        const data = await callApi({
-          method: "POST",
-          url: `orders/${order.id}/products`,
-          body:  {product},
-          token,
-        });
-        console.log(data, "new cart!!!")
+        let order = userOrders && userOrders.length ? userOrders.filter(o=>o.userId===userD.id && o.status==="created")[0] : undefined;
+        console.log(order);
+        if(!order || !order.id){
+          console.log('creating cart');
+          const data = await callApi({
+            url:'orders',
+            method:'POST',
+            token
+          })
+          console.log(data);
+          order = data;
+        }
+          if(cart && cart.filter(p=>p.id===product.id)[0]){
+            const copyProduct = cart.filter(p=>p.id===product.id)[0];
+            console.log('copyProduct :>> ', copyProduct);
+            const data = await callApi({
+              token,
+              url: `order_products/${order.id}`,
+              method: "PATCH",
+              body: { product:{...copyProduct,quantity:copyProduct.quantity+1} },
+            });
+            console.log(data);
+          } else {
+            const data = await callApi({
+              method: "POST",
+              url: `orders/${order.id}/products`,
+              body:{product},
+              token,
+            });
+            console.log(data, "new cart!!!")
+          }
       }
     } catch (error) {
       throw error;
