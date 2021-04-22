@@ -21,7 +21,7 @@ import { useState } from "react";
 
 const STRIPE_KEY =
 	"pk_test_51IgESEAwKF3ow8u8iWs1EZ7w7SOHNw8zGEZZJ7cErTdZJfyvQ5iBSzWlQNC4Ngrkb24u8AbPrNP8ezMm1WpY5hhe0086gjXKtA";
-const PAYMENT_URL = "http://localhost:3001/api/stripe/pay";
+const PAYMENT_URL = "/api/stripe/pay";
 const CURRENCY = "USD";
 
 const useStyles = makeStyles((theme) => ({
