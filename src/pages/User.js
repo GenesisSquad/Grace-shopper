@@ -43,24 +43,24 @@ const Orders = ({userOrders}) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const rows = userOrders.map((order) => {
-    return createData(
-      order.id,
-      order.status,
-      order.products.length,
-      // order.total,
-      order.datePlaced
-    );
-  });
+  // const rows = userOrders && userOrders.length ? userOrders.map((order) => {
+  //   return createData(
+  //     order.id,
+  //     order.status,
+  //     order.products.length,
+  //     // order.total,
+  //     order.datePlaced
+  //   );
+  // }):[];
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Order Number (id)</TableCell>
-            <TableCell align="right">Order Status (status)</TableCell>
-            <TableCell align="right">Items in cart (Order length)</TableCell>
+            <TableCell>Order Number </TableCell>
+            <TableCell align="right">Order Status</TableCell>
+            <TableCell align="right">Unique items in cart</TableCell>
             <TableCell align="right">Date placed</TableCell>
             {/* <TableCell align="right">Total&nbsp;($)(Order subtotal)</TableCell> */}
             <TableCell align="right">
@@ -69,13 +69,13 @@ const Orders = ({userOrders}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
+          {userOrders && userOrders.length ? userOrders.map((row) => {
+            return <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
               <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right">{row.quantity}</TableCell>
+              <TableCell align="right">{row.products.length}</TableCell>
               <TableCell align="right">{row.datePlaced}</TableCell>
               {/* <TableCell align="right">{row.total}</TableCell> */}
               <TableCell align="right">
@@ -90,7 +90,7 @@ const Orders = ({userOrders}) => {
                 </Button>
               </TableCell>
             </TableRow>
-          ))}
+          }):<div></div>}
         </TableBody>
       </Table>
     </TableContainer>
