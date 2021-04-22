@@ -4,18 +4,18 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { requireUser } = require("./utils");
 const { requireAdmin } = require("./utils");
-const { createUser, getUserByUsername, getUser, getAllUsers, getOrdersByUser } = require("../db");
+const {
+	createUser,
+	getUserByUsername,
+	getUser,
+	getAllUsers,
+	getOrdersByUser,
+} = require("../db");
 const { JWT_SECRET } = process.env;
 
 usersRouter.post("/register", async (req, res, next) => {
 	try {
-		const {
-			username,
-			password,
-			firstName,
-			lastName,
-			email,
-		} = req.body;
+		const { username, password, firstName, lastName, email } = req.body;
 		if (!username || !password) {
 			return res
 				.status(400)
@@ -36,7 +36,7 @@ usersRouter.post("/register", async (req, res, next) => {
 			password,
 			firstName,
 			lastName,
-			email
+			email,
 		});
 		if (user && user.username) {
 			const token = jwt.sign(
@@ -84,7 +84,11 @@ usersRouter.post("/login", async (req, res, next) => {
 				{ id: _user.id, username: _user.username },
 				JWT_SECRET
 			);
-			res.send({ message: "you're logged in!", token: _user.token, user:_user });
+			res.send({
+				message: "you're logged in!",
+				token: _user.token,
+				user: _user,
+			});
 		} else {
 			next({
 				name: "IncorrectCredentialsError",
@@ -97,41 +101,38 @@ usersRouter.post("/login", async (req, res, next) => {
 	}
 });
 
-
 usersRouter.get("/me", requireUser, async (req, res, next) => {
 	try {
 		const { user } = req;
 		if (!user) return res.status(400).send("no token");
-		// console.log(user);
 		return res.send(req.user);
 	} catch (error) {
 		next(error);
 	}
 });
 
-usersRouter.get('/', requireAdmin, async (req, res, next) => {
-try {
-	const { isAdmin } = req;
-	if(!isAdmin) return res.status(400).send("Not an Admin!"); 
-	return res.send(await getAllUsers())
-	
-} catch (error) {
-	next(error);
-}
-})
+usersRouter.get("/", requireAdmin, async (req, res, next) => {
+	try {
+		const { isAdmin } = req;
+		if (!isAdmin) return res.status(400).send("Not an Admin!");
+		return res.send(await getAllUsers());
+	} catch (error) {
+		next(error);
+	}
+});
 
 //logged in user and owner of object
 usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
-    try {
-        const { userId } = req.params;
-        if ( parseInt(userId) !== req.user.id ) return res.status(400).send("Not authorized to edit cart.") 
-        return res.send(await getOrdersByUser({id:parseInt(userId)}));
-
-    } catch (error) {
-        console.error(error);
-    }
+	try {
+		const { userId } = req.params;
+		if (parseInt(userId) !== req.user.id)
+			return res.status(400).send("Not authorized to edit cart.");
+		return res.send(await getOrdersByUser({ id: parseInt(userId) }));
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 module.exports = {
-	usersRouter
-}
+	usersRouter,
+};

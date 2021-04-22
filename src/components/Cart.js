@@ -1,4 +1,3 @@
-// import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { callApi } from "../api";
 //! Stripe start
@@ -6,7 +5,7 @@ import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-// import { GridLoadIcon } from "@material-ui/data-grid";
+
 import {
 	CircularProgress,
 	Grid,
@@ -58,24 +57,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const onToken = (amount) => async (token) => {
-  // console.log("Token is:", token);
-  try {
-     await axios.post(PAYMENT_URL, {
-      source: token.id,
-      currency: CURRENCY,
-      amount,
-    });
-    // console.log("Success!", response);
-  } catch (error) {
-    console.error(error);
-  }
+	try {
+		await axios.post(PAYMENT_URL, {
+			source: token.id,
+			currency: CURRENCY,
+			amount,
+		});
+	} catch (error) {
+		console.error(error);
+	}
 };
 //! Stripe end
 
 const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
-	// const [name, setName] = useState("");
-	// const [description, setDescription] = useState("");
-	// const [price, setPrice] = useState("");
 	const history = useHistory();
 
 	//! STRIPE styling start
@@ -92,10 +86,6 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 	const clearCart = async () => {
 		setCart([]);
 		localStorage.setItem("cart", JSON.stringify([]));
-		// const data = await callApi({
-		//   url:'',
-		//   m
-		// })
 	};
 
 	const setQuantity = async (product, amount) => {
@@ -108,7 +98,6 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 			if (a >= 0) {
 				newCart[a].quantity = amount;
 			}
-			// localStorage.setItem('cart',JSON.stringify(newCart))
 			if (userData || JSON.parse(localStorage.getItem("user"))) {
 				const userD = JSON.parse(localStorage.getItem("user"));
 				console.log(userD);
