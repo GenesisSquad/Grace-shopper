@@ -158,7 +158,13 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 				url: `order_products/${order.id}`,
 			});
 			setCart(newCart);
+		} else if (cart && cart.length) {
+			const newCart = cart.filter(
+				(product) => product.id !== productToRemove.id
+			);
+			setCart(newCart)
 		}
+
 	};
 
 	return (
