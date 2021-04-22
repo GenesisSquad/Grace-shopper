@@ -78,7 +78,6 @@ const getCartByUser = async ({ id }) => {
 //create and return the new order
 const createOrder = async ({ status, userId }) => {
 	try {
-		console.log('userId :>> ', userId);
 		const {
 			rows: [order],
 		} = await client.query(
@@ -90,7 +89,6 @@ const createOrder = async ({ status, userId }) => {
 			[status, userId]
 		);
 
-		console.log(order);
 		return order;
 	} catch (error) {
 		console.error(error);

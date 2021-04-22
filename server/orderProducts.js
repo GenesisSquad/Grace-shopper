@@ -12,7 +12,7 @@ orderProductsRouter.get("/:productId", requireUser, async (req, res, next) => {
 	try {
 		const { productId } = req.params;
 		const data = await getOrderProductsByProductId(productId);
-		console.log("orders:", data);
+
 		res.send(data);
 	} catch (error) {
 		next({ error });
@@ -27,8 +27,6 @@ orderProductsRouter.patch(
 		try {
 			const { orderProductId } = req.params;
 			const { product } = req.body;
-			console.log("product:", product);
-			console.log("orderProductId:", orderProductId);
 
 			const data = await updateOrderProduct(orderProductId, product);
 			res.send(data);

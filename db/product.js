@@ -26,7 +26,6 @@ const createProduct = async (fields) => {
         `,
 			[name, description, price, imageURL, inStock, category]
 		);
-		console.log(product);
 		return product;
 	} catch (error) {
 		console.error(error);

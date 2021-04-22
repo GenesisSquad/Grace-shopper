@@ -20,7 +20,6 @@ const createUser = async ({
             `,
 			[hash, username.toLowerCase(), firstName, lastName, email, isAdmin]
 		);
-		console.log(user);
 		return user;
 	} catch (error) {
 		console.error(error);

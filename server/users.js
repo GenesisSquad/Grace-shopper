@@ -52,7 +52,6 @@ usersRouter.post("/register", async (req, res, next) => {
 				token,
 			});
 		} else {
-			console.log("duplicate username found");
 			return next({
 				message: "A user by that username already exists",
 			});

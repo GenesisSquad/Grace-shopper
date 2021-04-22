@@ -1,11 +1,11 @@
 import { Paper, Grid, TextField, Typography } from "@material-ui/core";
 import { Component } from "react";
-// import { withRouter } from "react-router";
+import { withRouter } from "react-router";
 import { callApi } from "../api";
-// import { useParams } from "react-router";
+
 import { ColorButton } from "../components";
 import "./AccountForm.css";
-// import Products from "./Products";
+
 
 const paperStyle = {
   padding: 20,
@@ -69,7 +69,6 @@ class AdminProduct extends Component {
           if (newProduct) {
             this.props.setProducts([...products, newProduct]);
             this.props.history.push("/products");
-            console.log("newproducucucu", newProduct)
           }
         } catch (error) {
           console.error(error);
@@ -96,10 +95,9 @@ class AdminProduct extends Component {
             },
           });
           const data = res;
-          // console.log(data);
+
           const token = data?.token;
-          // const user = data?.user;
-          // delete user.password;
+
           if (token) {
             this.props.setToken(token);
             localStorage.setItem("token", token);
@@ -122,7 +120,7 @@ class AdminProduct extends Component {
 
   render() {
     const {
-      //  action,
+
        name, description, category, price, imageURL } = this.state;
     return (
 

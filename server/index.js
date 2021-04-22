@@ -49,9 +49,7 @@ server.use(async (req, res, next) => {
 				if (id) {
 					req.user = await getUserById(id);
 					next();
-				} else {
-					console.log("why is this happening?");
-				}
+				} 
 			} catch (error) {
 				next(error);
 			}
@@ -62,7 +60,6 @@ server.use(async (req, res, next) => {
 			});
 		}
 	} catch (error) {
-		console.log("middlewear errorrrrrrr");
 		console.error(error);
 	}
 });
