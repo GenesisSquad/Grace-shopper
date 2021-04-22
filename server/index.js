@@ -2,7 +2,6 @@ require("dotenv").config();
 const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
-
 var cors = require("cors");
 const jwt = require("jsonwebtoken");
 // all required node_modules go ^
@@ -26,6 +25,17 @@ client.connect();
 server.use(morgan("dev"));
 server.use(cors());
 server.use("/", express.static("build"));
+server.use("/login", express.static("build"));
+server.use("/register", express.static("build"));
+server.use("/products", express.static("build"));
+server.use("/about", express.static("build"));
+server.use("/account", express.static("build"));
+server.use("/orders/:orderId", express.static("build"));
+server.use("/admin-create-product", express.static("build"));
+server.use("/admin-update/:productId", express.static("build"));
+server.use("/products/:productId", express.static("build"));
+server.use("checkout", express.static("build"));
+
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
@@ -71,6 +81,10 @@ server.use("/api/users", usersRouter);
 server.use("/api/orders", ordersRouter);
 server.use("/api/stripe", stripeRouter);
 server.use("/api/order_products", orderProductsRouter);
+
+// server.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/build/index.html'));
+// });
 
 server.use("*", (req, res, next) => {
 	res.status(404);
