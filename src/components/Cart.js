@@ -92,10 +92,9 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 	const clearCart = async () => {
 		setCart([]);
 		localStorage.setItem("cart", JSON.stringify([]));
-		// const data = await callApi({
-		//   url:'',
-		//   m
-		// })
+		if(cart && cart.length){
+			await Promise.all(cart.map(removeFromCart));
+		}
 	};
 
 	const setQuantity = async (product, amount) => {

@@ -5,7 +5,7 @@ const { client } = require("./client");
 const getOrderById = async (id) => {
 	try {
 		const orders = await getAllOrders();
-		return orders.filter(o=>o.id===id)[0]
+		return orders.filter(o=>o.id===parseInt(id))[0]
 	}catch(error){
 		console.error(error);
 	}
@@ -107,6 +107,7 @@ const getCartByUser = async({ id }) => {
 //create and return the new order
 const createOrder = async ({ status, userId }) => {
 	try {
+		console.log('userId :>> ', userId);
 		const {
 			rows: [order],
 		} = await client.query(

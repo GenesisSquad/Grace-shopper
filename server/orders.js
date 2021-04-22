@@ -43,7 +43,7 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
 ordersRouter.post("/", requireUser, async (req, res, next) => {
     try {
         const { user } = req;
-        return res.send(await createOrder('created',user.id));
+        return res.send(await createOrder({status:'created',userId:user.id}));
 
     } catch (error) {
         console.error(error);
@@ -52,9 +52,10 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
 
 ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
     try {
+        const {user} = req;
         const {orderId} = req.params;
         const {product} = req.body
-        const data = await addProductToOrder({...product,orderId})
+        const data = await addProductToOrder({price:product.price,productId:product.id,orderId,userId:user.id})
         res.send(data);
     } catch (error) {
         next({error})
