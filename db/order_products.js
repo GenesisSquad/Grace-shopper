@@ -1,5 +1,5 @@
 const { client } = require("./client");
-const { getOrderById } = require("./orders");
+const { getOrderById, createOrder } = require("./orders");
 const createOrder_product = async ({orderId,productId,price,quantity}) => {
     try {
       
@@ -29,15 +29,21 @@ const getOrderProductsByProductId = async (productId) => {
 
 const addProductToOrder = async ({orderId,productId,price,quantity}) => {
     const order = await getOrderById(orderId);
-    if(order && order.products){
-        const product = order.products.filter(p=>p.id===productId) 
-        if(product && product.id){
-            return await updateOrderProduct(order.id,{price,quantity})
+    try {
+        if(order && order.products){
+            const product = order.products.filter(p=>p.id===productId)[0] 
+            if(product && product.id){
+                return await updateOrderProduct(order.id,{price,quantity})
+            } else {
+               return await createOrder_product({orderId,productId,price,quantity})
+            }
         } else {
-           return await createOrder_product({orderId,productId,price,quantity})
+            const {id:userId} = order;
+            const newOrder = await createOrder({status:'created',userId});
+            return await createOrder_product({orderId:newOrder.id,productId,price,quantity})
         }
-    } else {
-        return await createOrder_product({orderId,productId,price,quantity})
+    } catch (error) {
+        console.error(error);
     }
 }
 

@@ -151,7 +151,7 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 			const data = await callApi({
 				token,
 				method: "DELETE",
-				url: `order_products/${productToRemove.id}`,
+				url: `order_products/${order.id}`,
 			});
 			setCart(newCart);
 			console.log(data);
