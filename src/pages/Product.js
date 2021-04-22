@@ -38,6 +38,7 @@ const ProductGrid = ({ product, cart, setCart, token, userOrders }) => {
     }
 
     setCart(updatedCart);
+    localStorage.setItem('cart',JSON.stringify(updatedCart))
     console.log("added item!!!, ", product);
     try {
       if (JSON.parse(localStorage.getItem("user"))) {
