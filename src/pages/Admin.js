@@ -11,11 +11,14 @@
 // 	Make a username clickable in the users list that can be used to navigate to the /users/:userId component (*admin)
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { callApi } from "../api";
 import { Button } from "@material-ui/core";
 import "./Admin.css";
+// const {requireAdmin} = require ("../server");
+import { ColorButton } from "../components";
 
-const Admin = (token, requireAdmin, productId, userId) => {
+const Admin = (token, users, requireAdmin, productId, userId) => {
   //Products
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -48,29 +51,28 @@ const Admin = (token, requireAdmin, productId, userId) => {
   };
 
   useEffect(() => {
-//     const myFunc = async () => {
-//       try {
-//         // const [users, setUsers] = useState([])
-//         const users = await fetchUsers();
-//         console.log("useEffect", users);
-//       } catch (error) {
-//         console.error("useEffect", error);
-//       }
-//     };
-//     myFunc();
+    //     const myFunc = async () => {
+    //       try {
+    //         // const [users, setUsers] = useState([])
+    //         const users = await fetchUsers();
+    //         console.log("useEffect", users);
+    //       } catch (error) {
+    //         console.error("useEffect", error);
+    //       }
+    //     };
+    //     myFunc();
 
     const myOtherFunc = async () => {
-        try {
-          // const [orders, setOrders] = useState([])
-          const orders = await fetchOrders();
-          console.log("useEffect", orders);
-        } catch (error) {
-          console.error("useEffect", error);
-        }
-      };
-      myOtherFunc();
+      try {
+        // const [orders, setOrders] = useState([])
+        const orders = await fetchOrders();
+        console.log("useEffect", orders);
+      } catch (error) {
+        console.error("useEffect", error);
+      }
+    };
+    myOtherFunc();
   });
-
 
   const handleEditProducts = async (event) => {
     event.preventDefault();
@@ -97,7 +99,69 @@ const Admin = (token, requireAdmin, productId, userId) => {
 
   return (
     <>
-      <div className="adminPage">
+    { requireAdmin ? (
+      <> 
+      <ColorButton
+        component={Link}
+        to="/admin-create-product"
+        variant="outlined"
+        color="primary"
+        style={{
+          display: "flex",
+          marginTop: "75px",
+          marginLeft: "650px",
+          marginRight: "650px",
+        }}
+      >
+        Create Product
+      </ColorButton>  
+
+      <ColorButton
+        component={Link}
+        to="/admin-update/:productId"
+        variant="outlined"
+        color="primary"
+        style={{
+          display: "flex",
+          marginTop: "40px",
+          marginLeft: "650px",
+          marginRight: "650px",
+        }}
+      >
+        Update Product Info
+      </ColorButton>
+
+      <ColorButton
+        component={Link}
+        to="/admin-update/:user"
+        variant="outlined"
+        color="primary"
+        style={{
+          display: "flex",
+          marginTop: "40px",
+          marginLeft: "650px",
+          marginRight: "650px",
+        }}
+      >
+        Update User Info
+      </ColorButton>
+
+      <Button
+        component={Link}
+        to="/admin-create-product"
+        variant="outlined"
+        color="secondary"
+        style={{
+          display: "flex",
+          marginTop: "40px",
+          marginLeft: "650px",
+          marginRight: "650px",
+        }}
+      >
+        Delete Product
+      </Button>
+
+      {/* <div className="adminPage">
         <h2 className="changeTitle">Change Product Info</h2>
         <form onSubmit={handleEditProducts}>
           <div>
@@ -172,9 +236,9 @@ const Admin = (token, requireAdmin, productId, userId) => {
             </div>
           </div>
         </form>
-      </div>
+      </div> */}
       {/***************************************/}
-      <div className="adminPage">
+      {/* <div className="adminPage">
         <h2 className="changeTitle">Change User Info</h2>
         <form onSubmit={handleEditUsers}>
           <div>
@@ -242,7 +306,11 @@ const Admin = (token, requireAdmin, productId, userId) => {
             </Button>
           </div>
         </form>
-      </div>
+      </div> */}
+      </>
+     ) : ( 
+      <h1>Not an Admin!!!</h1>
+    )}
     </>
   );
 };

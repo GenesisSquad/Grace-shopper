@@ -271,6 +271,8 @@ const users = [
     email: "Nickemail@gmail.com",
     username: "nickusername",
     password: "12345678",
+    isAdmin: true,
+
   },
 ];
 
