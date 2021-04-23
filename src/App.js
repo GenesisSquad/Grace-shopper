@@ -1,8 +1,6 @@
 
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home, About, User, Order, Checkout,
-
-    AdminProduct } from "./pages";
+import { AccountForm, Product, Products, Home, About, User, Order, Checkout, Admin, AdminProduct, AdminUser } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -125,11 +123,21 @@ function App() {
       <Route exact path='/checkout'>
         <Checkout token={token} cart={cart} setCart={setCart} userData={userData}/>
       </Route>
+
+      <Route exact path='/admin'>
+        <Admin />
+      </Route>
+
       <Route exact path='/admin-create-product'>
         <AdminProduct action ="create" userData={userData} token={token} setToken={setToken} products={products} setProducts={setProducts}/>
       </Route>
+
       <Route exact path='/admin-update/:productId'>
         <AdminProduct action ="login" userData={userData} token={token} setToken={setToken} products={products} setProducts={setProducts}/>
+      </Route>
+
+      <Route exact path='/admin-update/:userId'>
+        <AdminUser action ="login" userData={userData} token={token} setToken={setToken} />
       </Route>
     </>
   );

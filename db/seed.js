@@ -241,35 +241,37 @@ const products = [
 	},
 ];
 const users = [
-	{
-		firstName: "jasper",
-		lastName: "m",
-		email: "jaspermesebrink@gmail.com",
-		username: "jasperTest",
-		password: "12345678",
-		isAdmin: true,
-	},
-	{
-		firstName: "eddie",
-		lastName: "J",
-		email: "testemail@gmail.com",
-		username: "eddieusername",
-		password: "12345678",
-	},
-	{
-		firstName: "Juno",
-		lastName: "C",
-		email: "Junoemail@gmail.com",
-		username: "Junousername",
-		password: "12345678",
-	},
-	{
-		firstName: "Nick",
-		lastName: "S",
-		email: "Nickemail@gmail.com",
-		username: "nickusername",
-		password: "12345678",
-	},
+  {
+    firstName: "jasper",
+    lastName: "m",
+    email: "jaspermesebrink@gmail.com",
+    username: "jasperTest",
+    password: "12345678",
+    isAdmin: true,
+  },
+  {
+    firstName: "eddie",
+    lastName: "J",
+    email: "testemail@gmail.com",
+    username: "eddieusername",
+    password: "12345678",
+  },
+  {
+    firstName: "Juno",
+    lastName: "C",
+    email: "Junoemail@gmail.com",
+    username: "Junousername",
+    password: "12345678",
+  },
+  {
+    firstName: "Nick",
+    lastName: "S",
+    email: "Nickemail@gmail.com",
+    username: "nickusername",
+    password: "12345678",
+    isAdmin: true,
+
+  },
 ];
 
 const orders = [
