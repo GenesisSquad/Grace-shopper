@@ -2,13 +2,15 @@
   "name": "grace-shopper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "start-dev-mac": "react-scripts start",
     "start-dev-win": "CHOKIDAR_USEPOLLING=true react-scripts start",
     "build": "react-scripts build",
     "test:watch": "jest --watchAll --runInBand --verbose",
-    "start": "nodemon server/index.js"
+    "start-server": "nodemon server/index.js",
+    "start":"node server/index.js",
+    "seed": "node ./db/seed.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "is-svg": "^4.3.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",

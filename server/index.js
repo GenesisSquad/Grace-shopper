@@ -2,9 +2,8 @@ require("dotenv").config();
 const { PORT = 3001 } = process.env;
 const express = require("express");
 const morgan = require("morgan");
-// const axios = require("axios");
-var cors = require('cors')
-const jwt = require('jsonwebtoken');
+var cors = require("cors");
+const jwt = require("jsonwebtoken");
 // all required node_modules go ^
 
 const { usersRouter } = require("./users");
@@ -13,7 +12,7 @@ const { ordersRouter } = require("./orders");
 const { orderProductsRouter } = require("./orderProducts");
 
 const { stripeRouter } = require("./stripe");
-const {client, getUserById, rebuildDB} = require('../db');
+const { client, getUserById } = require("../db");
 
 // all required locally made files go ^
 
@@ -22,10 +21,21 @@ const { JWT_SECRET } = process.env;
 const server = express();
 
 client.connect();
-rebuildDB();
+
 server.use(morgan("dev"));
 server.use(cors());
-// server.use("/",express.static("/build"));
+server.use("/", express.static("build"));
+server.use("/login", express.static("build"));
+server.use("/register", express.static("build"));
+server.use("/products", express.static("build"));
+server.use("/about", express.static("build"));
+server.use("/account", express.static("build"));
+server.use("/orders/:orderId", express.static("build"));
+server.use("/admin-create-product", express.static("build"));
+server.use("/admin-update/:productId", express.static("build"));
+server.use("/products/:productId", express.static("build"));
+server.use("/checkout", express.static("build"));
+
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 
@@ -35,7 +45,7 @@ server.get("/health", (req, res, next) => {
 
 server.use(async (req, res, next) => {
 	try {
-		// console.log('middlewear is getting used');
+		
 		const prefix = "Bearer ";
 		const auth = req.header("Authorization");
 		if (!auth) {
@@ -49,9 +59,7 @@ server.use(async (req, res, next) => {
 				if (id) {
 					req.user = await getUserById(id);
 					next();
-				} else {
-					console.log("why is this happening?");
-				}
+				} 
 			} catch (error) {
 				next(error);
 			}
@@ -62,7 +70,6 @@ server.use(async (req, res, next) => {
 			});
 		}
 	} catch (error) {
-		console.log("middlewear errorrrrrrr");
 		console.error(error);
 	}
 });
@@ -73,19 +80,22 @@ server.use("/api/products", productsRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/orders", ordersRouter);
 server.use("/api/stripe", stripeRouter);
-server.use("/api/order_products", orderProductsRouter)
+server.use("/api/order_products", orderProductsRouter);
 
-server.use('*', (req, res, next) => {
+// server.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/build/index.html'));
+// });
+
+server.use("*", (req, res, next) => {
 	res.status(404);
 	res.send({ error: "Request not found." });
 });
-  
+
 server.use((error, req, res, next) => {
 	res.status(500);
 	res.send({ error });
 });
-  
 
 server.listen(PORT, () => {
-  console.log(`listening on port ${PORT}...`);
+	console.log(`listening on port ${PORT}...`);
 });

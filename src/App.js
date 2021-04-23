@@ -1,7 +1,8 @@
-// Front end APP.js file
-// import react from "react";
+
 import { Route } from "react-router-dom";
-import { AccountForm, Product, Products, Home, About, User, Order, Checkout, Admin, AdminProduct } from "./pages";
+import { AccountForm, Product, Products, Home, About, User, Order, Checkout,
+
+    AdminProduct } from "./pages";
 import { useState, useEffect } from "react";
 import { callApi } from "./api";
 import { Header } from "./components";
@@ -25,7 +26,7 @@ const fetchUserData = async (token) => {
     url: "users/me",
     token,
   });
-  console.log("user data is:", data);
+
   return data;
 };
 
@@ -34,7 +35,7 @@ const fetchUserOrders = async (userId, token) => {
     url: `users/${userId}/orders`,
     token,
   });
-  console.log("This user's order's are:", data);
+
   return data;
 };
 
@@ -55,19 +56,18 @@ function App() {
         const products = await fetchProducts();
         if (products) {
           setProducts(products);
-          console.log("List of all products:", products);
+   
         }
 
         if (token) {
           const user = await fetchUserData(token);
           localStorage.setItem("user", JSON.stringify(user));
           setUserData(user);
-          const username = user.username;
-          console.log("username is :", username);
+ 
           const { products: cart } = await fetchCartData(token);
           localStorage.setItem("cart", JSON.stringify(cart) || JSON.stringify([]));
           setCart(cart);
-          console.log("cart is:", cart);
+        
           setUserOrders(await fetchUserOrders(user.id, token));
         }
       } catch (error) {
