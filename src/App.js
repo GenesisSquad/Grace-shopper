@@ -104,7 +104,7 @@ function App() {
       </Route>
 
       <Route exact path="/products">
-        <Products products={products} cart={cart} setCart={setCart} />
+        <Products products={products} cart={cart} setCart={setCart} userOrders={userOrders} token={token}/>
       </Route>
 
       <Route path="/about">
