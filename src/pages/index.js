@@ -5,7 +5,6 @@ import { default as Products } from "./Products";
 import { default as About } from "./About";
 import {default as User} from  "./User"
 import {default as Order} from  "./Order"
-import {default as Admin} from "./Admin"
 import {default as Checkout} from  "./Checkout"
 import {default as AdminProduct} from  "./AdminProduct"
 import {default as AdminUser} from  "./AdminUser"

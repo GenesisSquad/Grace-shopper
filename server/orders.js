@@ -1,41 +1,34 @@
 const express = require("express");
 const ordersRouter = express.Router();
-const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 const { requireUser } = require("./utils");
 const { requireAdmin } = require("./utils");
-const { JWT_SECRET } = process.env;
-const { 
-    getAllOrders,
-     getCartByUser, 
-     createOrder 
-    } = require("../db");
-const { addProductToOrder, updateOrderProduct,destroyOrderProduct } = require("../db/order_products");
-// const { requireAdmin } = require("./admin");
+
+const { getAllOrders, getCartByUser, createOrder } = require("../db");
+const { addProductToOrder } = require("../db/order_products");
 
 //Admin is user
 ordersRouter.get("/", requireAdmin, async (req, res, next) => {
-    try {
-        const { isAdmin } = req;
-        if(!isAdmin) return next({message:'not an Admin'})
-        return res.send(await getAllOrders());
-
-    } catch (error) {
-        console.error(error);
-    }
+	try {
+		const { isAdmin } = req;
+		if (!isAdmin) return next({ message: "not an Admin" });
+		return res.send(await getAllOrders());
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 // logged in user
 // status="created" should be returned
 ordersRouter.get("/cart", requireUser, async (req, res, next) => {
-    try {
-        const { user } = req;
-        if (!user) return res.status(400).send("Please log in.")
-        return res.send(await getCartByUser({id:user.id}));
-
-    } catch (error) {
-        console.error(error);
-    } 
+	try {
+		const { user } = req;
+		if (!user) return res.status(400).send("Please log in.");
+		return res.send(await getCartByUser({ id: user.id }));
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 // logged in user
@@ -62,6 +55,5 @@ ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
         console.error(error);
     }
 });
-
 
 module.exports = { ordersRouter };

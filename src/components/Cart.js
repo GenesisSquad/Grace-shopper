@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { callApi } from "../api";
 //! Stripe start
@@ -6,22 +5,23 @@ import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { GridLoadIcon } from "@material-ui/data-grid";
+
 import {
 	CircularProgress,
 	Grid,
 	Card,
-	TextField,
+	// TextField,
 	CardContent,
 	Divider,
 	Typography,
 	Link,
 } from "@material-ui/core";
 import ColorButton from "./ColorButton";
+import { useState } from "react";
 
 const STRIPE_KEY =
 	"pk_test_51IgESEAwKF3ow8u8iWs1EZ7w7SOHNw8zGEZZJ7cErTdZJfyvQ5iBSzWlQNC4Ngrkb24u8AbPrNP8ezMm1WpY5hhe0086gjXKtA";
-const PAYMENT_URL = "http://localhost:3001/api/stripe/pay";
+const PAYMENT_URL = "/api/stripe/pay";
 const CURRENCY = "USD";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,27 +61,23 @@ const useStyles = makeStyles((theme) => ({
 //! Stripe end
 
 const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
-	const [paymentState,setPaymentState] = useState('inProgress')
-	const [receiptLink,setReceiptLink] = useState('');
+	const [paymentState, setPaymentState] = useState("inProgress");
+	const [receiptLink, setReceiptLink] = useState("");
 	const onToken = (amount) => async (token) => {
-		console.log("Token is:", token);
 		try {
-			const {data} = await axios.post(PAYMENT_URL, {
+			const { data } = await axios.post(PAYMENT_URL, {
 				source: token.id,
 				currency: CURRENCY,
 				amount,
 			});
-			console.log("Success!", data);
-			if(data && data.success && data.success.paid){
-				setPaymentState('PAID')
-				setReceiptLink(data.success.receipt_url)
+
+			if (data && data.success && data.success.paid) {
+				setPaymentState("PAID");
+				setReceiptLink(data.success.receipt_url);
 				window.location.href = data.success.receipt_url;
-				// clearCart();
-		// 		setCart([]);
-		// localStorage.setItem("cart", JSON.stringify([]));
 			} else {
-				setPaymentState('ERROR')
-				alert('there has been an error with your payment please try again')
+				setPaymentState("ERROR");
+				alert("there has been an error with your payment please try again");
 			}
 		} catch (error) {
 			console.error(error);
@@ -103,42 +99,39 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 	const clearCart = async () => {
 		setCart([]);
 		localStorage.setItem("cart", JSON.stringify([]));
-		
-		if(cart && cart.length && token){
+
+		if (cart && cart.length && token) {
 			await Promise.all(cart.map(removeFromCart));
 		}
 	};
 
 	const setQuantity = async (product, amount) => {
 		if (amount > 0) {
-			console.log("amount:", amount);
 			const newCart = [...cart];
-			console.log("newCart", newCart);
+
 			const a = newCart.indexOf(product);
-			console.log(a);
+
 			if (a >= 0) {
 				newCart[a].quantity = amount;
 			}
-			// localStorage.setItem('cart',JSON.stringify(newCart))
 			if (userData || JSON.parse(localStorage.getItem("user"))) {
 				const userD = JSON.parse(localStorage.getItem("user"));
-				console.log(userD);
+
 				const orders = await callApi({
 					token,
 					url: `order_products/${product.id}`,
 				});
-				console.log(orders);
+
 				const order = orders.filter(
 					(o) => o.userId === userD.id && o.status === "created"
 				)[0];
-				console.log("order: ", order);
-				const data = await callApi({
+
+				await callApi({
 					token,
 					url: `order_products/${order.id}`,
 					method: "PATCH",
 					body: { product: { quantity: product.quantity } },
 				});
-				console.log(data);
 			}
 			setCart(newCart);
 		}
@@ -151,22 +144,27 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 				token,
 				url: `order_products/${productToRemove.id}`,
 			});
-			console.log(orders);
+
 			const order = orders.filter(
 				(o) => o.userId === userD.id && o.status === "created"
 			)[0];
-			console.log("order: ", order);
+
 			const newCart = cart.filter(
 				(product) => product.id !== productToRemove.id
 			);
-			const data = await callApi({
+			await callApi({
 				token,
 				method: "DELETE",
 				url: `order_products/${order.id}`,
 			});
 			setCart(newCart);
-			console.log(data);
+		} else if (cart && cart.length) {
+			const newCart = cart.filter(
+				(product) => product.id !== productToRemove.id
+			);
+			setCart(newCart)
 		}
+
 	};
 
 	return (
@@ -273,15 +271,14 @@ const Cart = ({ token, cart, setCart, real, toggleDrawer, userData }) => {
 					</div>
 					{/* STRIPE end */}
 				</>
-			) : paymentState==="PAID" ? 
-			(
-				<Link href={receiptLink} underline target="_blank"> RECEIPT </Link>
-			)
-			: 
-			(
+			) : paymentState === "PAID" ? (
+				<Link href={receiptLink} underline target="_blank">
+					{" "}
+					RECEIPT{" "}
+				</Link>
+			) : (
 				<h3> Your cart is empty.</h3>
-			)
-			}
+			)}
 		</>
 	);
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router";
 import {
   Button,
-  CircularProgress,
   makeStyles,
   Paper,
   Table,
@@ -27,13 +26,6 @@ const orderProducts = {
   quantity: 3,
 };
 
-function createData(orderId, productId, product, price, quantity) {
-  return { orderId, productId, product, price, quantity };
-}
-
-// const rows = [createData("coffee", 159, 6.0)];
-
-// export default function BasicTable() {
 
 const Order = () => {
   const history = useHistory();
@@ -77,7 +69,6 @@ const Order = () => {
       </Table>
       <Button
           onClick={() => {
-            console.log("edit button here");
           }}
           variant="contained"
           color="secondary"
@@ -86,7 +77,6 @@ const Order = () => {
         </Button>{" "}
         <Button
           onClick={() => {
-            console.log("cancel button here");
           }}
           variant="contained"
           color="secondary"

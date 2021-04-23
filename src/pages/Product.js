@@ -136,8 +136,8 @@ const Product = ({ products, cart, setCart, token, userOrders }) => {
   let { productId } = useParams();
   productId = parseInt(productId, 10);
   const product = products.find((product) => productId === product.id);
-  console.log("products being passed into Product component", products);
-  console.log("This is the product being rendered:", product);
+  // console.log("products being passed into Product component", products);
+  // console.log("This is the product being rendered:", product);
   return (
     <>
       {product ? (
