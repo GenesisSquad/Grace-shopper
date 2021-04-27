@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
 		paddingRight: "60px",
 	},
 	gridList: {
-		width: 4000,
-		height: 800,
+		width: "auto",
+		height: "auto",
 		// Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
 		transform: "translateZ(0)",
 	},
@@ -43,7 +43,7 @@ const tileData = [
 	{
 		imgUrl: "https://i.postimg.cc/4d5gMZYC/tea-image-2.jpg",
 		title: "tea-image-2",
-		cols: 2,
+		cols: 6,
 	},
 	{
 		imgUrl: "https://i.postimg.cc/7LPPtM7K/4-cups.jpg",
@@ -66,7 +66,7 @@ const Home = () => {
 					Welcome to Rhino Coffee... Where Quality meets Taste!!!
 				</h2>
 			</span>
-			<GridList cellHeight={400} spacing={1} className={classes.gridList}>
+			<GridList cellHeight={300} spacing={1} className={classes.gridList}>
 				{tileData.map((tile) => (
 					<GridListTile
 						key={tile.imgUrl}
